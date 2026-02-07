@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} | {{ company.name }}</title>
+    <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">AUGE<small>MANUFACTURING</small></div>
+    </header>
+
+    <nav>
+        <div class="menu-toggle" onclick="toggleMenu()">☰ Menü</div>
+        <div class="nav-links" id="navLinks">
+            <a href="/" class="{% if page.url == '/' %}active{% endif %}">
+                <span class="nav-icon">🏠</span> Home
+            </a>
+            <a href="/ueber-uns/" class="{% if page.url == '/ueber-uns/' %}active{% endif %}">
+                <span class="nav-icon">👥</span> Über uns
+            </a>
+            <a href="/leistungen/" class="{% if page.url == '/leistungen/' %}active{% endif %}">
+                <span class="nav-icon">🛠️</span> Leistungen
+            </a>
+            <a href="/maschinenpark/" class="{% if page.url == '/maschinenpark/' %}active{% endif %}">
+                <span class="nav-icon">⚙️</span> Maschinenpark
+            </a>
+            <a href="/kontakt/" class="{% if page.url == '/kontakt/' %}active{% endif %}">
+                <span class="nav-icon">📧</span> Kontakt
+            </a>
+        </div>
+    </nav>
+
+    <main>
+        {{ content | safe }}
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Kontakt Info</h4>
+                <p>📍 {{ company.contact.address }}</p>
+                <p>📞 {{ company.contact.phone }}</p>
+                <p>📧 {{ company.contact.email }}</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Social Links</h4>
+                <div class="social-links">
+                    {% for social in company.socials %}
+                        <a href="{{ social.url }}">{{ social.icon }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById("navLinks").classList.toggle("show");
+        }
+    </script>
+
+</body>
+</html>

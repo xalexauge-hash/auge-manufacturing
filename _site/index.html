@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | AUGE Manufacturing</title>
+    <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">AUGE<small>MANUFACTURING</small></div>
+    </header>
+
+    <nav>
+        <div class="menu-toggle" onclick="toggleMenu()">☰ Menü</div>
+        <div class="nav-links" id="navLinks">
+            <a href="/" class="active">
+                <span class="nav-icon">🏠</span> Home
+            </a>
+            <a href="/ueber-uns/" class="">
+                <span class="nav-icon">👥</span> Über uns
+            </a>
+            <a href="/leistungen/" class="">
+                <span class="nav-icon">🛠️</span> Leistungen
+            </a>
+            <a href="/maschinenpark/" class="">
+                <span class="nav-icon">⚙️</span> Maschinenpark
+            </a>
+            <a href="/kontakt/" class="">
+                <span class="nav-icon">📧</span> Kontakt
+            </a>
+        </div>
+    </nav>
+
+    <main>
+        
+<section class="hero">
+    <div class="hero-text">
+        <h1>Präzision in<br>3-Achs-Frästechnik</h1>
+        <p>Ihr Partner für hochwertige Lohnfertigung und CAD-Konstruktion.</p>
+        <a href="mailto:info@augemanufacturing.com" class="btn-quote">JETZT ANFRAGE SENDEN</a>
+    </div>
+</section>
+
+<section class="expertise">
+    <h2>Unsere Expertise</h2>
+    <div class="services-grid">
+        
+        
+        <div class="service-card">
+            <span class="main-icon">⚙️</span>
+            <h3>CNC Fräsen</h3>
+            <p>Spezialisiert auf die präzise 3-Achs-Bearbeitung von Aluminium, Stahl und Kunststoffen.</p>
+        </div>
+        
+        <div class="service-card">
+            <span class="main-icon">📐</span>
+            <h3>CAD Konstruktion</h3>
+            <p>Wir optimieren Ihre Bauteile für eine effiziente Fertigung oder erstellen 3D-Modelle.</p>
+        </div>
+        
+        <div class="service-card">
+            <span class="main-icon">🏭</span>
+            <h3>Lohnfertigung</h3>
+            <p>Flexible Kapazitäten für Einzelteile und Kleinserien dank zwei identischer Maschinen.</p>
+        </div>
+        
+
+    </div>
+</section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Kontakt Info</h4>
+                <p>📍 Musterstraße 1, 12345 Stadt</p>
+                <p>📞 (906) 138-1900</p>
+                <p>📧 info@augemanufacturing.com</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Social Links</h4>
+                <div class="social-links">
+                    
+                        <a href="#">FB</a>
+                    
+                        <a href="#">LI</a>
+                    
+                        <a href="#">IG</a>
+                    
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById("navLinks").classList.toggle("show");
+        }
+    </script>
+
+</body>
+</html>

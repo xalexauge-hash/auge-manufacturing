@@ -1,0 +1,27 @@
+---
+layout: base.njk
+title: Home
+---
+
+<section class="hero">
+    <div class="hero-text">
+        <h1>Präzision in<br>3-Achs-Frästechnik</h1>
+        <p>Ihr Partner für hochwertige Lohnfertigung und CAD-Konstruktion.</p>
+        <a href="{{ company.contact.cta_link }}" class="btn-quote">JETZT ANFRAGE SENDEN</a>
+    </div>
+</section>
+
+<section class="expertise">
+    <h2>Unsere Expertise</h2>
+    <div class="services-grid">
+        
+        {% for service in company.services %}
+        <div class="service-card">
+            <span class="main-icon">{{ service.icon }}</span>
+            <h3>{{ service.title }}</h3>
+            <p>{{ service.description }}</p>
+        </div>
+        {% endfor %}
+
+    </div>
+</section>
