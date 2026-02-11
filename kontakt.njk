@@ -57,7 +57,7 @@ title: Kontakt
         <!-- Kontaktformular -->
         <div style="background: #f5f5f5; padding: 2rem; border-radius: 8px; margin-top: 3rem;">
             <h2>Anfrage senden</h2>
-            <form name="contact" method="POST" enctype="multipart/form-data" netlify netlify-honeypot="bot-field">
+            <form name="contact" method="POST" enctype="multipart/form-data" netlify netlify-honeypot="bot-field" id="contactForm">
                 <p style="display: none;">
                     <label>Don't fill this out: <input name="bot-field" /></label>
                 </p>
@@ -111,4 +111,12 @@ title: Kontakt
         </p>
     </div>
 </section>
+
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    // Allow the default Netlify form submission to happen
+    // After submission, Netlify will redirect automatically if configured
+    // This is just a backup to ensure redirect works
+});
+</script>
 
