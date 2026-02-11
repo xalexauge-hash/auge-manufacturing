@@ -2,10 +2,10 @@ module.exports = {
   name: "AUGE Manufacturing",
   // WICHTIG: Das Template sucht nach 'contact.address' usw.
   contact: {
-    address: "Musterstraße 1, 12345 Stadt",
-    phone: "(906) 138-1900",
-    email: "info@augemanufacturing.com",
-    cta_link: "mailto:info@augemanufacturing.com"
+    address: "Eichenstraße 4, 83083 Riedering",
+    phone: "+4915202408592",
+    email: "info@auge-manufacturing.de",
+    cta_link: "mailto:info@auge-manufacturing.de"
   },
   services: [
     { 
