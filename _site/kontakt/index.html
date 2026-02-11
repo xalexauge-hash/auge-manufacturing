@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt | AUGE Manufacturing</title>
+    <link rel="stylesheet" href="/public/style.css">
+    <style>
+        /* Minimaler Zusatz, um das Bild einzupassen */
+        .logo img {
+            height: 200px; /* Höhe so angepasst, dass es in die Zeile passt */
+            width: auto;
+            vertical-align: middle;
+            horizontal-align: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="/">
+                <img src="/public/auge_manufacturing_logo.png" alt="AUGE MANUFACTURING">
+            </a>
+        </div>
+    </header>
+
+    <nav>
+        <div class="menu-toggle" onclick="toggleMenu()">☰ Menü</div>
+        <div class="nav-links" id="navLinks">
+            <a href="/" class="">
+                <span class="nav-icon">🏠</span> Home
+            </a>
+            <a href="/ueber-uns/" class="">
+                <span class="nav-icon">👥</span> Über uns
+            </a>
+            <a href="/leistungen/" class="">
+                <span class="nav-icon">🛠️</span> Leistungen
+            </a>
+            <a href="/maschinenpark/" class="">
+                <span class="nav-icon">⚙️</span> Maschinenpark
+            </a>
+            <a href="/kontakt/" class="active">
+                <span class="nav-icon">📧</span> Kontakt
+            </a>
+        </div>
+    </nav>
+
+    <main>
+        
+<section class="page-header">
+    <h1>Kontakt</h1>
+    <p>Wir freuen uns auf Ihre Anfrage!</p>
+</section>
+
+<section class="expertise">
+    <div style="max-width: 900px; margin: 0 auto;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 3rem;">
+            <!-- Kontaktinformationen -->
+            <div>
+                <h3>Kontaktinformationen</h3>
+                <div style="background: #f9f9f9; padding: 2rem; border-radius: 8px;">
+                    <p style="margin-bottom: 1.5rem;">
+                        <strong>📍 Adresse:</strong><br>
+                        Musterstraße 1, 12345 Stadt
+                    </p>
+                    <p style="margin-bottom: 1.5rem;">
+                        <strong>📞 Telefon:</strong><br>
+                        <a href="tel:(906) 138-1900">(906) 138-1900</a>
+                    </p>
+                    <p style="margin-bottom: 1.5rem;">
+                        <strong>📧 E-Mail:</strong><br>
+                        <a href="mailto:info@augemanufacturing.com">info@augemanufacturing.com</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Öffnungszeiten -->
+            <div>
+                <h3>Öffnungszeiten</h3>
+                <div style="background: #f9f9f9; padding: 2rem; border-radius: 8px;">
+                    <p style="margin-bottom: 1rem;">
+                        <strong>Montag - Freitag:</strong><br>
+                        8:00 - 17:00 Uhr
+                    </p>
+                    <p style="margin-bottom: 1rem;">
+                        <strong>Samstag:</strong><br>
+                        Nach Vereinbarung
+                    </p>
+                    <p>
+                        <strong>Sonntag:</strong><br>
+                        Geschlossen
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kontaktformular -->
+        <div style="background: #f5f5f5; padding: 2rem; border-radius: 8px; margin-bottom: 2rem;">
+            <h3>Anfrage senden</h3>
+            <form style="display: grid; gap: 1rem;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div>
+                        <label for="name" style="display: block; margin-bottom: 0.5rem;"><strong>Name *</strong></label>
+                        <input type="text" id="name" name="name" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label for="email" style="display: block; margin-bottom: 0.5rem;"><strong>E-Mail *</strong></label>
+                        <input type="email" id="email" name="email" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="phone" style="display: block; margin-bottom: 0.5rem;"><strong>Telefon</strong></label>
+                    <input type="tel" id="phone" name="phone" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+
+                <div>
+                    <label for="subject" style="display: block; margin-bottom: 0.5rem;"><strong>Betreff *</strong></label>
+                    <input type="text" id="subject" name="subject" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+
+                <div>
+                    <label for="message" style="display: block; margin-bottom: 0.5rem;"><strong>Nachricht *</strong></label>
+                    <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; font-family: inherit;"></textarea>
+                </div>
+
+                <p style="font-size: 0.9rem; color: #666;">* Pflichtfelder</p>
+
+                <button type="submit" class="btn-quote" style="width: 100%; margin-top: 1rem;">ANFRAGE SENDEN</button>
+            </form>
+        </div>
+
+        <p style="text-align: center; color: #666;">
+            <strong>Hinweis:</strong> Dieses Formular ist ein Platzhalter. Für eine funktionierende E-Mail-Integration empfehlen wir ein Service wie Netlify Forms oder EmailJS zu konfigurieren.
+        </p>
+    </div>
+</section>
+
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Kontakt Info</h4>
+                <p>📍 Musterstraße 1, 12345 Stadt</p>
+                <p>📞 (906) 138-1900</p>
+                <p>📧 info@augemanufacturing.com</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Social Links</h4>
+                <div class="social-links">
+                    
+                        <a href="#">FB</a>
+                    
+                        <a href="#">LI</a>
+                    
+                        <a href="#">IG</a>
+                    
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            var x = document.getElementById("navLinks");
+            if (x.className === "nav-links") {
+                x.className += " show";
+            } else {
+                x.className = "nav-links";
+            }
+        }
+    </script>
+
+</body>
+</html>
