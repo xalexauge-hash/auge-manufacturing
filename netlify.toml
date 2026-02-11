@@ -1,3 +1,9 @@
 [build]
   command = "npm run build"
   publish = "_site"
+
+[[redirects]]
+  from = "/contact"
+  to = "/success/"
+  status = 301
+  condition = "Status=200 country=* Accept-Language!=* Referer=*"
