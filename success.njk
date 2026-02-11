@@ -1,0 +1,30 @@
+---
+layout: base.njk
+title: Anfrage erfolgreich gesendet
+permalink: /success/
+---
+
+<section class="page-header">
+    <h1>Vielen Dank!</h1>
+    <p>Ihre Anfrage wurde erfolgreich gesendet</p>
+</section>
+
+<section class="expertise">
+    <div style="max-width: 700px; margin: 0 auto; text-align: center;">
+        <div style="background: #f5f5f5; padding: 3rem; border-radius: 8px; border-left: 8px solid #28a745;">
+            <h2 style="color: #28a745; margin-top: 0;">Erfolgreich!</h2>
+            <p style="font-size: 1.1rem; line-height: 1.8; color: #333;">
+                Wir haben Ihre Anfrage erhalten und werden uns schnellstmöglich bei Ihnen melden.
+            </p>
+            <p style="color: #666;">
+                Sie können uns auch direkt kontaktieren unter:<br>
+                <strong>{{ company.contact.email }}</strong><br>
+                <strong>{{ company.contact.phone }}</strong>
+            </p>
+        </div>
+
+        <div style="margin-top: 3rem;">
+            <a href="/" class="btn-quote">Zur Startseite</a>
+        </div>
+    </div>
+</section>

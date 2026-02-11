@@ -8,14 +8,14 @@
     <style>
         /* Minimaler Zusatz, um das Bild einzupassen */
         .logo img {
-            height: 200px; /* Höhe so angepasst, dass es in die Zeile passt */
+            height: 200px;
             width: auto;
             vertical-align: middle;
-            horizontal-align: center;
         }
         .logo {
             display: flex;
             align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
@@ -33,19 +33,19 @@
         <div class="menu-toggle" onclick="toggleMenu()">☰ Menü</div>
         <div class="nav-links" id="navLinks">
             <a href="/" class="{% if page.url == '/' %}active{% endif %}">
-                <span class="nav-icon">🏠</span> Home
+                Home
             </a>
             <a href="/ueber-uns/" class="{% if page.url == '/ueber-uns/' %}active{% endif %}">
-                <span class="nav-icon">👥</span> Über uns
+                Über uns
             </a>
             <a href="/leistungen/" class="{% if page.url == '/leistungen/' %}active{% endif %}">
-                <span class="nav-icon">🛠️</span> Leistungen
+                Leistungen
             </a>
             <a href="/maschinenpark/" class="{% if page.url == '/maschinenpark/' %}active{% endif %}">
-                <span class="nav-icon">⚙️</span> Maschinenpark
+                Maschinenpark
             </a>
             <a href="/kontakt/" class="{% if page.url == '/kontakt/' %}active{% endif %}">
-                <span class="nav-icon">📧</span> Kontakt
+                Kontakt
             </a>
         </div>
     </nav>
@@ -58,18 +58,15 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h4>Kontakt Info</h4>
-                <p>📍 {{ company.contact.address }}</p>
-                <p>📞 {{ company.contact.phone }}</p>
-                <p>📧 {{ company.contact.email }}</p>
+                <p><strong>Adresse:</strong> {{ company.contact.address }}</p>
+                <p><strong>Telefon:</strong> {{ company.contact.phone }}</p>
+                <p><strong>E-Mail:</strong> {{ company.contact.email }}</p>
             </div>
 
             <div class="footer-section">
-                <h4>Social Links</h4>
-                <div class="social-links">
-                    {% for social in company.socials %}
-                        <a href="{{ social.url }}">{{ social.icon }}</a>
-                    {% endfor %}
-                </div>
+                <h4>Öffnungszeiten</h4>
+                <p><strong>Mo-Fr:</strong> 8:00 - 17:00</p>
+                <p><strong>Sa:</strong> Nach Vereinbarung</p>
             </div>
         </div>
     </footer>

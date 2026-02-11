@@ -132,7 +132,7 @@ nav a:hover, nav a.active {
 
 /* --- 5. PAGE HEADER (UNTERSEITEN) --- */
 .page-header {
-    background: var(--light-grey);
+    background: white;
     padding: 50px 10%;
     border-bottom: 1px solid #ddd;
 }

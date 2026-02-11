@@ -8,14 +8,14 @@
     <style>
         /* Minimaler Zusatz, um das Bild einzupassen */
         .logo img {
-            height: 200px; /* Höhe so angepasst, dass es in die Zeile passt */
+            height: 200px;
             width: auto;
             vertical-align: middle;
-            horizontal-align: center;
         }
         .logo {
             display: flex;
             align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
@@ -33,19 +33,19 @@
         <div class="menu-toggle" onclick="toggleMenu()">☰ Menü</div>
         <div class="nav-links" id="navLinks">
             <a href="/" class="">
-                <span class="nav-icon">🏠</span> Home
+                Home
             </a>
             <a href="/ueber-uns/" class="">
-                <span class="nav-icon">👥</span> Über uns
+                Über uns
             </a>
             <a href="/leistungen/" class="">
-                <span class="nav-icon">🛠️</span> Leistungen
+                Leistungen
             </a>
             <a href="/maschinenpark/" class="">
-                <span class="nav-icon">⚙️</span> Maschinenpark
+                Maschinenpark
             </a>
             <a href="/kontakt/" class="active">
-                <span class="nav-icon">📧</span> Kontakt
+                Kontakt
             </a>
         </div>
     </nav>
@@ -64,18 +64,20 @@
             <div>
                 <h3>Kontaktinformationen</h3>
                 <div style="background: #f9f9f9; padding: 2rem; border-radius: 8px;">
-                    <p style="margin-bottom: 1.5rem;">
-                        <strong>📍 Adresse:</strong><br>
-                        Eichenstraße 4, 83083 Riedering
-                    </p>
-                    <p style="margin-bottom: 1.5rem;">
-                        <strong>📞 Telefon:</strong><br>
-                        <a href="tel:+4915202408592">+4915202408592</a>
-                    </p>
-                    <p style="margin-bottom: 1.5rem;">
-                        <strong>📧 E-Mail:</strong><br>
-                        <a href="mailto:info@auge-manufacturing.de">info@auge-manufacturing.de</a>
-                    </p>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 0.75rem 0; font-weight: bold; width: 30%;">Adresse:</td>
+                            <td style="padding: 0.75rem 0;">Eichenstraße 4, 83083 Riedering</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 0.75rem 0; font-weight: bold;">Telefon:</td>
+                            <td style="padding: 0.75rem 0;"><a href="tel:+4915202408592">+4915202408592</a></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.75rem 0; font-weight: bold;">E-Mail:</td>
+                            <td style="padding: 0.75rem 0;"><a href="mailto:info@auge-manufacturing.de">info@auge-manufacturing.de</a></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
 
@@ -83,63 +85,83 @@
             <div>
                 <h3>Öffnungszeiten</h3>
                 <div style="background: #f9f9f9; padding: 2rem; border-radius: 8px;">
-                    <p style="margin-bottom: 1rem;">
-                        <strong>Montag - Freitag:</strong><br>
-                        8:00 - 17:00 Uhr
-                    </p>
-                    <p style="margin-bottom: 1rem;">
-                        <strong>Samstag:</strong><br>
-                        Nach Vereinbarung
-                    </p>
-                    <p>
-                        <strong>Sonntag:</strong><br>
-                        Geschlossen
-                    </p>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 0.75rem 0; font-weight: bold; width: 40%;">Montag - Freitag:</td>
+                            <td style="padding: 0.75rem 0;">8:00 - 17:00 Uhr</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 0.75rem 0; font-weight: bold;">Samstag:</td>
+                            <td style="padding: 0.75rem 0;">Nach Vereinbarung</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.75rem 0; font-weight: bold;">Sonntag:</td>
+                            <td style="padding: 0.75rem 0;">Geschlossen</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
 
         <!-- Kontaktformular -->
-        <div style="background: #f5f5f5; padding: 2rem; border-radius: 8px; margin-bottom: 2rem;">
-            <h3>Anfrage senden</h3>
-            <form style="display: grid; gap: 1rem;">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div style="background: #f5f5f5; padding: 2rem; border-radius: 8px; margin-top: 3rem;">
+            <h2>Anfrage senden</h2>
+            <form name="contact" method="POST" action="/success/" enctype="multipart/form-data" netlify netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="contact">
+                <p style="display: none;">
+                    <label>Don't fill this out: <input name="bot-field" /></label>
+                </p>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
                     <div>
                         <label for="name" style="display: block; margin-bottom: 0.5rem;"><strong>Name *</strong></label>
-                        <input type="text" id="name" name="name" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                        <input type="text" id="name" name="name" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
                     </div>
                     <div>
                         <label for="email" style="display: block; margin-bottom: 0.5rem;"><strong>E-Mail *</strong></label>
-                        <input type="email" id="email" name="email" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                        <input type="email" id="email" name="email" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
                     </div>
                 </div>
                 
-                <div>
-                    <label for="phone" style="display: block; margin-bottom: 0.5rem;"><strong>Telefon</strong></label>
-                    <input type="tel" id="phone" name="phone" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <label for="phone" style="display: block; margin-bottom: 0.5rem;"><strong>Telefon</strong></label>
+                        <input type="tel" id="phone" name="phone" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                    </div>
+                    <div>
+                        <label for="company" style="display: block; margin-bottom: 0.5rem;"><strong>Unternehmen</strong></label>
+                        <input type="text" id="company" name="company" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                    </div>
                 </div>
 
-                <div>
+                <div style="margin-bottom: 1rem;">
                     <label for="subject" style="display: block; margin-bottom: 0.5rem;"><strong>Betreff *</strong></label>
-                    <input type="text" id="subject" name="subject" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;">
+                    <input type="text" id="subject" name="subject" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
                 </div>
 
-                <div>
+                <div style="margin-bottom: 1rem;">
                     <label for="message" style="display: block; margin-bottom: 0.5rem;"><strong>Nachricht *</strong></label>
-                    <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; font-family: inherit;"></textarea>
+                    <textarea id="message" name="message" rows="6" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-family: inherit;"></textarea>
                 </div>
 
-                <p style="font-size: 0.9rem; color: #666;">* Pflichtfelder</p>
+                <div style="margin-bottom: 1rem;">
+                    <label for="attachments" style="display: block; margin-bottom: 0.5rem;"><strong>Dateien anhängen (.pdf, .step)</strong></label>
+                    <input type="file" id="attachments" name="attachments" multiple accept=".pdf,.step,.stp" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                    <small style="color: #666; display: block; margin-top: 0.5rem;">Sie können mehrere Dateien hochladen. Unterstützte Formate: PDF, STEP (.step, .stp)</small>
+                </div>
 
-                <button type="submit" class="btn-quote" style="width: 100%; margin-top: 1rem;">ANFRAGE SENDEN</button>
+                <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">* Pflichtfelder</p>
+
+                <button type="submit" class="btn-quote" style="width: 100%; border: none; cursor: pointer; font-size: 1rem;">ANFRAGE SENDEN</button>
             </form>
         </div>
 
-        <p style="text-align: center; color: #666;">
-            <strong>Hinweis:</strong> Dieses Formular ist ein Platzhalter. Für eine funktionierende E-Mail-Integration empfehlen wir ein Service wie Netlify Forms oder EmailJS zu konfigurieren.
+        <p style="text-align: center; color: #666; margin-top: 2rem;">
+            <strong>Hinweis:</strong> Ihre Anfrage wird direkt an info@auge-manufacturing.de gesendet. Wir werden uns schnellstmöglich bei Ihnen melden.
         </p>
     </div>
 </section>
+
 
     </main>
 
@@ -147,22 +169,15 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h4>Kontakt Info</h4>
-                <p>📍 Eichenstraße 4, 83083 Riedering</p>
-                <p>📞 +4915202408592</p>
-                <p>📧 info@auge-manufacturing.de</p>
+                <p><strong>Adresse:</strong> Eichenstraße 4, 83083 Riedering</p>
+                <p><strong>Telefon:</strong> +4915202408592</p>
+                <p><strong>E-Mail:</strong> info@auge-manufacturing.de</p>
             </div>
 
             <div class="footer-section">
-                <h4>Social Links</h4>
-                <div class="social-links">
-                    
-                        <a href="#">FB</a>
-                    
-                        <a href="#">LI</a>
-                    
-                        <a href="#">IG</a>
-                    
-                </div>
+                <h4>Öffnungszeiten</h4>
+                <p><strong>Mo-Fr:</strong> 8:00 - 17:00</p>
+                <p><strong>Sa:</strong> Nach Vereinbarung</p>
             </div>
         </div>
     </footer>
