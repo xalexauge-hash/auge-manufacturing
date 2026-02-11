@@ -1,5 +1,5 @@
 module.exports = {
-  name: "AUGE Manufacturing",
+  name: "AUGÉ Manufacturing",
   // WICHTIG: Das Template sucht nach 'contact.address' usw.
   contact: {
     address: "Eichenstraße 4, 83083 Riedering",
