@@ -4,12 +4,162 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }} | {{ company.name }}</title>
-    <link rel="stylesheet" href="/public/style.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #000000;
+            --accent-color: #ff0000;
+            --text-light: #ffffff;
+            --bg-light: #f4f4f4;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--text-light);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .logo-container a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .site-logo {
+            height: 65px; /* Optimale Größe für das AUGE Logo */
+            width: auto;
+            display: block;
+        }
+
+        /* Navigation Styles */
+        nav {
+            background: var(--primary-color);
+            color: var(--text-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: 0.3s;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: var(--accent-color);
+        }
+
+        .nav-icon {
+            margin-right: 8px;
+        }
+
+        .menu-toggle {
+            display: none;
+            padding: 15px;
+            cursor: pointer;
+            text-align: center;
+            background: var(--accent-color);
+            font-weight: bold;
+        }
+
+        main {
+            padding: 40px 5%;
+            min-height: 60vh;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: var(--text-light);
+            padding: 40px 5%;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .footer-section h4 {
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            text-decoration: none;
+        }
+
+        /* Screen Reader Text für SEO */
+        .screen-reader-text {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+            }
+            .nav-links.show {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            header {
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">AUGE<small>MANUFACTURING</small></div>
+        <div class="logo-container">
+            <a href="/">
+                <img src="/public/auge_manufacturing_logo.png" alt="AUGE MANUFACTURING Logo" class="site-logo">
+                <span class="screen-reader-text">AUGE MANUFACTURING</span>
+            </a>
+        </div>
     </header>
 
     <nav>
@@ -50,7 +200,7 @@
                 <h4>Social Links</h4>
                 <div class="social-links">
                     {% for social in company.socials %}
-                        <a href="{{ social.url }}">{{ social.icon }}</a>
+                        <a href="{{ social.url }}" title="{{ social.name }}">{{ social.icon }}</a>
                     {% endfor %}
                 </div>
             </div>
