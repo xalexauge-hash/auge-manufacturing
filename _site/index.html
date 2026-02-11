@@ -5,11 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | AUGE Manufacturing</title>
     <link rel="stylesheet" href="/public/style.css">
+    <style>
+        /* Minimaler Zusatz, um das Bild einzupassen */
+        .logo img {
+            height: 200px; /* Höhe so angepasst, dass es in die Zeile passt */
+            width: auto;
+            vertical-align: middle;
+            horizontal-align: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">AUGE<small>MANUFACTURING</small></div>
+        <div class="logo">
+            <a href="/">
+                <img src="/public/auge_manufacturing_logo.png" alt="AUGE MANUFACTURING">
+            </a>
+        </div>
     </header>
 
     <nav>
@@ -97,7 +114,12 @@
 
     <script>
         function toggleMenu() {
-            document.getElementById("navLinks").classList.toggle("show");
+            var x = document.getElementById("navLinks");
+            if (x.className === "nav-links") {
+                x.className += " show";
+            } else {
+                x.className = "nav-links";
+            }
         }
     </script>
 
