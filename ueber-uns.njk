@@ -3,6 +3,20 @@ layout: base.njk
 title: Über mich
 ---
 
+<style>
+    @media (max-width: 768px) {
+        .ueber-mich-grid {
+            grid-template-columns: 1fr !important;
+        }
+        .ueber-mich-grid > div:first-child {
+            order: 2;
+        }
+        .ueber-mich-grid > div:last-child {
+            order: 1;
+        }
+    }
+</style>
+
 <section class="page-header">
     <h1>Über mich</h1>
     <p>Vom Werkstück zum intelligenten System - Lösungen aus einer Hand.</p>
@@ -10,7 +24,7 @@ title: Über mich
 
 <section class="expertise">
     <div style="max-width: 900px; margin: 0 auto;">
-        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; margin-bottom: 3rem; align-items: start;">
+        <div class="ueber-mich-grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; margin-bottom: 3rem; align-items: start;">
             <div>
                 <h3 style="color: #333; margin-bottom: 1rem;">Über mich</h3>
                 <p style="line-height: 1.6; color: #555;">
