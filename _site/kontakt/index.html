@@ -106,8 +106,7 @@
         <!-- Kontaktformular -->
         <div style="background: #f5f5f5; padding: 2rem; border-radius: 8px; margin-top: 3rem;">
             <h2>Anfrage senden</h2>
-            <form name="contact" method="POST" enctype="multipart/form-data" netlify netlify-honeypot="bot-field" onsubmit="return handleSubmit(event)">
-                <input type="hidden" name="form-name" value="contact">
+            <form name="contact" method="POST" enctype="multipart/form-data" netlify netlify-honeypot="bot-field">
                 <p style="display: none;">
                     <label>Don't fill this out: <input name="bot-field" /></label>
                 </p>
@@ -161,14 +160,6 @@
         </p>
     </div>
 </section>
-
-<script>
-function handleSubmit(event) {
-    // Let Netlify Forms handle the submission
-    // After successful submission, redirect to success page
-    return true;
-}
-</script>
 
 
     </main>

@@ -3,7 +3,12 @@
   publish = "_site"
 
 [[redirects]]
-  from = "/contact"
-  to = "/success/"
-  status = 301
-  condition = "Status=200 country=* Accept-Language!=* Referer=*"
+  from = "/"
+  to = "/"
+  status = 200
+  force = false
+
+# Form submission handling - redirect to success page
+[[form]]
+  name = "contact"
+  action = "/success/"
