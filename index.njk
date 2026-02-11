@@ -3,6 +3,23 @@ layout: base.njk
 title: Home
 ---
 
+<style>
+    @media (max-width: 768px) {
+        .hero {
+            justify-content: center !important;
+            padding-right: 1rem !important;
+            background-position: right center !important;
+        }
+        .hero-box {
+            max-width: 280px !important;
+            padding: 1.5rem !important;
+        }
+        .hero h1 {
+            font-size: 1.4rem !important;
+        }
+    }
+</style>
+
 <section class="hero" style="background: url('/public/images/cut_country.png') center/cover no-repeat; position: relative; min-height: 500px; display: flex; align-items: center; justify-content: flex-end; padding-right: 3rem;">
     <div class="hero-box" style="background: white; padding: 3rem; max-width: 550px; text-align: center; border-right: 5px solid #d32f2f; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
         <h1 style="font-size: 2.4rem; line-height: 1.3; margin: 0 0 2rem 0; color: #000; font-weight: 900; letter-spacing: -0.5px;">LOKALE, ZUVERLÄSSIGE UND PRÄZISE<br>FRÄSTECHNIK</h1>
