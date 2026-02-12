@@ -3,6 +3,14 @@ layout: base.njk
 title: Maschinenpark
 ---
 
+<style>
+    @media (max-width: 768px) {
+        .machine-grid {
+            grid-template-columns: 1fr !important;
+        }
+    }
+</style>
+
 <section class="page-header">
     <h1>Unser Maschinenpark</h1>
     <p>Moderne CNC-Technologie für höchste Präzision</p>
@@ -15,7 +23,7 @@ title: Maschinenpark
         <div style="margin: 3rem 0;">
             <h3 style="color: #cc2128; font-size: 2rem; font-weight: bold; margin-bottom: 0.5rem;">Karina</h3>
             <p style="color: #666; margin-bottom: 1.5rem;">Kondia A10</p>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start;">
+            <div class="machine-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start;">
                 <div>
                     <img src="/public/images/karina.jpg" alt="Karina CNC Fräsmaschine" style="width: 100%; max-width: 400px; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.12);">
                 </div>
@@ -33,7 +41,7 @@ title: Maschinenpark
         <div style="margin: 3rem 0;">
             <h3 style="color: #6F717A; font-size: 2rem; font-weight: bold; margin-bottom: 0.5rem;">Katrina</h3>
             <p style="color: #666; margin-bottom: 1.5rem;">Kondia A10</p>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start;">
+            <div class="machine-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start;">
                 <div>
                     <img src="/public/images/katrina.png" alt="Katrina CNC Fräsmaschine" style="width: 100%; max-width: 400px; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.12);">
                 </div>
@@ -53,9 +61,10 @@ title: Maschinenpark
             <div style="background: #f9f9f9; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #007bff;">
                 <p><strong>Digitale Schieblehre:</strong> Mitutuyo / Mahr</p>
                 <p><strong>Oberflächenrauheitsmessgerät:</strong> ATP HRT-120</p>
-                <p><strong>Bügelmessschrauben:</strong> Mitutuyo / Mahr / Filetta</p>
+                <p><strong>Digitale Bügelmessschrauben:</strong> Mitutuyo / Mahr / Filetta</p>
                 <p><strong>Innenmikrometer:</strong> Mitutuyo</p>
                 <p><strong>Subito:</strong> Helios-Preisser</p>
+                <p><strong>Tiefenmikrometer:</strong> Mitutuyo</p>
             </div>
         </div>
 
