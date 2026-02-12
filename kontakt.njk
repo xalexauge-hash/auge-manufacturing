@@ -74,11 +74,11 @@ title: Kontakt
                 </div>
 
                 <div style="margin-bottom: 1rem;">
-                    <label for="attachments" style="display: block; margin-bottom: 0.5rem;"><strong>Dateien anhängen (.pdf, .step)</strong></label>
+                    <label style="display: block; margin-bottom: 0.5rem;"><strong>Dateien anhängen (.pdf, .step)</strong></label>
                     <div id="dropZone" style="border: 2px dashed #ddd; border-radius: 4px; padding: 2rem; text-align: center; background: #fafafa; transition: all 0.3s; cursor: pointer;">
-                        <input type="file" id="attachments" name="attachments" multiple accept=".pdf,.step,.stp" style="display: none;">
                         <p style="margin: 0; color: #666;">📎 Dateien hier ablegen oder klicken zum Auswählen</p>
-                        <p id="fileList" style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: #333;"></p>
+                        <div id="fileList" style="margin: 1rem 0 0 0; font-size: 0.9rem; color: #333;"></div>
+                        <div id="fileInputsContainer" style="display: none;"></div>
                     </div>
                     <small style="color: #666; display: block; margin-top: 0.5rem;">Sie können mehrere Dateien hochladen. Unterstützte Formate: PDF, STEP (.step, .stp)</small>
                 </div>
@@ -96,15 +96,35 @@ title: Kontakt
 </section>
 
 <script>
-// Drag & Drop functionality with multiple file support
+// Drag & Drop functionality - Netlify only supports one file per field, so we create multiple hidden inputs
 const dropZone = document.getElementById('dropZone');
-const fileInput = document.getElementById('attachments');
 const fileList = document.getElementById('fileList');
+const fileInputsContainer = document.getElementById('fileInputsContainer');
 
 let selectedFiles = [];
+let tempFileInput = null;
+
+// Create temporary file input for selection
+function createTempInput() {
+    if (tempFileInput) {
+        tempFileInput.remove();
+    }
+    tempFileInput = document.createElement('input');
+    tempFileInput.type = 'file';
+    tempFileInput.accept = '.pdf,.step,.stp';
+    tempFileInput.style.display = 'none';
+    tempFileInput.multiple = true;
+    document.body.appendChild(tempFileInput);
+    
+    tempFileInput.addEventListener('change', (e) => {
+        addFiles(e.target.files);
+    });
+}
+
+createTempInput();
 
 // Click to open file picker
-dropZone.addEventListener('click', () => fileInput.click());
+dropZone.addEventListener('click', () => tempFileInput.click());
 
 // Prevent default drag behaviors
 ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -138,11 +158,6 @@ dropZone.addEventListener('drop', (e) => {
     addFiles(dt.files);
 });
 
-// Handle selected files
-fileInput.addEventListener('change', (e) => {
-    addFiles(e.target.files);
-});
-
 function addFiles(newFiles) {
     // Add new files to existing array
     Array.from(newFiles).forEach(file => {
@@ -150,7 +165,7 @@ function addFiles(newFiles) {
             selectedFiles.push(file);
         }
     });
-    updateFileInput();
+    updateFileInputs();
     updateFileList();
 }
 
@@ -159,15 +174,27 @@ function removeFile(index, event) {
         event.stopPropagation();
     }
     selectedFiles.splice(index, 1);
-    updateFileInput();
+    updateFileInputs();
     updateFileList();
 }
 
-function updateFileInput() {
-    // Create a new DataTransfer object and populate it
-    const dt = new DataTransfer();
-    selectedFiles.forEach(file => dt.items.add(file));
-    fileInput.files = dt.files;
+function updateFileInputs() {
+    // Clear existing hidden inputs
+    fileInputsContainer.innerHTML = '';
+    
+    // Create separate hidden input for each file (Netlify requirement)
+    selectedFiles.forEach((file, index) => {
+        const dt = new DataTransfer();
+        dt.items.add(file);
+        
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.name = `file-${index}`;
+        input.files = dt.files;
+        input.style.display = 'none';
+        
+        fileInputsContainer.appendChild(input);
+    });
 }
 
 function updateFileList() {
@@ -176,7 +203,7 @@ function updateFileList() {
         return;
     }
     
-    let html = '<div style="margin-top: 1rem; text-align: left;">';
+    let html = '<div style="text-align: left;">';
     html += `<strong>${selectedFiles.length} Datei(en) ausgewählt:</strong><br>`;
     selectedFiles.forEach((file, index) => {
         html += `
@@ -192,35 +219,6 @@ function updateFileList() {
 
 // Make removeFile available globally
 window.removeFile = removeFile;
-
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Create FormData from form
-    const formData = new FormData(this);
-    
-    // Remove original attachments and add all selected files individually
-    formData.delete('attachments');
-    selectedFiles.forEach((file) => {
-        formData.append('attachments[]', file);
-    });
-    
-    // Submit to Netlify
-    fetch('/', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if(response.ok) {
-            window.location.href = '/success/';
-        } else {
-            throw new Error('Form submission failed');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Es gab einen Fehler beim Senden. Bitte versuchen Sie es erneut.');
-    });
-});
+</script>
 </script>
 
