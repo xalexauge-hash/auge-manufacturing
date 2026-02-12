@@ -154,7 +154,10 @@ function addFiles(newFiles) {
     updateFileList();
 }
 
-function removeFile(index) {
+function removeFile(index, event) {
+    if (event) {
+        event.stopPropagation();
+    }
     selectedFiles.splice(index, 1);
     updateFileInput();
     updateFileList();
@@ -178,7 +181,7 @@ function updateFileList() {
         html += `
             <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.5rem; background: white; border-radius: 4px; margin-top: 0.5rem;">
                 <span style="flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${file.name}</span>
-                <button type="button" onclick="removeFile(${index})" style="background: #dc3545; color: white; border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; font-weight: bold; margin-left: 0.5rem; flex-shrink: 0;">✕</button>
+                <button type="button" onclick="removeFile(${index}, event)" style="background: #dc3545; color: white; border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; font-weight: bold; margin-left: 0.5rem; flex-shrink: 0;">✕</button>
             </div>
         `;
     });
