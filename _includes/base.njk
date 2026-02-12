@@ -62,11 +62,21 @@
             <div class="footer-section">
                 <h4>Kontakt Info</h4>
                 <p><strong>Adresse:</strong> {{ company.contact.address }}</p>
-                <p><strong>Telefon:</strong> {{ company.contact.phone }}</p>
-                <p><strong>E-Mail:</strong> {{ company.contact.email }}</p>
+                <p><strong>Telefon:</strong> <a href="tel:{{ company.contact.phone }}">{{ company.contact.phone }}</a></p>
+                <p><strong>E-Mail:</strong> <a href="mailto:{{ company.contact.email }}">{{ company.contact.email }}</a></p>
             </div>
-
             
+            <div class="footer-section">
+                <h4>Rechtliches</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="/impressum/" style="color: inherit; text-decoration: none;">Impressum</a></li>
+                    <li><a href="/datenschutz/" style="color: inherit; text-decoration: none;">Datenschutzerklärung</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div style="border-top: 1px solid #ddd; padding-top: 1rem; margin-top: 1rem; text-align: center; font-size: 0.9rem; color: #666;">
+            <p style="margin: 0;">© 2026 Alexander Augé</p>
         </div>
     </footer>
 
