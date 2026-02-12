@@ -220,9 +220,8 @@ footer {
 .footer-content {
     background-color: var(--dark-bg);
     padding: 60px 10%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 60px;
     color: white;
     /* Das Trapez: Oben 95% breit, unten 100% */
@@ -230,9 +229,14 @@ footer {
 }
 
 .footer-section {
-    flex: 1;
-    min-width: 250px;
     text-align: center;
+}
+
+.footer-section:nth-child(3) {
+    grid-column: 1 / -1;
+    border-top: 1px solid #444;
+    padding-top: 1rem;
+    margin-top: 1rem;
 }
 
 .footer-section h4 {
