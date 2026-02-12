@@ -215,18 +215,70 @@ function updateFileList() {
         return;
     }
     
+    const MAX_SIZE_BYTES = 8 * 1024 * 1024; // 8 MB
+    
+    // Calculate total size
+    const totalSize = selectedFiles.reduce((sum, file) => sum + file.size, 0);
+    const isOverLimit = totalSize > MAX_SIZE_BYTES;
+    
+    // Helper function to format file size
+    function formatFileSize(bytes) {
+        if (bytes < 1024) return bytes + ' B';
+        if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(2) + ' KB';
+        return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+    }
+    
     let html = '<div style="text-align: left;">';
     html += `<strong>${selectedFiles.length} Datei(en) ausgewählt:</strong><br>`;
+    
     selectedFiles.forEach((file, index) => {
+        const fileSize = file.size;
+        const isFileOverLimit = fileSize > MAX_SIZE_BYTES;
+        const fileSizeStr = formatFileSize(fileSize);
+        const bgColor = isFileOverLimit ? '#ffe6e6' : 'white';
+        const textColor = isFileOverLimit ? '#dc3545' : '#333';
+        
         html += `
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.5rem; background: white; border-radius: 4px; margin-top: 0.5rem;">
-                <span style="flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${file.name}</span>
-                <button type="button" onclick="removeFile(${index}, event)" style="background: #dc3545; color: white; border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; font-weight: bold; margin-left: 0.5rem; flex-shrink: 0;">✕</button>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.5rem; background: ${bgColor}; border-radius: 4px; margin-top: 0.5rem; border: ${isFileOverLimit ? '1px solid #dc3545' : '1px solid #eee'};">
+                <div style="flex: 1; overflow: hidden; margin-right: 0.5rem;">
+                    <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: ${textColor};">${file.name}</div>
+                    <div style="font-size: 0.85rem; color: ${isFileOverLimit ? '#dc3545' : '#666'}; margin-top: 0.25rem;">
+                        ${fileSizeStr}${isFileOverLimit ? ' <strong>(zu groß!)</strong>' : ''}
+                    </div>
+                </div>
+                <button type="button" onclick="removeFile(${index}, event)" style="background: #dc3545; color: white; border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; font-weight: bold; flex-shrink: 0;">✕</button>
             </div>
         `;
     });
+    
+    // Total size summary
+    const totalSizeStr = formatFileSize(totalSize);
+    const limitStr = formatFileSize(MAX_SIZE_BYTES);
+    const summaryBgColor = isOverLimit ? '#ffe6e6' : '#e8f4ff';
+    const summaryTextColor = isOverLimit ? '#dc3545' : '#0066cc';
+    const summaryBorder = isOverLimit ? '2px solid #dc3545' : '2px solid #0066cc';
+    
+    html += `
+        <div style="margin-top: 1rem; padding: 0.75rem; background: ${summaryBgColor}; border-radius: 4px; border: ${summaryBorder}; font-weight: bold; color: ${summaryTextColor};">
+            Gesamt: ${totalSizeStr} / ${limitStr}
+            ${isOverLimit ? '<br><span style="font-size: 0.9rem;">⚠️ Limit überschritten! Bitte Dateien entfernen.</span>' : ''}
+        </div>
+    `;
+    
     html += '</div>';
     fileList.innerHTML = html;
+    
+    // Update submit button state
+    const submitButton = document.querySelector('button[type="submit"]');
+    if (isOverLimit) {
+        submitButton.disabled = true;
+        submitButton.style.opacity = '0.5';
+        submitButton.style.cursor = 'not-allowed';
+    } else {
+        submitButton.disabled = false;
+        submitButton.style.opacity = '1';
+        submitButton.style.cursor = 'pointer';
+    }
 }
 
 // Make removeFile available globally
@@ -235,6 +287,15 @@ window.removeFile = removeFile;
 // Handle form submission via AJAX to properly attach files
 document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
+    
+    // Check total file size
+    const MAX_SIZE_BYTES = 8 * 1024 * 1024;
+    const totalSize = selectedFiles.reduce((sum, file) => sum + file.size, 0);
+    
+    if (totalSize > MAX_SIZE_BYTES) {
+        alert('Die Gesamtgröße der Dateien überschreitet 8 MB. Bitte entfernen Sie einige Dateien.');
+        return;
+    }
     
     // Create FormData from the form
     const formData = new FormData(this);
