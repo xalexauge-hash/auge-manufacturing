@@ -194,9 +194,33 @@ function updateFileList() {
 window.removeFile = removeFile;
 
 document.getElementById('contactForm').addEventListener('submit', function(e) {
-    // Ensure all files are in the input field before submitting
-    updateFileInput();
-    // Allow normal form submission to Netlify
+    e.preventDefault();
+    
+    // Create FormData from form
+    const formData = new FormData(this);
+    
+    // Remove original attachments and add all selected files individually
+    formData.delete('attachments');
+    selectedFiles.forEach((file) => {
+        formData.append('attachments[]', file);
+    });
+    
+    // Submit to Netlify
+    fetch('/', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if(response.ok) {
+            window.location.href = '/success/';
+        } else {
+            throw new Error('Form submission failed');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Es gab einen Fehler beim Senden. Bitte versuchen Sie es erneut.');
+    });
 });
 </script>
 
