@@ -78,9 +78,14 @@ title: Kontakt
                     <div id="dropZone" style="border: 2px dashed #ddd; border-radius: 4px; padding: 2rem; text-align: center; background: #fafafa; transition: all 0.3s; cursor: pointer;">
                         <p style="margin: 0; color: #666;">📎 Dateien hier ablegen oder klicken zum Auswählen</p>
                         <div id="fileList" style="margin: 1rem 0 0 0; font-size: 0.9rem; color: #333;"></div>
-                        <div id="fileInputsContainer" style="display: none;"></div>
                     </div>
-                    <small style="color: #666; display: block; margin-top: 0.5rem;">Sie können mehrere Dateien hochladen. Unterstützte Formate: PDF, STEP (.step, .stp)</small>
+                    <!-- Pre-defined file inputs for Netlify form detection (max 5 files) -->
+                    <input type="file" name="file1" accept=".pdf,.step,.stp" style="display: none;" id="file1">
+                    <input type="file" name="file2" accept=".pdf,.step,.stp" style="display: none;" id="file2">
+                    <input type="file" name="file3" accept=".pdf,.step,.stp" style="display: none;" id="file3">
+                    <input type="file" name="file4" accept=".pdf,.step,.stp" style="display: none;" id="file4">
+                    <input type="file" name="file5" accept=".pdf,.step,.stp" style="display: none;" id="file5">
+                    <small style="color: #666; display: block; margin-top: 0.5rem;">Sie können bis zu 5 Dateien hochladen. Unterstützte Formate: PDF, STEP (.step, .stp)</small>
                 </div>
 
                 <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">* Pflichtfelder</p>
@@ -96,11 +101,18 @@ title: Kontakt
 </section>
 
 <script>
-// Drag & Drop functionality - Netlify only supports one file per field, so we create multiple hidden inputs
+// Drag & Drop functionality with pre-defined file inputs (max 5 files)
 const dropZone = document.getElementById('dropZone');
 const fileList = document.getElementById('fileList');
-const fileInputsContainer = document.getElementById('fileInputsContainer');
+const fileInputs = [null, 
+    document.getElementById('file1'),
+    document.getElementById('file2'),
+    document.getElementById('file3'),
+    document.getElementById('file4'),
+    document.getElementById('file5')
+];
 
+const MAX_FILES = 5;
 let selectedFiles = [];
 let tempFileInput = null;
 
@@ -159,8 +171,12 @@ dropZone.addEventListener('drop', (e) => {
 });
 
 function addFiles(newFiles) {
-    // Add new files to existing array
+    // Add new files to existing array (max 5)
     Array.from(newFiles).forEach(file => {
+        if (selectedFiles.length >= MAX_FILES) {
+            alert('Maximal 5 Dateien können hochgeladen werden.');
+            return;
+        }
         if (!selectedFiles.some(f => f.name === file.name && f.size === file.size)) {
             selectedFiles.push(file);
         }
@@ -179,21 +195,17 @@ function removeFile(index, event) {
 }
 
 function updateFileInputs() {
-    // Clear existing hidden inputs
-    fileInputsContainer.innerHTML = '';
+    // Clear all file inputs first
+    for (let i = 1; i <= MAX_FILES; i++) {
+        const dt = new DataTransfer();
+        fileInputs[i].files = dt.files;
+    }
     
-    // Create separate hidden input for each file (Netlify requirement)
+    // Assign each file to a separate input field
     selectedFiles.forEach((file, index) => {
         const dt = new DataTransfer();
         dt.items.add(file);
-        
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.name = `file-${index}`;
-        input.files = dt.files;
-        input.style.display = 'none';
-        
-        fileInputsContainer.appendChild(input);
+        fileInputs[index + 1].files = dt.files;
     });
 }
 
