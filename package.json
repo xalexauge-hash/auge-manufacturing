@@ -9,6 +9,7 @@
     "@11ty/eleventy": "^3.0.0"
   },
   "dependencies": {
-    "auge-manufacturing": "file:"
+    "auge-manufacturing": "file:",
+    "nodemailer": "^6.9.13"
   }
 }
