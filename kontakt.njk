@@ -75,7 +75,11 @@ title: Kontakt
 
                 <div style="margin-bottom: 1rem;">
                     <label for="attachments" style="display: block; margin-bottom: 0.5rem;"><strong>Dateien anhängen (.pdf, .step)</strong></label>
-                    <input type="file" id="attachments" name="attachments" multiple accept=".pdf,.step,.stp" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                    <div id="dropZone" style="border: 2px dashed #ddd; border-radius: 4px; padding: 2rem; text-align: center; background: #fafafa; transition: all 0.3s; cursor: pointer;">
+                        <input type="file" id="attachments" name="attachments" multiple accept=".pdf,.step,.stp" style="display: none;">
+                        <p style="margin: 0; color: #666;">📎 Dateien hier ablegen oder klicken zum Auswählen</p>
+                        <p id="fileList" style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: #333;"></p>
+                    </div>
                     <small style="color: #666; display: block; margin-top: 0.5rem;">Sie können mehrere Dateien hochladen. Unterstützte Formate: PDF, STEP (.step, .stp)</small>
                 </div>
 
@@ -92,6 +96,62 @@ title: Kontakt
 </section>
 
 <script>
+// Drag & Drop functionality
+const dropZone = document.getElementById('dropZone');
+const fileInput = document.getElementById('attachments');
+const fileList = document.getElementById('fileList');
+
+// Click to open file picker
+dropZone.addEventListener('click', () => fileInput.click());
+
+// Prevent default drag behaviors
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+    dropZone.addEventListener(eventName, preventDefaults, false);
+    document.body.addEventListener(eventName, preventDefaults, false);
+});
+
+function preventDefaults(e) {
+    e.preventDefault();
+    e.stopPropagation();
+}
+
+// Highlight drop zone when dragging over
+['dragenter', 'dragover'].forEach(eventName => {
+    dropZone.addEventListener(eventName, () => {
+        dropZone.style.borderColor = '#0066cc';
+        dropZone.style.background = '#e8f4ff';
+    });
+});
+
+['dragleave', 'drop'].forEach(eventName => {
+    dropZone.addEventListener(eventName, () => {
+        dropZone.style.borderColor = '#ddd';
+        dropZone.style.background = '#fafafa';
+    });
+});
+
+// Handle dropped files
+dropZone.addEventListener('drop', (e) => {
+    const dt = e.dataTransfer;
+    const files = dt.files;
+    fileInput.files = files;
+    updateFileList(files);
+});
+
+// Handle selected files
+fileInput.addEventListener('change', (e) => {
+    updateFileList(e.target.files);
+});
+
+function updateFileList(files) {
+    if (files.length === 0) {
+        fileList.innerHTML = '';
+        return;
+    }
+    const names = Array.from(files).map(f => f.name).join(', ');
+    fileList.innerHTML = `<strong>${files.length} Datei(en) ausgewählt:</strong> ${names}`;
+}
+
 document.getElementById('contactForm').addEventListener('submit', function(e) {
     // Allow the default Netlify form submission to happen
     // After submission, Netlify will redirect automatically if configured
