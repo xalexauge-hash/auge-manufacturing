@@ -79,13 +79,23 @@ title: Kontakt
                         <p style="margin: 0; color: #666;">📎 Dateien hier ablegen oder klicken zum Auswählen</p>
                         <div id="fileList" style="margin: 1rem 0 0 0; font-size: 0.9rem; color: #333;"></div>
                     </div>
-                    <!-- Pre-defined file inputs for Netlify form detection (max 5 files) -->
+                    <!-- Pre-defined file inputs for Netlify form detection (max 15 files) -->
                     <input type="file" name="file1" accept=".pdf,.step,.stp" style="display: none;" id="file1">
                     <input type="file" name="file2" accept=".pdf,.step,.stp" style="display: none;" id="file2">
                     <input type="file" name="file3" accept=".pdf,.step,.stp" style="display: none;" id="file3">
                     <input type="file" name="file4" accept=".pdf,.step,.stp" style="display: none;" id="file4">
                     <input type="file" name="file5" accept=".pdf,.step,.stp" style="display: none;" id="file5">
-                    <small style="color: #666; display: block; margin-top: 0.5rem;">Sie können bis zu 5 Dateien hochladen. Unterstützte Formate: PDF, STEP (.step, .stp)</small>
+                    <input type="file" name="file6" accept=".pdf,.step,.stp" style="display: none;" id="file6">
+                    <input type="file" name="file7" accept=".pdf,.step,.stp" style="display: none;" id="file7">
+                    <input type="file" name="file8" accept=".pdf,.step,.stp" style="display: none;" id="file8">
+                    <input type="file" name="file9" accept=".pdf,.step,.stp" style="display: none;" id="file9">
+                    <input type="file" name="file10" accept=".pdf,.step,.stp" style="display: none;" id="file10">
+                    <input type="file" name="file11" accept=".pdf,.step,.stp" style="display: none;" id="file11">
+                    <input type="file" name="file12" accept=".pdf,.step,.stp" style="display: none;" id="file12">
+                    <input type="file" name="file13" accept=".pdf,.step,.stp" style="display: none;" id="file13">
+                    <input type="file" name="file14" accept=".pdf,.step,.stp" style="display: none;" id="file14">
+                    <input type="file" name="file15" accept=".pdf,.step,.stp" style="display: none;" id="file15">
+                    <small style="color: #666; display: block; margin-top: 0.5rem;">Sie können mehrere Dateien hochladen (max. 8 MB gesamt). Unterstützte Formate: PDF, STEP (.step, .stp). Für größere Dateien senden Sie diese bitte direkt per E-Mail an {{ company.contact.email }}.</small>
                 </div>
 
                 <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">* Pflichtfelder</p>
@@ -109,10 +119,20 @@ const fileInputs = [null,
     document.getElementById('file2'),
     document.getElementById('file3'),
     document.getElementById('file4'),
-    document.getElementById('file5')
+    document.getElementById('file5'),
+    document.getElementById('file6'),
+    document.getElementById('file7'),
+    document.getElementById('file8'),
+    document.getElementById('file9'),
+    document.getElementById('file10'),
+    document.getElementById('file11'),
+    document.getElementById('file12'),
+    document.getElementById('file13'),
+    document.getElementById('file14'),
+    document.getElementById('file15')
 ];
 
-const MAX_FILES = 5;
+const MAX_FILES = 15;
 let selectedFiles = [];
 let tempFileInput = null;
 
@@ -171,10 +191,10 @@ dropZone.addEventListener('drop', (e) => {
 });
 
 function addFiles(newFiles) {
-    // Add new files to existing array (max 5)
+    // Add new files to existing array (max 15)
     Array.from(newFiles).forEach(file => {
         if (selectedFiles.length >= MAX_FILES) {
-            alert('Maximal 5 Dateien können hochgeladen werden.');
+            alert('Maximal 15 Dateien können hochgeladen werden.');
             return;
         }
         if (!selectedFiles.some(f => f.name === file.name && f.size === file.size)) {
@@ -306,6 +326,16 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     formData.delete('file3');
     formData.delete('file4');
     formData.delete('file5');
+    formData.delete('file6');
+    formData.delete('file7');
+    formData.delete('file8');
+    formData.delete('file9');
+    formData.delete('file10');
+    formData.delete('file11');
+    formData.delete('file12');
+    formData.delete('file13');
+    formData.delete('file14');
+    formData.delete('file15');
     
     // Add each selected file with its proper field name
     selectedFiles.forEach((file, index) => {
