@@ -96,10 +96,12 @@ title: Kontakt
 </section>
 
 <script>
-// Drag & Drop functionality
+// Drag & Drop functionality with multiple file support
 const dropZone = document.getElementById('dropZone');
 const fileInput = document.getElementById('attachments');
 const fileList = document.getElementById('fileList');
+
+let selectedFiles = [];
 
 // Click to open file picker
 dropZone.addEventListener('click', () => fileInput.click());
@@ -133,24 +135,59 @@ function preventDefaults(e) {
 // Handle dropped files
 dropZone.addEventListener('drop', (e) => {
     const dt = e.dataTransfer;
-    const files = dt.files;
-    fileInput.files = files;
-    updateFileList(files);
+    addFiles(dt.files);
 });
 
 // Handle selected files
 fileInput.addEventListener('change', (e) => {
-    updateFileList(e.target.files);
+    addFiles(e.target.files);
 });
 
-function updateFileList(files) {
-    if (files.length === 0) {
+function addFiles(newFiles) {
+    // Add new files to existing array
+    Array.from(newFiles).forEach(file => {
+        if (!selectedFiles.some(f => f.name === file.name && f.size === file.size)) {
+            selectedFiles.push(file);
+        }
+    });
+    updateFileInput();
+    updateFileList();
+}
+
+function removeFile(index) {
+    selectedFiles.splice(index, 1);
+    updateFileInput();
+    updateFileList();
+}
+
+function updateFileInput() {
+    const dt = new DataTransfer();
+    selectedFiles.forEach(file => dt.items.add(file));
+    fileInput.files = dt.files;
+}
+
+function updateFileList() {
+    if (selectedFiles.length === 0) {
         fileList.innerHTML = '';
         return;
     }
-    const names = Array.from(files).map(f => f.name).join(', ');
-    fileList.innerHTML = `<strong>${files.length} Datei(en) ausgewählt:</strong> ${names}`;
+    
+    let html = '<div style="margin-top: 1rem; text-align: left;">';
+    html += `<strong>${selectedFiles.length} Datei(en) ausgewählt:</strong><br>`;
+    selectedFiles.forEach((file, index) => {
+        html += `
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.5rem; background: white; border-radius: 4px; margin-top: 0.5rem;">
+                <span style="flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${file.name}</span>
+                <button type="button" onclick="removeFile(${index})" style="background: #dc3545; color: white; border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; font-weight: bold; margin-left: 0.5rem; flex-shrink: 0;">✕</button>
+            </div>
+        `;
+    });
+    html += '</div>';
+    fileList.innerHTML = html;
 }
+
+// Make removeFile available globally
+window.removeFile = removeFile;
 
 document.getElementById('contactForm').addEventListener('submit', function(e) {
     // Allow the default Netlify form submission to happen
