@@ -164,6 +164,7 @@ function removeFile(index, event) {
 }
 
 function updateFileInput() {
+    // Create a new DataTransfer object and populate it
     const dt = new DataTransfer();
     selectedFiles.forEach(file => dt.items.add(file));
     fileInput.files = dt.files;
@@ -193,9 +194,9 @@ function updateFileList() {
 window.removeFile = removeFile;
 
 document.getElementById('contactForm').addEventListener('submit', function(e) {
-    // Allow the default Netlify form submission to happen
-    // After submission, Netlify will redirect automatically if configured
-    // This is just a backup to ensure redirect works
+    // Ensure all files are in the input field before submitting
+    updateFileInput();
+    // Allow normal form submission to Netlify
 });
 </script>
 
