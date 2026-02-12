@@ -231,6 +231,43 @@ function updateFileList() {
 
 // Make removeFile available globally
 window.removeFile = removeFile;
+
+// Handle form submission via AJAX to properly attach files
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Create FormData from the form
+    const formData = new FormData(this);
+    
+    // Remove the empty static file inputs
+    formData.delete('file1');
+    formData.delete('file2');
+    formData.delete('file3');
+    formData.delete('file4');
+    formData.delete('file5');
+    
+    // Add each selected file with its proper field name
+    selectedFiles.forEach((file, index) => {
+        formData.append(`file${index + 1}`, file);
+    });
+    
+    // Submit to Netlify
+    fetch('/', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            window.location.href = '/success/';
+        } else {
+            throw new Error('Submission failed');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Es gab einen Fehler beim Senden. Bitte versuchen Sie es erneut.');
+    });
+});
 </script>
 </script>
 
