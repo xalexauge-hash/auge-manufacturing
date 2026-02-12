@@ -5,7 +5,7 @@ module.exports = {
     address: "Eichenstraße 4, 83083 Riedering",
     phone: "+4915202408592",
     email: "info@auge-manufacturing.de",
-    cta_link: "mailto:info@auge-manufacturing.de"
+    cta_link: "/kontakt/"
   },
   services: [
     { 
