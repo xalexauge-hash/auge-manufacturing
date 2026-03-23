@@ -16,13 +16,13 @@
     <meta property="og:description" content="{% if seo.description %}{{ seo.description }}{% else %}{{ company.description }}{% endif %}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ site.url }}{{ page.url | replace('//', '/') }}">
-    <meta property="og:image" content="{% if seo.image %}{{ site.url }}{{ seo.image }}{% else %}{{ site.url }}/public/auge_manufacturing_logo.png{% endif %}">
+    <meta property="og:image" content="{% if seo.image %}{{ site.url }}{{ seo.image }}{% else %}{{ site.url }}/public/images/og-default.svg{% endif %}">
     <!-- TODO: Ersetzen durch echtes OG-Bild, z.B. og-default.jpg -->
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{% if seo.title %}{{ seo.title }}{% else %}{{ title }} | {{ company.name }}{% endif %}">
     <meta name="twitter:description" content="{% if seo.description %}{{ seo.description }}{% else %}{{ company.description }}{% endif %}">
-    <meta name="twitter:image" content="{% if seo.image %}{{ site.url }}{{ seo.image }}{% else %}{{ site.url }}/public/auge_manufacturing_logo.png{% endif %}">
+    <meta name="twitter:image" content="{% if seo.image %}{{ site.url }}{{ seo.image }}{% else %}{{ site.url }}/public/images/og-default.svg{% endif %}">
     <!-- TODO: Ersetzen durch echtes OG-Bild -->
     <script type="application/ld+json">
     {
@@ -30,9 +30,9 @@
       "@type": "Organization",
       "name": "{{ company.name }}",
       "url": "{{ site.url }}",
-      "logo": "{{ site.url }}/public/auge_manufacturing_logo.png",
-      "email": "{{ company.email }}",
-      "telephone": "{{ company.phone }}",
+    "logo": "{{ site.url }}/public/auge_manufacturing_logo.png",
+    "email": "{{ company.email }}",
+    "telephone": "{{ company.phone }}",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "{{ company.street }}",
@@ -40,7 +40,8 @@
         "addressLocality": "{{ company.city }}",
         "addressCountry": "{{ company.country }}"
       },
-      "description": "{{ company.description }}"
+            "description": "{{ company.description }}",
+            "areaServed": ["Riedering","Rosenheim","Chiemgau","Oberbayern","München"]
     }
     </script>
     <link rel="stylesheet" href="/public/style.css">
