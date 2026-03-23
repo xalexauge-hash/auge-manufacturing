@@ -2,7 +2,7 @@ module.exports = {
   name: "AUGÉ Manufacturing GmbH",
   legalName: "AUGÉ Manufacturing GmbH",
   shortName: "AUGÉ Manufacturing",
-  description: "AUGÉ Manufacturing bietet Lohnfertigung, CNC-Fräsen, CAD-Konstruktion und Baugruppenmontage für Prototypen, Einzelteile und Kleinserien.",
+  description: "AUGÉ Manufacturing bietet Lohnfertigung, CNC-Fräsen, CAD-Konstruktion und Baugruppenmontage für Prototypen, Einzelteile und Kleinserien. Verarbeitung: Stahl, Edelstahl, Aluminium und technische Kunststoffe.",
   email: "info@auge-manufacturing.de",
   phone: "+49 1520 2408592",
   website: "https://www.auge-manufacturing.de",
@@ -22,7 +22,7 @@ module.exports = {
       title: "CNC Fräsen", 
       icon: "⚙️", 
       // WICHTIG: Das Template sucht nach 'description' (nicht 'text')
-      description: "3-Achs-Bearbeitung von Stahl, NE-Metallen und technischen Kunststoffen." 
+      description: "3-Achs-Bearbeitung von Stahl, Edelstahl, Aluminium und technischen Kunststoffen." 
     },
     { 
       title: "CAD Konstruktion", 
