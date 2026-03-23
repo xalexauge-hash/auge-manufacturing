@@ -1,5 +1,15 @@
 module.exports = {
-  name: "AUGÉ Manufacturing",
+  name: "AUGÉ Manufacturing GmbH",
+  legalName: "AUGÉ Manufacturing GmbH",
+  shortName: "AUGÉ Manufacturing",
+  description: "AUGÉ Manufacturing bietet Lohnfertigung, CNC-Fräsen, CAD-Konstruktion und Baugruppenmontage für Prototypen, Einzelteile und Kleinserien.",
+  email: "info@auge-manufacturing.de",
+  phone: "+49 1520 2408592",
+  website: "https://www.auge-manufacturing.de",
+  street: "Eichenstraße 4",
+  postalCode: "83083",
+  city: "Riedering",
+  country: "DE",
   // WICHTIG: Das Template sucht nach 'contact.address' usw.
   contact: {
     address: "Eichenstraße 4, 83083 Riedering",

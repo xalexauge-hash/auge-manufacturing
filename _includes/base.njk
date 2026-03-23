@@ -1,9 +1,48 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} | {{ company.name }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if seo.title %}{{ seo.title }}{% else %}{{ title }} | {{ company.name }}{% endif %}</title>
+    <meta name="description" content="{% if seo.description %}{{ seo.description }}{% else %}{{ company.description }}{% endif %}">
+    <link rel="canonical" href="{{ site.url }}{{ page.url | replace('//', '/') }}">
+    {% if seo.noindex %}
+    <meta name="robots" content="noindex, nofollow">
+    {% else %}
+    <meta name="robots" content="index, follow">
+    {% endif %}
+    <!-- Open Graph -->
+    <meta property="og:title" content="{% if seo.title %}{{ seo.title }}{% else %}{{ title }} | {{ company.name }}{% endif %}">
+    <meta property="og:description" content="{% if seo.description %}{{ seo.description }}{% else %}{{ company.description }}{% endif %}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ site.url }}{{ page.url | replace('//', '/') }}">
+    <meta property="og:image" content="{% if seo.image %}{{ site.url }}{{ seo.image }}{% else %}{{ site.url }}/public/auge_manufacturing_logo.png{% endif %}">
+    <!-- TODO: Ersetzen durch echtes OG-Bild, z.B. og-default.jpg -->
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% if seo.title %}{{ seo.title }}{% else %}{{ title }} | {{ company.name }}{% endif %}">
+    <meta name="twitter:description" content="{% if seo.description %}{{ seo.description }}{% else %}{{ company.description }}{% endif %}">
+    <meta name="twitter:image" content="{% if seo.image %}{{ site.url }}{{ seo.image }}{% else %}{{ site.url }}/public/auge_manufacturing_logo.png{% endif %}">
+    <!-- TODO: Ersetzen durch echtes OG-Bild -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "{{ company.name }}",
+      "url": "{{ site.url }}",
+      "logo": "{{ site.url }}/public/auge_manufacturing_logo.png",
+      "email": "{{ company.email }}",
+      "telephone": "{{ company.phone }}",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "{{ company.street }}",
+        "postalCode": "{{ company.postalCode }}",
+        "addressLocality": "{{ company.city }}",
+        "addressCountry": "{{ company.country }}"
+      },
+      "description": "{{ company.description }}"
+    }
+    </script>
     <link rel="stylesheet" href="/public/style.css">
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="48x48" href="/public/images/fav_ico.png">
