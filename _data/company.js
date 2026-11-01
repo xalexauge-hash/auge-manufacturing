@@ -10,6 +10,9 @@ module.exports = {
   postalCode: "83083",
   city: "Riedering",
   country: "DE",
+  registerNumber: "HRB 35142",
+  registerCourt: "Amtsgericht Traunstein",
+  vatId: "DE461964227",
   // WICHTIG: Das Template sucht nach 'contact.address' usw.
   contact: {
     address: "Eichenstraße 4, 83083 Riedering",
