@@ -17,5 +17,4 @@ seo:
   </div>
 </section>
 {% include "tasks.njk" %}
-{% for service in company.services %}{% for alias in service.aliases %}<span id="{{ alias }}"></span>{% endfor %}<section class="content-section service-detail" id="{{ service.id }}"><p class="eyebrow">0{{ loop.index }} / {{ service.title }}</p><h2>{{ service.heading }}</h2><p class="intro">{{ service.description }}</p><ul>{% for item in service.items %}<li>{{ item }}</li>{% endfor %}</ul><h3>So gehen wir vor</h3><p class="intro">{{ service.approach }}</p><a class="btn-quote" href="/leistungen/{{ service.id }}/">{{ service.title }} im Detail ↗</a></section>{% endfor %}
 <section class="content-section contact-band"><h2>Eine gute Lösung beginnt mit Ihrer Aufgabe.</h2><p>Hilfreich sind eine kurze Prozessbeschreibung, vorhandene Zeichnungen oder CAD-Daten sowie Ihre Ziele und Rahmenbedingungen. Den konkreten Leistungsumfang stimmen wir projektbezogen ab.</p><a class="btn-quote" href="/kontakt/">Projekt besprechen ↗</a></section>
