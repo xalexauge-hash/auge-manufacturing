@@ -151,7 +151,7 @@
     // Roof signal lamp and fasteners complete the visible enclosure assembly.
     cylinder(89,240,35,2,10,dark);cylinder(89,250,35,4,4,[219,175,40]);cylinder(89,254,35,4,2,dark);
     faces.sort((a,b)=>a.depth-b.depth).forEach(f=>{ctx.beginPath();f.points.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.closePath();ctx.fillStyle=f.color;ctx.fill();ctx.strokeStyle='#243c2c20';ctx.lineWidth=.6;ctx.stroke();});
-    const pins={spindle:[0,143,20],tools:[-65,181,30],coolant:[24,134,30]};
+    const pins={workspace:[0,101,25],spindle:[0,143,20],tools:[-65,181,30],coolant:[24,134,30]};
     root.querySelectorAll('.machine-hotspots button').forEach(b=>{
       let point;
       if(b.dataset.door==='open'){b.hidden=Boolean(targetDoor);point=[0,150,95];}
