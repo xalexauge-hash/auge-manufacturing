@@ -156,12 +156,36 @@
     box(140,165,55,38,39,2,[48,58,63]);box(144,169,58,30,30,1,[28,91,124]);
     box(147,194,60,17,2,.5,[212,187,68]);
     for(let y=174;y<190;y+=4)box(147,y,60,21,1,.5,[119,184,195]);
-    for(let n=0;n<7;n++)box(141+n*5.2,159,56,3,3,1,dark);
-    box(138,147,55,42,8,2,[182,37,43]);
-    for(let row=0;row<6;row++)for(let col=0;col<10;col++)box(140+col*3.8,141-row*3.7,56,2.8,2.5,1,[44,58,65]);
-    for(let row=0;row<3;row++)for(let col=0;col<5;col++)box(153+col*5,112-row*5.5,56,3.5,3.5,1,[48,62,66]);
-    box(140,98,56,9,9,2,[223,182,40]);box(142,100,59,5,5,3,[198,39,39]);
-    box(156,92,56,5,4,2,[46,144,103]);box(164,92,56,5,4,2,[188,48,47]);
+    // Photo-based iTNC panel: separate screen softkeys, alphanumeric and numeric banks.
+    const key=(x,y,w=2.1,h=1.7,color=[34,40,43])=>{
+      box(x,y,56,w,h,1,color);
+      box(x+w*.25,y+h*.47,57.1,w*.48,.22,.15,[221,225,221]);
+    };
+    for(let n=0;n<8;n++)key(142+n*4.3,160,2.5,2,[209,214,207]);
+    for(let n=0;n<6;n++)key(176,173+n*4.2,1.5,2,[209,214,207]);
+    box(138,155,55,42,.5,1,[90,101,101]);
+    for(let row=0;row<6;row++)for(let col=0;col<13;col++)key(140+col*2.15+(row%2)*.35,150-row*2.6,1.75,1.8);
+    // Amber axis/function column and distinct numeric keypad at right.
+    for(let row=0;row<6;row++){
+      key(170,150-row*2.6,1.8,1.8,[222,156,34]);
+      for(let col=0;col<3;col++)key(172.5+col*2.3,150-row*2.6,1.8,1.8);
+    }
+    for(let row=0;row<2;row++)for(let col=0;col<3;col++)key(146+col*2.6,128-row*2.8);
+    for(let row=0;row<2;row++)for(let col=0;col<5;col++)key(158+col*2.5,128-row*2.8,1.8,1.8,[188,195,190]);
+    for(let row=0;row<2;row++)for(let col=0;col<10;col++)key(145+col*2.5,118-row*2.8);
+    for(const y of [127,117]){
+      const ring=[];for(let i=0;i<20;i++){const a=i*Math.PI/10;ring.push([141+2*Math.cos(a),y+2*Math.sin(a),58]);}pane(ring,'#303839');
+      box(140.8,y,58.2,.4,1.6,.2,[210,216,212]);
+    }
+    box(138,110,55,42,.6,1,[91,100,98]);
+    box(140,99,56,7,8,1,[230,190,38]);
+    const stop=[];for(let i=0;i<20;i++){const a=i*Math.PI/10;stop.push([143.5+2.8*Math.cos(a),103+2.8*Math.sin(a),59]);}pane(stop,'#d4262e');
+    for(let row=0;row<3;row++)for(let col=0;col<3;col++)key(151+col*2.8,105-row*2.7);
+    for(let row=0;row<2;row++)for(let col=0;col<7;col++)key(161+col*2.4,106-row*4,1.8,2.7);
+    for(let n=0;n<4;n++)key(150+n*6,91,4,4,[[24,150,103],[205,40,43],[53,63,65],[31,103,194]][n]);
+    box(138,86,55,42,3,2,[181,32,39]);
+    // Full-height black side handle and mounting lugs.
+    box(182,94,48,5,4,8,dark);box(182,184,48,5,4,8,dark);box(186,94,54,2.5,94,3,dark);
     // Karina's conveyor is clearly visible in the supplied photograph.
     {
       box(-163,16,-30,36,17,48,dark);
