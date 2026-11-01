@@ -48,94 +48,55 @@
     <link rel="stylesheet" href="/public/refinement.css">
     <link rel="stylesheet" href="/public/experience.css">
     <script src="/public/experience.js" defer></script>
+    <link rel="stylesheet" href="/public/pages-modern.css">
+    <link rel="stylesheet" href="/public/layout-modern.css">
+    <link rel="stylesheet" href="/public/motion.css">
+    <script src="/public/motion.js" defer></script>
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="48x48" href="/public/images/fav_ico.png">
     <link rel="shortcut icon" href="/public/images/fav_ico.png">
-    <style>
-        /* Minimaler Zusatz, um das Bild einzupassen */
-        .logo img {
-            height: 200px;
-            width: auto;
-            vertical-align: middle;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-    </style>
+
 </head>
 <body>
 <script>document.documentElement.classList.add("js");</script>
 <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
 
-    <header>
-        <div class="logo">
-            <a href="/">
-                <img src="/public/auge_manufacturing_logo.png" alt="AUGÉ MANUFACTURING">
-            </a>
+    <header class="site-dock">
+      <a class="dock-brand" href="/" aria-label="AUGÉ Manufacturing – Start"><span>AUGÉ<span class="brand-dot">.</span></span><small>MANUFACTURING</small></a>
+      <nav class="dock-nav" aria-label="Hauptnavigation">
+        <button class="dock-toggle" type="button" aria-expanded="false" aria-controls="navLinks"><span>Menü</span><span class="menu-lines" aria-hidden="true"></span></button>
+        <div class="dock-links" id="navLinks">
+          <a href="/"{% if page.url == '/' %} aria-current="page"{% endif %}>Start</a>
+          <a href="/ueber-uns/"{% if page.url == '/ueber-uns/' %} aria-current="page"{% endif %}>Über uns</a>
+          <a href="/leistungen/"{% if page.url == '/leistungen/' %} aria-current="page"{% endif %}>Leistungen</a>
+          <a href="/maschinenpark/"{% if page.url == '/maschinenpark/' %} aria-current="page"{% endif %}>Maschinenpark</a>
+          <a class="dock-contact" href="/kontakt/"{% if page.url == '/kontakt/' %} aria-current="page"{% endif %}>Kontakt <span aria-hidden="true">↗</span></a>
         </div>
+      </nav>
     </header>
-
-    <nav aria-label="Hauptnavigation">
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navLinks" onclick="toggleMenu()">Menü</button>
-        <div class="nav-links" id="navLinks">
-            <a href="/" class="{% if page.url == '/' %}active{% endif %}">
-                Start
-            </a>
-            <a href="/ueber-uns/" class="{% if page.url == '/ueber-uns/' %}active{% endif %}">
-                Über uns
-            </a>
-            <a href="/leistungen/" class="{% if page.url == '/leistungen/' %}active{% endif %}">
-                Leistungen
-            </a>
-            <a href="/maschinenpark/" class="{% if page.url == '/maschinenpark/' %}active{% endif %}">
-                Maschinenpark
-            </a>
-            <a href="/kontakt/" class="{% if page.url == '/kontakt/' %}active{% endif %}">
-                Kontakt
-            </a>
-        </div>
-    </nav>
 
     <main id="main-content">
         {{ content | safe }}
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Kontakt Info</h4>
-                <p><strong>Adresse:</strong> {{ company.contact.address }}</p>
-                <p><strong>Telefon:</strong> <a href="tel:{{ company.contact.phone }}">{{ company.contact.phone }}</a></p>
-                <p><strong>E-Mail:</strong> <a href="mailto:{{ company.contact.email }}">{{ company.contact.email }}</a></p>
-            </div>
-            
-            <div class="footer-section">
-                <h4>Rechtliches</h4>
-                <ul style="list-style: none; padding: 0;">
-                    <li><a href="/impressum/" style="color: inherit; text-decoration: none;">Impressum</a></li>
-                    <li><a href="/datenschutz/" style="color: inherit; text-decoration: none;">Datenschutzerklärung</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <p style="margin: 0;">© 2026 Alexander Augé, M.Sc.</p>
-            </div>
-        </div>
+    <footer class="site-outro">
+      <div class="outro-top"><span class="eyebrow">AUGÉ Manufacturing / Riedering</span><a class="outro-top-link" href="#main-content">Zurück nach oben <span aria-hidden="true">↑</span></a></div>
+      <a class="outro-invitation" href="/kontakt/"><span>Was möchten<br>Sie bewegen?</span><span class="outro-arrow" aria-hidden="true">↗</span></a>
+      <div class="outro-contact"><p>Ihre technische Aufgabe.<br>Unser nächstes Gespräch.</p><div><a href="mailto:{{ company.contact.email }}">{{ company.contact.email }}</a><a href="tel:{{ company.contact.phone }}">{{ company.contact.phone }}</a></div></div>
+      <div class="outro-bottom"><span>© 2026 AUGÉ Manufacturing GmbH</span><span>{{ company.contact.address }}</span><div><a href="/impressum/">Impressum</a><a href="/datenschutz/">Datenschutz</a></div></div>
+      <div class="outro-wordmark" aria-hidden="true">AUGÉ<span>.</span></div>
     </footer>
-
     <script>
-        function toggleMenu() {
-            var x = document.getElementById("navLinks");
-            document.querySelector(".menu-toggle").setAttribute("aria-expanded", String(!x.classList.contains("show")));
-            if (x.className === "nav-links") {
-                x.className += " show";
-            } else {
-                x.className = "nav-links";
-            }
-        }
+      (() => {
+        const toggle = document.querySelector('.dock-toggle');
+        const links = document.querySelector('.dock-links');
+        const close = () => { toggle.setAttribute('aria-expanded', 'false'); links.classList.remove('is-open'); };
+        toggle.addEventListener('click', () => { const open = toggle.getAttribute('aria-expanded') !== 'true'; toggle.setAttribute('aria-expanded', String(open)); links.classList.toggle('is-open', open); });
+        links.addEventListener('click', event => { if (event.target.closest('a')) close(); });
+        document.addEventListener('keydown', event => { if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') { close(); toggle.focus(); } });
+        document.addEventListener('click', event => { if (!event.target.closest('.site-dock')) close(); });
+        window.matchMedia('(min-width: 901px)').addEventListener('change', close);
+      })();
     </script>
-
 </body>
 </html>
