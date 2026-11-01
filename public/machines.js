@@ -62,7 +62,7 @@
     // Red door frames belong to Karina; dark frames and blue-grey head to Katrina.
     const shell=[220,224,221], dark=[45,51,53], metal=[156,168,171];
     const accent=machine==='karina'?[188,32,39]:[65,76,82];
-    const head=machine==='karina'?[191,35,39]:[120,148,162];
+    const head=machine==='karina'?[191,35,39]:[65,76,82];
     // Cast base, levelling feet and white fixed splash apron.
     box(-127,12,-88,254,24,166,dark);
     [-111,106].forEach(x=>[-68,60].forEach(z=>{cylinder(x,5,z,7,7,metal);cylinder(x,0,z,10,4,dark);}));
@@ -86,6 +86,12 @@
     // T-slots run across the table in X, not front-to-back.
     for(let z=-16;z<54;z+=14){box(-83,100,z,166,.7,2.3,[44,54,58]);box(-83,100,z+2.3,166,.7,.7,[222,227,228]);}
     for(let x=-78;x<84;x+=14)box(x,92,54,1,6,.6,[91,108,113]);
+    // Peaked stainless front way cover and drainage channels below the saddle.
+    for(let i=0;i<6;i++){
+      const z=25+i*8,y=54-i*2;
+      pane([[-49,y,z],[0,y+5,z],[0,y+3,z+8],[-49,y-2,z+8]],'#b9c3c5');
+      pane([[0,y+5,z],[49,y,z],[49,y-2,z+8],[0,y+3,z+8]],'#929fa3');
+    }
     // Vertical guideway cover and exposed characteristic narrow spindle head.
     for(let y=105;y<232;y+=6)box(-26,y,-18,52,3,5,[60,69,73]);
     box(-23,156,-12,46,94,43,head);
@@ -101,14 +107,14 @@
     for(let y=115;y<124;y+=2)cylinder(0,y,9,4.2,.7,[209,217,219]);
     // User-confirmed tool changer types, illustrated with simplified pocket geometry.
     if(machine==='karina'){
-      cylinder(-65,178,13,29,7,metal);
-      for(let i=0;i<22;i++){const a=i*Math.PI*2/22;cylinder(-65+24*Math.cos(a),169,13+24*Math.sin(a),2.4,9,dark);}
+      cylinder(-62,178,7,35,25,[221,222,211]); cylinder(-62,177,7,33,2,dark);
+      for(let i=0;i<22;i++){const a=i*Math.PI*2/22;const tx=-62+28*Math.cos(a),tz=7+28*Math.sin(a);cylinder(tx,170,tz,3.5,8,dark);cylinder(tx,163-(i%3)*2,tz,1.6,7+(i%3)*2,metal);}
     }else{
       for(let i=0;i<24;i++){const a=i*Math.PI*2/24;box(-65+26*Math.cos(a),185+26*Math.sin(a),18,3,5,9,metal);}
       box(-79,176,12,28,26,10,dark);
     }
     // Upper changer shroud.
-    box(-89,184,-42,53,43,50,[210,214,208]);
+    if(machine==='katrina')box(-89,184,-42,53,43,50,[210,214,208]);
     box(-48,192,9,13,24,1,[28,36,39]);
     box(-91,181,-42,55,3,51,[121,132,133]);
     // Articulated coolant nozzles, steel end tips and conduit behind head.
@@ -119,18 +125,24 @@
     [-1,1].forEach(side=>{
       const x=side===-1?-94-door*67:door*67;
       box(x,78,79,94,9,6,accent);box(x,215,79,94,12,6,accent);
+      // Deep pressed-sheet bevels around the tall inset glazing, visible in supplied listings.
+      const ac='rgb('+accent.join(',')+')';
+      pane([[x,78,87],[x+94,78,87],[x+81,101,92],[x+14,101,92]],ac);
+      pane([[x,78,87],[x+14,101,92],[x+14,214,92],[x,227,87]],ac);
+      pane([[x+94,78,87],[x+94,227,87],[x+81,214,92],[x+81,101,92]],ac);
+      box(x+13,101,92,2,113,1,[29,33,34]);box(x+80,101,92,2,113,1,[29,33,34]);
       box(x,87,79,10,128,6,accent);box(x+84,87,79,10,128,6,accent);
       // Muted glazing remains translucent, allowing depth and the spindle behind it.
       pane([[x+10,87,82],[x+84,87,82],[x+84,215,82],[x+10,215,82]],'rgba(166,193,198,.22)');
       box(x+10,87,85,2,128,1,metal);box(x+82,87,85,2,128,1,metal);
       box(x+12,211,85,70,2,1,[228,233,232]);
       const hx=x+(side===-1?83:9);
-      box(hx,119,87,3,5,7,metal);box(hx,176,87,3,5,7,metal);box(hx,122,93,3,55,3,metal);
+      box(hx,119,87,3,5,7,metal);box(hx,176,87,3,5,7,metal);box(hx,111,93,3,77,3,[24,28,29]);
       for(let xx of [x+5,x+89])for(let yy of [82,221])cylinder(xx,yy,86,1,1,metal);
     });
     // Controller support, console chassis, screen bezel, soft keys and keyboard.
     box(116,12,30,51,7,30,dark);box(145,19,39,9,74,12,dark);
-    box(137,80,32,27,8,16,metal);box(135,86,36,48,125,15,metal);
+    box(137,80,32,27,8,16,metal);box(135,72,36,53,139,15,metal);
     box(138,89,52,42,119,2,[191,200,199]);
     box(140,165,55,38,39,2,[48,58,63]);box(144,169,58,30,30,1,[28,91,124]);
     box(147,194,60,17,2,.5,[212,187,68]);
