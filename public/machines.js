@@ -129,8 +129,9 @@
     // Articulated coolant nozzles, steel end tips and conduit behind head.
     for(let side of [-1,1])for(let i=0;i<6;i++)cylinder(side*(17+i*1.1),147-i*2,17+i*1.7,2.2,2.4,[43,85,122]);
     cylinder(-24,133,26,1.7,3,[196,156,62]);cylinder(24,133,26,1.7,3,[196,156,62]);
-    // Front rail, jambs and two real framed sliding windows. Opening retracts frames.
+    // Front-mounted sliding doors travel outside the fixed side panels.
     box(-98,224,77,196,5,6,metal);box(-98,74,77,196,4,6,metal);
+    const doorFaceStart=faces.length;
     [-1,1].forEach(side=>{
       const x=side===-1?-94-door*67:door*67;
       box(x,78,79,94,9,6,accent);box(x,215,79,94,12,6,accent);
@@ -149,6 +150,10 @@
       box(hx,119,87,3,5,7,metal);box(hx,176,87,3,5,7,metal);box(hx,111,93,3,77,3,[24,28,29]);
       for(let xx of [x+5,x+89])for(let yy of [82,221])cylinder(xx,yy,86,1,1,metal);
     });
+    // The doors are entirely in front of the enclosure (z >= 79; wall ends at 75).
+    // Render them as a front assembly: mean-depth sorting alone lets large side-wall
+    // faces incorrectly cover the opened door frames. Preserve depth order within it.
+    faces.slice(doorFaceStart).forEach(face=>{face.layer=1;});
     // Controller support, console chassis, screen bezel, soft keys and keyboard.
     box(116,12,30,51,7,30,dark);box(145,19,39,9,74,12,dark);
     box(137,80,32,27,8,16,metal);box(135,72,36,53,139,15,metal);
@@ -195,7 +200,7 @@
     }
     // Roof signal lamp and fasteners complete the visible enclosure assembly.
     cylinder(89,240,35,2,10,dark);cylinder(89,250,35,4,4,[219,175,40]);cylinder(89,254,35,4,2,dark);
-    faces.sort((a,b)=>a.depth-b.depth).forEach(f=>{ctx.beginPath();f.points.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.closePath();ctx.fillStyle=f.color;ctx.fill();ctx.strokeStyle='#243c2c20';ctx.lineWidth=.6;ctx.stroke();});
+    faces.sort((a,b)=>(a.layer||0)-(b.layer||0)||a.depth-b.depth).forEach(f=>{ctx.beginPath();f.points.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.closePath();ctx.fillStyle=f.color;ctx.fill();ctx.strokeStyle='#243c2c20';ctx.lineWidth=.6;ctx.stroke();});
     const pins={workspace:[0,101,25],spindle:[0,143,20],tools:[-65,181,30],coolant:[24,134,30]};
     root.querySelectorAll('.machine-hotspots button').forEach(b=>{
       let point;
