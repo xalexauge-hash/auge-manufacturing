@@ -3,15 +3,15 @@ layout: base.njk
 title: Engineering, Automatisierung und Robotik
 seo:
   title: "Engineering, Automatisierung & Robotik | AUGÉ Manufacturing"
-  description: "Engineering und Robotik aus Riedering: von der technischen Aufgabenstellung zur durchdachten Lösung. Digitalisierung & KI, CNC-Fertigung und Rapid Prototyping ergänzen unser Engineering."
+  description: "Sondermaschinenbau inklusive Retrofit, Automatisierung & Robotik, Digitalisierung & KI und CNC-(Express)Fertigung aus Riedering."
 ---
 <section class="engineering-hero">
-  <div><p class="eyebrow">AUGÉ Manufacturing · Riedering bei Rosenheim</p><h1>Technik entwickeln.<br>Prozesse verbinden.<br><span>Ideen umsetzen.</span></h1><p class="lead">Engineering, Automatisierung und Robotik – ergänzt durch Digitalisierung &amp; KI, CNC-Fertigung und Rapid Prototyping. Mit dem Blick für das ganze System.</p><div class="actions"><a class="btn-quote" href="/kontakt/">Projekt besprechen ↗</a><a href="/leistungen/">Leistungen entdecken →</a></div></div>
-  <div class="system-map" aria-label="Sondermaschinenbau, Automatisierung und Robotik, Digitalisierung und KI sowie CNC-Express-Fertigung"><p class="eyebrow">Von der Aufgabe zur Lösung</p><ol><li><span>01</span> Sondermaschinenbau<small>Anforderungen verstehen. Anlagen durchdenken.</small></li><li><span>02</span> Automatisierung &amp; Robotik<small>Abläufe automatisieren. Robotik integrieren.</small></li><li><span>03</span> Digitalisierung &amp; KI<small>Prozesswissen vernetzen. Daten nutzbar machen.</small></li><li><span>04</span> CNC-(Express-)Fertigung<small>Einzelteile, Prototypen und Kleinserien fertigen.</small></li></ol></div>
+  <div><p class="eyebrow">AUGÉ Manufacturing · Riedering bei Rosenheim</p><h1>Technik entwickeln.<br>Prozesse verbinden.<br><span>Ideen umsetzen.</span></h1><p class="lead">Sondermaschinenbau, Automatisierung &amp; Robotik, Digitalisierung &amp; KI und CNC-(Express)Fertigung. Mit dem Blick für das ganze System.</p><div class="actions"><a class="btn-quote" href="/kontakt/">Projekt besprechen ↗</a><a href="/leistungen/">Leistungen entdecken →</a></div></div>
+  <div class="system-map" aria-label="Sondermaschinenbau, Automatisierung und Robotik, Digitalisierung und KI sowie CNC-Express-Fertigung"><p class="eyebrow">Von der Aufgabe zur Lösung</p><ol>{% for service in company.services %}<li><span>0{{ loop.index }}</span> {{ service.title }}<small>{{ service.mapLine }}</small></li>{% endfor %}</ol></div>
 </section>
 {% include "experience.njk" %}
 {% include "tasks.njk" %}
-<section class="content-section"><p class="eyebrow">Leistungen</p><h2>Ihr Projekt bestimmt den Einstieg.</h2><p class="intro">Eine konstruktive Aufgabe, ein manueller Prozess oder eine geplante Roboteranwendung: Gemeinsam klären wir, wo Unterstützung sinnvoll ist.</p><div class="capabilities">{% for service in company.services %}<a href="/leistungen/{{ service.id }}/"><span class="eyebrow">{{ loop.index }} / Kompetenz</span><h3>{{ service.title }} ↗</h3><p>{{ service.description }}</p></a>{% endfor %}</div></section>
+<section class="content-section"><p class="eyebrow">Leistungen</p><h2>Ihr Projekt bestimmt den Einstieg.</h2><p class="intro">Eine konstruktive Aufgabe, ein manueller Prozess oder eine geplante Roboteranwendung: Gemeinsam klären wir, wo Unterstützung sinnvoll ist.</p><div class="capabilities">{% for service in company.services %}<a href="/leistungen/{{ service.id }}/"><span class="eyebrow">0{{ loop.index }} / Kompetenz</span><h3>{{ service.title }} ↗</h3><p>{{ service.description }}</p></a>{% endfor %}</div></section>
 <section class="content-section process-section" id="zusammenarbeit">
   <p class="eyebrow">Zusammenarbeit</p>
   <h2>Wir übernehmen Verantwortung.</h2>

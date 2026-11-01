@@ -1,28 +1,7 @@
 module.exports = [
   {
-    id: "steuerungstechnik",
-    title: "Steuerungstechnik",
-    heading: "Damit aus einzelnen Komponenten ein verlässlicher Ablauf wird.",
-    description: "Programmierung, Hardware-Projektierung, Schaltschrankbau und Installation für Maschinen und Roboteranwendungen. Wir stimmen Technik und Prozess aufeinander ab.",
-    intro: "Eine Maschine erfüllt ihre Aufgabe erst, wenn Sensoren, Antriebe, Steuerung und Bedienung zusammenspielen. Wir betrachten deshalb nicht nur einzelne Funktionen, sondern den gesamten Ablauf: vom Startsignal über die Bearbeitung bis zur Rückmeldung an den nächsten Prozessschritt.",
-    tasks: [
-      { title: "Neue Maschinenabläufe", text: "Sie möchten eine Maschine oder Roboteranwendung aufbauen. Wir klären Betriebsabläufe, Signale und die Anbindung der beteiligten Komponenten als Grundlage für die Programmierung." },
-      { title: "Bestehende Funktionen anpassen", text: "Ein Werkstück, Prozessschritt oder angeschlossenes System verändert sich. Wir betrachten die Auswirkungen auf die vorhandene Steuerung und stimmen die erforderlichen Anpassungen ab." },
-      { title: "Hardware und Software verbinden", text: "Von der Hardware-Projektierung über Schaltschrankbau und Installation bis zur funktionalen Integration: Die Schnittstellen werden über die einzelnen Arbeitsschritte hinweg gemeinsam betrachtet." }
-    ],
-    steps: [
-      { title: "Ablauf und Schnittstellen klären", text: "Wir erfassen den gewünschten Prozess, die vorhandene Hardware und die Anforderungen an Bedienung und Kommunikation. Offene Punkte und Verantwortlichkeiten werden vor der Umsetzung sichtbar." },
-      { title: "Projektieren und programmieren", text: "Hardware und Software entstehen auf Grundlage des abgestimmten Funktionsumfangs. Änderungen besprechen wir mit Blick auf die übrigen Komponenten und den Projektstand." },
-      { title: "Funktionen prüfen und übergeben", text: "Wir prüfen die vereinbarten Abläufe und begleiten die Inbetriebnahme. Bedienung, Dokumentation und Übergabe werden passend zu Ihrer Anlage und dem beauftragten Umfang vorbereitet." }
-    ],
-    outputs: ["Abgestimmte Funktions- und Schnittstellenbeschreibung", "Projektierte Hardware und Programmierung im vereinbarten Umfang", "Schaltschrankbau und Installation entsprechend der Projektvereinbarung", "Vereinbarte Funktionsprüfungen sowie Unterlagen für Betrieb und weitere Anpassungen"],
-    interfaces: "Wir stimmen uns mit mechanischer Konstruktion, Anlagenverantwortlichen und den Lieferanten angeschlossener Komponenten ab. Dabei klären wir auch, wer welche sicherheitsbezogenen Aufgaben, Prüfungen und Freigaben übernimmt. Die erforderlichen Nachweise und Zuständigkeiten werden projektbezogen festgelegt.",
-    inputs: ["Beschreibung des gewünschten Ablaufs und der Betriebsarten", "Vorhandene Schaltpläne, Hardwarelisten und Programmunterlagen", "Daten zu Robotern, Antrieben, Sensoren und Kommunikationsschnittstellen", "Rahmenbedingungen für Installation, Tests und Inbetriebnahme"],
-    service: "Auch nach der Inbetriebnahme bleiben wir für Fragen und Anpassungen an unserem Projekt ansprechbar. Für neue Funktionen oder geänderte Komponenten betrachten wir gemeinsam den Änderungsbedarf und stimmen den weiteren Umfang ab."
-  },
-  {
     id: "sondermaschinen",
-    title: "Sondermaschinen",
+    title: "Sondermaschinenbau",
     heading: "Eine technische Lösung, die zu Ihrem Prozess passt.",
     description: "Engineering, CAD-Konstruktion und Integration für Automatisierungsanlagen, Retrofit und Umbauten. Von der Aufgabe zur abgestimmten mechanischen und robotischen Lösung.",
     intro: "Nicht jede Aufgabe lässt sich mit einer Standardmaschine lösen. Bauteilgeometrie, Handhabung, verfügbare Fläche und die Einbindung in bestehende Abläufe bestimmen das Konzept. Wir verbinden Konstruktion und praktische Umsetzung, damit diese Anforderungen zusammengeführt werden.",
@@ -40,6 +19,27 @@ module.exports = [
     interfaces: "Wir betrachten die Übergänge zu Ihrer bestehenden Anlage ebenso wie die Zusammenarbeit mit Zulieferern und Montagebeteiligten. Die Verantwortung für Sicherheitskonzept, Nachweise und Freigaben sowie der Umfang von Umbauten werden ausdrücklich abgestimmt.",
     inputs: ["Werkstücke, Zeichnungen oder CAD-Daten und Angaben zur Variantenvielfalt", "Beschreibung des Ist-Prozesses und des gewünschten Zielzustands", "Layout, Platzverhältnisse und Schnittstellen zu bestehenden Anlagen", "Anforderungen an Durchsatz, Bedienung, Montage und Wartungszugang"],
     service: "Nach der Übergabe begleiten wir unsere Lösungen bei technischen Rückfragen und Weiterentwicklungen. Wenn sich Ihr Prozess verändert, können Erkenntnisse aus dem Betrieb in Anpassungen der Konstruktion oder des Anlagenablaufs einfließen."
+  },
+  {
+    id: "steuerungstechnik",
+    title: "Automatisierung & Robotik",
+    heading: "Damit aus einzelnen Komponenten ein verlässlicher Ablauf wird.",
+    description: "Automatisierung und Roboterintegration für Ihre Produktion: von Handhabung und Programmierung über Steuerungstechnik bis zur Inbetriebnahme. Wir stimmen Technik und Prozess aufeinander ab.",
+    intro: "Eine Maschine erfüllt ihre Aufgabe erst, wenn Sensoren, Antriebe, Steuerung und Bedienung zusammenspielen. Wir betrachten deshalb nicht nur einzelne Funktionen, sondern den gesamten Ablauf: vom Startsignal über die Bearbeitung bis zur Rückmeldung an den nächsten Prozessschritt.",
+    tasks: [
+      { title: "Neue Maschinenabläufe", text: "Sie möchten eine Maschine oder Roboteranwendung aufbauen. Wir klären Betriebsabläufe, Signale und die Anbindung der beteiligten Komponenten als Grundlage für die Programmierung." },
+      { title: "Bestehende Funktionen anpassen", text: "Ein Werkstück, Prozessschritt oder angeschlossenes System verändert sich. Wir betrachten die Auswirkungen auf die vorhandene Steuerung und stimmen die erforderlichen Anpassungen ab." },
+      { title: "Hardware und Software verbinden", text: "Von der Hardware-Projektierung über Schaltschrankbau und Installation bis zur funktionalen Integration: Die Schnittstellen werden über die einzelnen Arbeitsschritte hinweg gemeinsam betrachtet." }
+    ],
+    steps: [
+      { title: "Ablauf und Schnittstellen klären", text: "Wir erfassen den gewünschten Prozess, die vorhandene Hardware und die Anforderungen an Bedienung und Kommunikation. Offene Punkte und Verantwortlichkeiten werden vor der Umsetzung sichtbar." },
+      { title: "Projektieren und programmieren", text: "Hardware und Software entstehen auf Grundlage des abgestimmten Funktionsumfangs. Änderungen besprechen wir mit Blick auf die übrigen Komponenten und den Projektstand." },
+      { title: "Funktionen prüfen und übergeben", text: "Wir prüfen die vereinbarten Abläufe und begleiten die Inbetriebnahme. Bedienung, Dokumentation und Übergabe werden passend zu Ihrer Anlage und dem beauftragten Umfang vorbereitet." }
+    ],
+    outputs: ["Abgestimmte Funktions- und Schnittstellenbeschreibung", "Projektierte Hardware und Programmierung im vereinbarten Umfang", "Schaltschrankbau und Installation entsprechend der Projektvereinbarung", "Vereinbarte Funktionsprüfungen sowie Unterlagen für Betrieb und weitere Anpassungen"],
+    interfaces: "Wir stimmen uns mit mechanischer Konstruktion, Anlagenverantwortlichen und den Lieferanten angeschlossener Komponenten ab. Dabei klären wir auch, wer welche sicherheitsbezogenen Aufgaben, Prüfungen und Freigaben übernimmt. Die erforderlichen Nachweise und Zuständigkeiten werden projektbezogen festgelegt.",
+    inputs: ["Beschreibung des gewünschten Ablaufs und der Betriebsarten", "Vorhandene Schaltpläne, Hardwarelisten und Programmunterlagen", "Daten zu Robotern, Antrieben, Sensoren und Kommunikationsschnittstellen", "Rahmenbedingungen für Installation, Tests und Inbetriebnahme"],
+    service: "Auch nach der Inbetriebnahme bleiben wir für Fragen und Anpassungen an unserem Projekt ansprechbar. Für neue Funktionen oder geänderte Komponenten betrachten wir gemeinsam den Änderungsbedarf und stimmen den weiteren Umfang ab."
   },
   {
     id: "digitalisierung-ki",
@@ -64,9 +64,9 @@ module.exports = [
   },
   {
     id: "cnc",
-    title: "CNC-Fertigung & Rapid Prototyping",
+    title: "CNC-(Express)Fertigung",
     heading: "Konstruktionen fertigen. Erkenntnisse gewinnen.",
-    description: "3-Achs-CNC-Fräsen für Einzelteile und Kleinserien sowie Rapid Prototyping für Anschauungs-, Montage- und Funktionsmuster. Fertigung als Ergänzung zum Engineering.",
+    description: "3-Achs-CNC-Fräsen für Einzelteile, Prototypen und Kleinserien. Bei zeitkritischen Bauteilen stimmen wir die Möglichkeiten einer Express-Fertigung anhand von Geometrie, Werkstoff, Stückzahl und gewünschtem Liefertermin ab.",
     intro: "Ein reales Bauteil beantwortet Fragen, die im Modell offenbleiben: Ist die Montage zugänglich? Passt die Geometrie zur Anwendung? Welche Details müssen verändert werden? Wir verbinden Fertigung und konstruktive Rückmeldung, damit aus dem ersten Entwurf eine abgestimmte Ausführung werden kann.",
     tasks: [
       { title: "Einzelteile und Kleinserien fertigen", text: "Für vorhandene Zeichnungen oder CAD-Modelle prüfen wir Material, Geometrie und Anforderungen. Unser Angebot umfasst die 3-Achs-Fräsbearbeitung von Stahl, Edelstahl, Aluminium und technischen Kunststoffen." },
@@ -75,12 +75,12 @@ module.exports = [
     ],
     steps: [
       { title: "Daten und Anforderungen prüfen", text: "Wir gleichen CAD-Modell und Zeichnung mit Werkstoff, Stückzahl und Funktionsanforderungen ab. Kritische Maße und offene Angaben werden vor der Fertigung besprochen." },
-      { title: "Ausführung abstimmen", text: "Fertigungsverfahren, Toleranzen und Prüfumfang legen wir passend zum Bauteil fest. Bei Prototypen entscheidet der Zweck des Musters darüber, welche Eigenschaften bereits abgebildet werden müssen." },
+      { title: "Ausführung abstimmen", text: "Fertigungsverfahren, Toleranzen, Prüfumfang und Liefertermin legen wir passend zum Bauteil fest. Bei Express-Anfragen klären wir vor der Beauftragung Materialverfügbarkeit und Fertigungskapazität. Bei Prototypen entscheidet der Zweck des Musters darüber, welche Eigenschaften bereits abgebildet werden müssen." },
       { title: "Fertigen und Rückmeldungen nutzen", text: "Wir fertigen im vereinbarten Umfang. Wenn die Erprobung Änderungsbedarf zeigt, stimmen wir eine überarbeitete Konstruktion und die nächste Ausführung mit Ihnen ab." }
     ],
     outputs: ["Bauteile oder Prototypen in der abgestimmten Ausführung", "Abgestimmter Werkstoff, Stückzahl, Toleranz- und Prüfumfang", "Konstruktive Rückmeldung zu fertigungstechnischen Fragestellungen", "Bei Bedarf vereinbarte Modellanpassungen für die nächste Ausführung"],
     interfaces: "Konstruktion, Fertigung und Erprobung arbeiten mit demselben abgestimmten Datenstand. Wir klären, welche Zeichnung oder Modellversion gilt und wie Änderungen freigegeben werden. Weitere Bearbeitungs- oder Nachweisanforderungen werden vorab besprochen.",
-    inputs: ["CAD-Modell, bevorzugt STEP oder IGES, und zugehörige Zeichnung", "Werkstoff, Stückzahl und gewünschter Einsatzzweck", "Funktionsmaße, Toleranzen und Anforderungen an Oberflächen", "Bei Prototypen: zu prüfende Eigenschaften und erwartete Beanspruchung"],
+    inputs: ["CAD-Modell, bevorzugt STEP oder IGES, und zugehörige Zeichnung", "Werkstoff, Stückzahl, gewünschter Einsatzzweck und Liefertermin", "Funktionsmaße, Toleranzen und Anforderungen an Oberflächen", "Bei Prototypen: zu prüfende Eigenschaften und erwartete Beanspruchung"],
     service: "Auch nach der Lieferung klären wir Rückfragen zu unseren Bauteilen. Bei Prototypen besprechen wir Erkenntnisse aus Ihrer Erprobung; bei Folgeteilen stimmen wir Datenstand und mögliche Änderungen erneut ab."
   }
 ];

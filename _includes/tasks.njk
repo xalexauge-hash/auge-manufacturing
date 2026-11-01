@@ -3,11 +3,8 @@
   <h2 id="task-title">Was möchten Sie lösen?</h2>
   <p class="intro">Sie bringen die Aufgabe mit. Gemeinsam finden wir den passenden Einstieg – vom einzelnen Arbeitspaket bis zum vollständigen Projekt.</p>
   <div class="task-grid">
-    <a href="/leistungen/sondermaschinen/#aufgaben"><span>01 / Konstruktion</span><h3>Eine Baugruppe entwickeln <b aria-hidden="true">↗</b></h3><p>Funktion, Bauraum und Schnittstellen in ein fertigungsgerechtes Konzept übersetzen.</p></a>
-    <a href="/leistungen/sondermaschinen/#vorgehen"><span>02 / Automatisierung</span><h3>Handhabung automatisieren <b aria-hidden="true">↗</b></h3><p>Werkstück, Greifaufgabe und Materialfluss gemeinsam betrachten.</p></a>
-    <a href="/leistungen/steuerungstechnik/#aufgaben"><span>03 / Robotik</span><h3>Einen Roboter integrieren <b aria-hidden="true">↗</b></h3><p>Bewegung, Programmierung und Anlagenschnittstellen aufeinander abstimmen.</p></a>
-    <a href="/leistungen/cnc/#aufgaben"><span>04 / Fertigung</span><h3>Einen Prototyp fertigen <b aria-hidden="true">↗</b></h3><p>Aus dem digitalen Entwurf ein Bauteil für Montage und Erprobung machen.</p></a>
-    <a href="/leistungen/digitalisierung-ki/#aufgaben"><span>05 / Digitalisierung &amp; KI</span><h3>Daten nutzbar machen <b aria-hidden="true">↗</b></h3><p>Informationen erschließen und Software oder KI für eine konkrete Aufgabe einsetzen.</p></a>
-    <a href="/leistungen/sondermaschinen/#aufgaben"><span>06 / Retrofit &amp; Umbau</span><h3>Eine Anlage weiterentwickeln <b aria-hidden="true">↗</b></h3><p>Bestehende Maschinen an neue Anforderungen anpassen – mechanisch, steuerungstechnisch und im Prozess.</p></a>
+    {% for service in company.services %}
+    <a href="/leistungen/{{ service.id }}/#aufgaben"><span>0{{ loop.index }} / {{ service.title }}</span><h3>{{ service.taskTitle }} <b aria-hidden="true">↗</b></h3><p>{{ service.taskDescription }}</p></a>
+    {% endfor %}
   </div>
 </section>
