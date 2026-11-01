@@ -62,7 +62,22 @@
 <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
 
     <header class="site-dock">
-      <a class="dock-brand" href="/" aria-label="AUGÉ Manufacturing – Start"><img src="/public/auge_manufacturing_logo.png" alt="AUGÉ Manufacturing" width="541" height="267"></a>
+      <a class="dock-brand" href="/" aria-label="AUGÉ Manufacturing – Start">
+        <svg class="dock-logo" viewBox="0 0 541 267" width="541" height="267" aria-hidden="true" focusable="false">
+          <defs>
+            <filter id="dock-logo-colors" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+              <!-- White ink from the original black areas; the light background becomes transparent. -->
+              <feColorMatrix in="SourceGraphic" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  -1 0 0 0 1" result="white-ink"/>
+              <feComponentTransfer in="white-ink" result="clean-ink"><feFuncA type="linear" slope="1.15" intercept="-.1"/></feComponentTransfer>
+              <!-- Keep the original red accents, without recoloring the source asset. -->
+              <feColorMatrix in="SourceGraphic" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  1 -1 0 0 0" result="red-ink"/>
+              <feComponentTransfer in="red-ink" result="clean-red"><feFuncA type="linear" slope="3" intercept="-.12"/></feComponentTransfer>
+              <feMerge><feMergeNode in="clean-ink"/><feMergeNode in="clean-red"/></feMerge>
+            </filter>
+          </defs>
+          <image href="/public/auge_manufacturing_logo.png" width="541" height="267" filter="url(#dock-logo-colors)"/>
+        </svg>
+      </a>
       <nav class="dock-nav" aria-label="Hauptnavigation">
         <button class="dock-toggle" type="button" aria-expanded="false" aria-controls="navLinks"><span>Menü</span><span class="menu-lines" aria-hidden="true"></span></button>
         <div class="dock-links" id="navLinks">
