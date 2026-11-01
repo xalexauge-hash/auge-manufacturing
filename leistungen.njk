@@ -2,9 +2,9 @@
 layout: base.njk
 title: Leistungen
 seo:
-  title: "Engineering, Automatisierung, Robotik & CNC | Leistungen"
-  description: "Konstruktion, Automatisierung und Robotik mit ergänzender CNC-Fertigung. Entdecken Sie die Projektfelder von AUGÉ Manufacturing in Riedering."
+  title: "Steuerungstechnik, Sondermaschinen, Digitalisierung & KI | AUGÉ"
+  description: "Steuerungstechnik, Sondermaschinen, Digitalisierung & KI sowie CNC-Fertigung und Rapid Prototyping: die Leistungen von AUGÉ Manufacturing."
 ---
-<section class="page-header"><p class="eyebrow">Leistungen</p><h1>Vom Bauteil zum System.</h1><p>Engineering als Ausgangspunkt. Automatisierung und Robotik als Schwerpunkt. CNC-Fertigung als praktische Ergänzung.</p></section>
-{% for service in company.services %}<section class="content-section service-detail" id="{{ service.id }}"><p class="eyebrow">0{{ loop.index }} / {{ service.title }}</p><h2>{{ service.heading }}</h2><p class="intro">{{ service.description }}</p><ul>{% for item in service.items %}<li>{{ item }}</li>{% endfor %}</ul><a href="/kontakt/">{{ service.title }} besprechen →</a></section>{% endfor %}
+<section class="page-header"><p class="eyebrow">Leistungen</p><h1>Vom Bauteil zum System.</h1><p>Engineering, Automatisierung und Robotik verbinden wir mit Digitalisierung &amp; KI. CNC-Fertigung und Rapid Prototyping machen aus der Konstruktion greifbare Bauteile und Muster.</p></section>
+{% for service in company.services %}{% for alias in service.aliases %}<span id="{{ alias }}"></span>{% endfor %}<section class="content-section service-detail" id="{{ service.id }}"><p class="eyebrow">0{{ loop.index }} / {{ service.title }}</p><h2>{{ service.heading }}</h2><p class="intro">{{ service.description }}</p><ul>{% for item in service.items %}<li>{{ item }}</li>{% endfor %}</ul><a href="/kontakt/">{{ service.title }} besprechen →</a></section>{% endfor %}
 <section class="content-section contact-band"><h2>Eine gute Lösung beginnt mit Ihrer Aufgabe.</h2><p>Hilfreich sind eine kurze Prozessbeschreibung, vorhandene Zeichnungen oder CAD-Daten sowie Ihre Ziele und Rahmenbedingungen. Den konkreten Leistungsumfang stimmen wir projektbezogen ab.</p><a class="btn-quote" href="/kontakt/">Projekt besprechen ↗</a></section>

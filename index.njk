@@ -3,10 +3,10 @@ layout: base.njk
 title: Engineering, Automatisierung und Robotik
 seo:
   title: "Engineering, Automatisierung & Robotik | AUGÉ Manufacturing"
-  description: "Engineering und Robotik aus Riedering: von der technischen Aufgabenstellung zur durchdachten Lösung. Ergänzende CNC-Fertigung für Bauteile und Prototypen."
+  description: "Engineering und Robotik aus Riedering: von der technischen Aufgabenstellung zur durchdachten Lösung. Digitalisierung & KI, CNC-Fertigung und Rapid Prototyping ergänzen unser Engineering."
 ---
 <section class="engineering-hero">
-  <div><p class="eyebrow">AUGÉ Manufacturing · Riedering bei Rosenheim</p><h1>Technik entwickeln.<br>Prozesse verbinden.<br><span>Ideen umsetzen.</span></h1><p class="lead">Engineering, Automatisierung und Robotik – mit dem Blick für das ganze System und der Erfahrung aus der Fertigung.</p><div class="actions"><a class="btn-quote" href="/kontakt/">Projekt besprechen ↗</a><a href="/leistungen/">Leistungen entdecken →</a></div></div>
+  <div><p class="eyebrow">AUGÉ Manufacturing · Riedering bei Rosenheim</p><h1>Technik entwickeln.<br>Prozesse verbinden.<br><span>Ideen umsetzen.</span></h1><p class="lead">Engineering, Automatisierung und Robotik – ergänzt durch Digitalisierung &amp; KI, CNC-Fertigung und Rapid Prototyping. Mit dem Blick für das ganze System.</p><div class="actions"><a class="btn-quote" href="/kontakt/">Projekt besprechen ↗</a><a href="/leistungen/">Leistungen entdecken →</a></div></div>
   <div class="system-map" aria-label="Vom Engineering über Automatisierung und Robotik zur ergänzenden Fertigung"><p class="eyebrow">Von der Aufgabe zur Lösung</p><ol><li><span>01</span> Engineering<small>Anforderungen verstehen. Konstruktion durchdenken.</small></li><li><span>02</span> Automatisierung<small>Abläufe und Schnittstellen zusammenbringen.</small></li><li><span>03</span> Robotik<small>Bewegung in den Prozess bringen.</small></li><li><span>+</span> CNC-Fertigung<small>Die passenden Komponenten ergänzen.</small></li></ol></div>
 </section>
 <section class="content-section"><p class="eyebrow">Leistungen</p><h2>Ihr Projekt bestimmt den Einstieg.</h2><p class="intro">Eine konstruktive Aufgabe, ein manueller Prozess oder eine geplante Roboteranwendung: Gemeinsam klären wir, wo Unterstützung sinnvoll ist.</p><div class="capabilities">{% for service in company.services %}<a href="/leistungen/#{{ service.id }}"><span class="eyebrow">{{ loop.index }} / Kompetenz</span><h3>{{ service.title }} ↗</h3><p>{{ service.description }}</p></a>{% endfor %}</div></section>

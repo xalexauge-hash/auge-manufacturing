@@ -2,7 +2,7 @@ module.exports = {
   name: "AUGÉ Manufacturing GmbH",
   legalName: "AUGÉ Manufacturing GmbH",
   shortName: "AUGÉ Manufacturing",
-  description: "Engineering, Automatisierung und Robotik aus Riedering – ergänzt durch CAD-Konstruktion und CNC-Fertigung für Einzelteile und Prototypen.",
+  description: "Engineering, Steuerungstechnik, Sondermaschinen sowie Digitalisierung & KI aus Riedering – ergänzt durch CNC-Fertigung und Rapid Prototyping.",
   email: "info@auge-manufacturing.de",
   phone: "+49 1520 2408592",
   website: "https://www.auge-manufacturing.de",
@@ -22,47 +22,59 @@ module.exports = {
   },
   services: [
   {
-    "id": "engineering",
-    "title": "Engineering",
-    "heading": "Aus Anforderungen wird Konstruktion.",
-    "description": "Technische Konzepte und fertigungsgerechte CAD-Konstruktion für Bauteile, Baugruppen und Anlagen.",
+    "id": "steuerungstechnik",
+    "aliases": [
+      "robotik"
+    ],
+    "title": "Steuerungstechnik",
+    "heading": "Abläufe steuern. Komponenten verbinden.",
+    "description": "Programmierung und technische Integration für Maschinen und Roboteranwendungen. Wir betrachten Steuerung, Hardware und Prozess gemeinsam und stimmen die Schnittstellen auf Ihre Anlage ab.",
     "items": [
-      "Anforderungen und konstruktive Randbedingungen klären",
-      "3D-Modelle und mechanische Schnittstellen ausarbeiten",
-      "Fertigung und Montage bereits in der Konstruktion berücksichtigen"
+      "Programmierung von Maschinen- und Roboterabläufen",
+      "Hardware-Projektierung",
+      "Schaltschrankbau",
+      "Installation"
     ]
   },
   {
-    "id": "automatisierung",
-    "title": "Automatisierung",
-    "heading": "Prozesse im Zusammenhang denken.",
-    "description": "Manuelle Abläufe, technische Schnittstellen und mögliche Automatisierungsschritte gemeinsam betrachten.",
+    "id": "sondermaschinen",
+    "aliases": [
+      "engineering",
+      "automatisierung"
+    ],
+    "title": "Sondermaschinen",
+    "heading": "Engineering für Ihre Anwendung.",
+    "description": "Von der konstruktiven Aufgabe zur abgestimmten Automatisierungslösung: Wir verbinden CAD-Konstruktion, Mechanik und Robotik für neue Anlagen und die Weiterentwicklung bestehender Systeme.",
     "items": [
-      "Bestehende Abläufe und Zielzustand einordnen",
-      "Mechanik und Prozessanforderungen aufeinander abstimmen",
-      "Konzept und Umsetzungsschritte projektbezogen definieren"
+      "Smarte Automatisierungsanlagen",
+      "Retrofit und Umbauten",
+      "Inhouse-Montage"
     ]
   },
   {
-    "id": "robotik",
-    "title": "Robotik",
-    "heading": "Roboter und Anwendung zusammenbringen.",
-    "description": "Erfahrung aus Entwicklung, Programmierung und Inbetriebnahme von Roboterzellen für Ihre Aufgabenstellung nutzen.",
+    "id": "digitalisierung-ki",
+    "aliases": [],
+    "title": "Digitalisierung & KI",
+    "heading": "Produktionswissen digital nutzbar machen.",
+    "description": "Wir verbinden technisches Prozessverständnis mit Software und Datenanalyse. Gemeinsam klären wir, wo digitale Werkzeuge und KI Ihre Abläufe sinnvoll ergänzen – von der Bereitstellung von Informationen bis zur Unterstützung von Planung und Auswertung.",
     "items": [
-      "Handhabungsaufgabe und Arbeitsraum betrachten",
-      "Roboterzelle und mechanische Einbindung konzipieren",
-      "Programmierung und Inbetriebnahme nach abgestimmtem Projektumfang"
+      "Software für die digitale Produktion",
+      "Virtuelles Engineering: digitale Modelle zur Entwicklung und Abstimmung technischer Konzepte",
+      "Datenanalyse und Visualisierung von Prozessinformationen",
+      "KI-Anwendungen für Wissenszugriff, Auswertung und Planungsunterstützung"
     ]
   },
   {
     "id": "cnc",
-    "title": "Ergänzende CNC-Fertigung",
-    "heading": "Konstruktion wird greifbar.",
-    "description": "3-Achs-Fräsbearbeitung für Einzelteile, Prototypen und Kleinserien aus Stahl, Edelstahl, Aluminium und technischen Kunststoffen.",
+    "aliases": [],
+    "title": "CNC-Fertigung & Rapid Prototyping",
+    "heading": "Ideen in Bauteile übersetzen.",
+    "description": "Zerspanende CNC-Fertigung für Einzelteile, Prototypen und Kleinserien ergänzt unser Engineering. Mit Rapid Prototyping machen wir Konstruktionen früh greifbar, um Geometrie, Montage und Funktion zu erproben. Verfahren und Werkstoffe stimmen wir auf den jeweiligen Prototyp ab.",
     "items": [
-      "Bauteile anhand von Zeichnung und CAD-Modell abstimmen",
-      "Material, Toleranzen und Stückzahl projektbezogen prüfen",
-      "STEP oder IGES sowie Zeichnungen für die Anfrage bereitstellen"
+      "3-Achs-CNC-Fräsen von Stahl, Edelstahl, Aluminium und technischen Kunststoffen",
+      "Einzelteile und Kleinserien nach Zeichnung und CAD-Modell",
+      "Rapid Prototyping für Anschauungs-, Montage- und Funktionsmuster",
+      "Konstruktive Anpassungen aus den Erkenntnissen der Erprobung"
     ]
   }
 ],
