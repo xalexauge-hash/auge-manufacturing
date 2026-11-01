@@ -6,7 +6,6 @@
   if (!ctx) return;
   const root = document.querySelector('.machine-lab');
   root.querySelector('.machine-explorer').hidden = false;
-  root.querySelector('.machine-controls').hidden = false;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   let machine = 'karina', selected = 'workspace', yaw = -28, targetYaw = -28, door = 0, targetDoor = 0, frame = 0;
   let width = 700, height = 500, scale = 1, faces = [];
@@ -19,14 +18,14 @@
   function info(key) {
     selected = key;
     const data = features[key].slice();
-    if (key === 'tools') data[2] = `${machine === 'karina' ? 22 : 24} Werkzeugplätze`;
+    if (key === 'tools') { data[2] = machine === 'karina' ? 'Tellerwechsler · 22 Werkzeugplätze' : 'Revolverwechsler · 24 Werkzeugplätze'; }
     ['number','title','value','copy'].forEach((id,i) => { document.getElementById(`machine-feature-${id}`).textContent = data[i]; });
     root.querySelectorAll('[data-feature]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.feature === key)));
     document.getElementById('machine-status').textContent = data[0] + ': ' + data[2];
     draw();
   }
   function project(p) {
-    const a = yaw * Math.PI / 180, pitch = .20;
+    const a = yaw * Math.PI / 180, pitch = -.28;
     const x = p[0]*Math.cos(a) + p[2]*Math.sin(a), z = -p[0]*Math.sin(a)+p[2]*Math.cos(a);
     return [width/2 + x*scale, height*.79-(p[1]*Math.cos(pitch)+z*Math.sin(pitch))*scale, z*Math.cos(pitch)-p[1]*Math.sin(pitch)];
   }
@@ -100,7 +99,15 @@
     cylinder(0,124,9,8,7,[187,199,201]);
     cylinder(0,114,9,4,10,[113,130,139]);
     for(let y=115;y<124;y+=2)cylinder(0,y,9,4.2,.7,[209,217,219]);
-    // Tool-change cover observed left of head; concealed mechanism is not invented.
+    // User-confirmed tool changer types, illustrated with simplified pocket geometry.
+    if(machine==='karina'){
+      cylinder(-65,178,13,29,7,metal);
+      for(let i=0;i<22;i++){const a=i*Math.PI*2/22;cylinder(-65+24*Math.cos(a),169,13+24*Math.sin(a),2.4,9,dark);}
+    }else{
+      for(let i=0;i<24;i++){const a=i*Math.PI*2/24;box(-65+26*Math.cos(a),185+26*Math.sin(a),18,3,5,9,metal);}
+      box(-79,176,12,28,26,10,dark);
+    }
+    // Upper changer shroud.
     box(-89,184,-42,53,43,50,[210,214,208]);
     box(-48,192,9,13,24,1,[28,36,39]);
     box(-91,181,-42,55,3,51,[121,132,133]);
@@ -135,7 +142,7 @@
     box(140,98,56,9,9,2,[223,182,40]);box(142,100,59,5,5,3,[198,39,39]);
     box(156,92,56,5,4,2,[46,144,103]);box(164,92,56,5,4,2,[188,48,47]);
     // Karina's conveyor is clearly visible in the supplied photograph.
-    if(machine==='karina'){
+    {
       box(-163,16,-30,36,17,48,dark);
       for(let i=0;i<8;i++){box(-161-i*5,28+i*7,-26,12,7,39,[57,66,70]);box(-161-i*5,35+i*7,-26,2,2,39,metal);}
       box(-201,79,-27,34,8,42,dark);box(-204,61,-27,7,24,42,dark);
@@ -144,9 +151,16 @@
     // Roof signal lamp and fasteners complete the visible enclosure assembly.
     cylinder(89,240,35,2,10,dark);cylinder(89,250,35,4,4,[219,175,40]);cylinder(89,254,35,4,2,dark);
     faces.sort((a,b)=>a.depth-b.depth).forEach(f=>{ctx.beginPath();f.points.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.closePath();ctx.fillStyle=f.color;ctx.fill();ctx.strokeStyle='#243c2c20';ctx.lineWidth=.6;ctx.stroke();});
-    const pins={workspace:[5,98,95],spindle:[0,182,90],tools:[-68,205,50]};
-    root.querySelectorAll('.machine-hotspots button').forEach(b=>{const p=project(pins[b.dataset.feature]);b.style.left=`${p[0]}px`;b.style.top=`${p[1]}px`;});
+    const pins={spindle:[0,143,20],tools:[-65,181,30],coolant:[24,134,30]};
+    root.querySelectorAll('.machine-hotspots button').forEach(b=>{
+      let point;
+      if(b.dataset.door==='open'){b.hidden=Boolean(targetDoor);point=[0,150,95];}
+      else if(b.dataset.door==='close'){b.hidden=!targetDoor;point=[-125,155,95];}
+      else{b.hidden=!targetDoor;point=pins[b.dataset.feature];}
+      const p=project(point);b.style.left=p[0]+'px';b.style.top=p[1]+'px';
+    });
   }
+
   function animate() {
     frame=0;
     if(reduced.matches){yaw=targetYaw;door=targetDoor;}else{yaw+=(targetYaw-yaw)*.15;door+=(targetDoor-door)*.14;}
@@ -157,23 +171,21 @@
   root.querySelectorAll('[data-machine]').forEach(b=>b.addEventListener('click',()=>{
     machine=b.dataset.machine;
     root.querySelectorAll('[data-machine]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
-    document.getElementById('machine-caption-name').textContent=machine==='karina'?'Karina':'Katrina';info(selected);
+    document.getElementById('machine-caption-name').textContent=machine==='karina'?'Karina':'Katrina';setDoor(false);
   }));
   root.querySelectorAll('[data-feature]').forEach(b=>b.addEventListener('click',()=>info(b.dataset.feature)));
-  document.getElementById('machine-door').addEventListener('click',e=>{
-    targetDoor=targetDoor?0:1;
-    e.currentTarget.setAttribute('aria-pressed',String(Boolean(targetDoor)));
-    e.currentTarget.innerHTML=targetDoor?'Arbeitsraum schließen <span aria-hidden="true">↙</span>':'Arbeitsraum öffnen <span aria-hidden="true">↗</span>';
-    document.getElementById('machine-status').textContent=targetDoor?'Arbeitsraum wird geöffnet.':'Arbeitsraum wird geschlossen.';start();
-  });
-  const range=document.getElementById('machine-rotation');
-  function rotate(value){targetYaw=Math.max(-70,Math.min(70,value));range.value=String(Math.round(targetYaw));root.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed','false'));start();}
-  range.addEventListener('input',()=>rotate(Number(range.value)));
-  root.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{rotate({perspective:-28,front:0,side:70}[b.dataset.view]);b.setAttribute('aria-pressed','true');}));
-  let dragging=false,lastX=0;
-  canvas.addEventListener('pointerdown',e=>{dragging=true;lastX=e.clientX;canvas.setPointerCapture(e.pointerId);});
-  canvas.addEventListener('pointermove',e=>{if(!dragging)return;rotate(targetYaw+(e.clientX-lastX)*.35);lastX=e.clientX;});
-  ['pointerup','pointercancel','lostpointercapture'].forEach(name=>canvas.addEventListener(name,()=>{dragging=false;}));
+  function setDoor(open){
+    targetDoor=open?1:0;
+    if(open)info('workspace');
+    else{
+      selected='workspace';
+      ['number','title','value','copy'].forEach((id,i)=>{document.getElementById('machine-feature-'+id).textContent=['Kondia A10','Ein Blick in die Maschine.','','Öffnen Sie den Arbeitsraum mit einem Klick auf den Türspalt.'][i];});
+    }
+    root.querySelector('.machine-drag-hint').textContent=open?'Bauteile anklicken · außen an der Tür schließen':'Türspalt anklicken und Arbeitsraum entdecken';
+    document.getElementById('machine-status').textContent=open?'Arbeitsraum geöffnet.':'Türen geschlossen. Ansicht zurückgesetzt.';
+    start();
+  }
+  root.querySelectorAll('[data-door]').forEach(b=>b.addEventListener('click',()=>setDoor(b.dataset.door==='open')));
   function resize(){const r=canvas.getBoundingClientRect();width=r.width;height=r.height;const dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);draw();}
-  new ResizeObserver(resize).observe(canvas);resize();info('workspace');
+  new ResizeObserver(resize).observe(canvas);resize();setDoor(false);
 })();
