@@ -40,46 +40,111 @@
       faces.push({points, depth:points.reduce((a,p)=>a+p[2],0)/4, color:`rgb(${rgb.join(',')})`});
     });
   }
+  function pane(vertices,color) {
+    const points=vertices.map(project);
+    faces.push({points,depth:points.reduce((sum,p)=>sum+p[2],0)/points.length,color});
+  }
+  function cylinder(x,y,z,r,h,color) {
+    const n=12, bottom=[],top=[];
+    for(let i=0;i<n;i++){const a=i*Math.PI*2/n;bottom.push([x+Math.cos(a)*r,y,z+Math.sin(a)*r]);top.push([x+Math.cos(a)*r,y+h,z+Math.sin(a)*r]);}
+    for(let i=0;i<n;i++){const j=(i+1)%n;const shade=.78+.2*Math.cos(i*Math.PI*2/n);pane([bottom[i],bottom[j],top[j],top[i]],`rgb(${color.map(c=>Math.round(c*shade)).join(',')})`);}
+    pane(top,`rgb(${color.join(',')})`);
+  }
   function draw() {
     ctx.clearRect(0,0,width,height);
-    scale=Math.min(width/420,height/340);
+    scale=Math.min(width/490,height/390);
     ctx.save();ctx.translate(width/2,height*.81);ctx.scale(1,.22);
     const shadow=ctx.createRadialGradient(0,0,5,0,0,150*scale);shadow.addColorStop(0,'#182c2740');shadow.addColorStop(1,'#182c2700');ctx.fillStyle=shadow;ctx.fillRect(-200*scale,-200*scale,400*scale,400*scale);ctx.restore();
     // Ground datum: deliberately schematic rather than a dimensional CAD drawing.
     ctx.strokeStyle='#899c8d24';ctx.lineWidth=1;
     for(let i=-200;i<=200;i+=40){const a=project([i,0,-130]),b=project([i,0,140]),c=project([-200,0,i*.65]),d=project([200,0,i*.65]);ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.moveTo(c[0],c[1]);ctx.lineTo(d[0],d[1]);ctx.stroke();}
     faces=[];
-    const shell=[202,211,206], dark=[43,57,54], red=machine==='karina'?[165,40,47]:[66,85,86];
-    box(-125,10,-70,250,35,140,dark); // base
-    box(-115,45,-65,230,200,20,shell); // back
-    box(-125,45,-65,30,200,140,shell);box(95,45,-65,30,200,140,shell);
-    box(-125,225,-65,250,28,140,shell);
-    box(-125,225,76,250,28,4,red);
-    box(-82,49,-20,164,28,76,[91,108,101]); // bed
-    box(-76,78,-12,152,12,64,[161,175,167]);
-    for(let x=-60;x<70;x+=23) box(x,90,-11,3,1,60,dark);
-    box(-25,91,0,50,20,38,selected==='workspace'?[180,74,57]:[152,164,157]);
-    box(-28,170,-30,56,52,48,[130,148,138]);
-    box(-13,145,-4,26,30,22,selected==='spindle'?[187,62,52]:[188,201,191]);
-    box(-3,125,3,6,20,7,[88,103,99]);
-    box(-91,157,-18,35,50,50,selected==='tools'?[177,61,51]:dark);
-    for(let n=0;n<5;n++) box(-87+n*6,148,28,3,12,5,[164,178,167]);
-    box(51,160,11,7,46,7,selected==='coolant'?[57,132,178]:[70,105,108]);
-    // Two sliding front doors. Separated panels expose the illustrative workspace.
+    // Proportions traced from the two supplied photographs, not manufacturer CAD.
+    // Red door frames belong to Karina; dark frames and blue-grey head to Katrina.
+    const shell=[220,224,221], dark=[45,51,53], metal=[156,168,171];
+    const accent=machine==='karina'?[188,32,39]:[65,76,82];
+    const head=machine==='karina'?[191,35,39]:[120,148,162];
+    // Cast base, levelling feet and white fixed splash apron.
+    box(-127,12,-88,254,24,166,dark);
+    [-111,106].forEach(x=>[-68,60].forEach(z=>{cylinder(x,5,z,7,7,metal);cylinder(x,0,z,10,4,dark);}));
+    box(-123,35,-80,246,20,154,[68,77,79]);
+    box(-128,40,72,256,36,8,shell);
+    box(-127,38,80,254,3,3,[29,34,36]);
+    // Rear column and cabinet; seams, side ventilation and access panel fasteners.
+    box(-119,56,-82,238,171,13,[204,209,205]);
+    box(-30,54,-74,61,211,54,[91,104,108]);
+    box(-125,76,-76,30,151,151,shell);box(95,76,-76,30,151,151,shell);
+    box(-124,227,-75,248,13,150,shell);
+    box(-120,239,-65,106,22,85,shell);
+    box(94,86,-63,32,126,109,[207,213,209]);
+    for(let y=113;y<180;y+=5)box(126,y,-45,1,1.5,64,[102,115,116]);
+    for(let y of [92,205])for(let z of [-56,35])box(127,y,z,1,2,2,metal);
+    // Telescoping axis covers, saddle and finely slotted worktable.
+    box(-91,64,-54,182,13,105,[92,101,104]);
+    for(let i=0;i<8;i++)box(-89,77+i*.75,-54+i*8,178,1.4,8,[144+i*5,153+i*4,157+i*3]);
+    box(-77,80,-17,154,11,70,[104,117,121]);
+    box(-83,91,-22,166,9,76,[185,195,197]);
+    // T-slots run across the table in X, not front-to-back.
+    for(let z=-16;z<54;z+=14){box(-83,100,z,166,.7,2.3,[44,54,58]);box(-83,100,z+2.3,166,.7,.7,[222,227,228]);}
+    for(let x=-78;x<84;x+=14)box(x,92,54,1,6,.6,[91,108,113]);
+    // Vertical guideway cover and exposed characteristic narrow spindle head.
+    for(let y=105;y<232;y+=6)box(-26,y,-18,52,3,5,[60,69,73]);
+    box(-23,156,-12,46,94,43,head);
+    box(-18,250,-15,36,47,40,head);
+    box(18,254,-24,16,31,25,dark);
+    for(let y=257;y<283;y+=4)box(34,y,-21,1,1,20,[111,121,123]);
+    box(-14,184,32,28,25,2,[188,194,190]);
+    box(-10,187,35,20,18,1,[108,119,121]);
+    cylinder(0,144,9,17,12,[138,152,157]);
+    cylinder(0,131,9,12,13,[62,73,79]);
+    cylinder(0,124,9,8,7,[187,199,201]);
+    cylinder(0,114,9,4,10,[113,130,139]);
+    for(let y=115;y<124;y+=2)cylinder(0,y,9,4.2,.7,[209,217,219]);
+    // Tool-change cover observed left of head; concealed mechanism is not invented.
+    box(-89,184,-42,53,43,50,[210,214,208]);
+    box(-48,192,9,13,24,1,[28,36,39]);
+    box(-91,181,-42,55,3,51,[121,132,133]);
+    // Articulated coolant nozzles, steel end tips and conduit behind head.
+    for(let side of [-1,1])for(let i=0;i<6;i++)cylinder(side*(17+i*1.1),147-i*2,17+i*1.7,2.2,2.4,[43,85,122]);
+    cylinder(-24,133,26,1.7,3,[196,156,62]);cylinder(24,133,26,1.7,3,[196,156,62]);
+    // Front rail, jambs and two real framed sliding windows. Opening retracts frames.
+    box(-98,224,77,196,5,6,metal);box(-98,74,77,196,4,6,metal);
     [-1,1].forEach(side=>{
-      const x=side===-1?-95-door*67:door*67;
-      box(x,45,77,95,180,5,shell);
-      box(x+9,95,83,77,111,2,[63,83,80]);
-      box(x+15,101,86,65,99,1,[101,132,126]);
-      box(x+(side===-1?83:8),105,88,4,42,5,dark);
-      box(x+9,62,84,77,19,2,red);
+      const x=side===-1?-94-door*67:door*67;
+      box(x,78,79,94,9,6,accent);box(x,215,79,94,12,6,accent);
+      box(x,87,79,10,128,6,accent);box(x+84,87,79,10,128,6,accent);
+      // Muted glazing remains translucent, allowing depth and the spindle behind it.
+      pane([[x+10,87,82],[x+84,87,82],[x+84,215,82],[x+10,215,82]],'rgba(166,193,198,.22)');
+      box(x+10,87,85,2,128,1,metal);box(x+82,87,85,2,128,1,metal);
+      box(x+12,211,85,70,2,1,[228,233,232]);
+      const hx=x+(side===-1?83:9);
+      box(hx,119,87,3,5,7,metal);box(hx,176,87,3,5,7,metal);box(hx,122,93,3,55,3,metal);
+      for(let xx of [x+5,x+89])for(let yy of [82,221])cylinder(xx,yy,86,1,1,metal);
     });
-    box(130,95,22,46,91,17,dark);box(136,135,41,34,40,2,[97,143,135]);
-    for(let row=0;row<3;row++)for(let col=0;col<4;col++)box(137+col*8,113-row*6,41,4,3,2,[166,183,173]);
-    box(146,96,42,6,6,3,[187,44,43]);
-    box(-98,253,-26,7,15,7,dark);box(-99,268,-27,9,11,9,[172,54,44]);
+    // Controller support, console chassis, screen bezel, soft keys and keyboard.
+    box(116,12,30,51,7,30,dark);box(145,19,39,9,74,12,dark);
+    box(137,80,32,27,8,16,metal);box(135,86,36,48,125,15,metal);
+    box(138,89,52,42,119,2,[191,200,199]);
+    box(140,165,55,38,39,2,[48,58,63]);box(144,169,58,30,30,1,[28,91,124]);
+    box(147,194,60,17,2,.5,[212,187,68]);
+    for(let y=174;y<190;y+=4)box(147,y,60,21,1,.5,[119,184,195]);
+    for(let n=0;n<7;n++)box(141+n*5.2,159,56,3,3,1,dark);
+    box(138,147,55,42,8,2,[182,37,43]);
+    for(let row=0;row<6;row++)for(let col=0;col<10;col++)box(140+col*3.8,141-row*3.7,56,2.8,2.5,1,[44,58,65]);
+    for(let row=0;row<3;row++)for(let col=0;col<5;col++)box(153+col*5,112-row*5.5,56,3.5,3.5,1,[48,62,66]);
+    box(140,98,56,9,9,2,[223,182,40]);box(142,100,59,5,5,3,[198,39,39]);
+    box(156,92,56,5,4,2,[46,144,103]);box(164,92,56,5,4,2,[188,48,47]);
+    // Karina's conveyor is clearly visible in the supplied photograph.
+    if(machine==='karina'){
+      box(-163,16,-30,36,17,48,dark);
+      for(let i=0;i<8;i++){box(-161-i*5,28+i*7,-26,12,7,39,[57,66,70]);box(-161-i*5,35+i*7,-26,2,2,39,metal);}
+      box(-201,79,-27,34,8,42,dark);box(-204,61,-27,7,24,42,dark);
+      cylinder(-167,5,-11,5,11,metal);
+    }
+    // Roof signal lamp and fasteners complete the visible enclosure assembly.
+    cylinder(89,240,35,2,10,dark);cylinder(89,250,35,4,4,[219,175,40]);cylinder(89,254,35,4,2,dark);
     faces.sort((a,b)=>a.depth-b.depth).forEach(f=>{ctx.beginPath();f.points.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.closePath();ctx.fillStyle=f.color;ctx.fill();ctx.strokeStyle='#243c2c20';ctx.lineWidth=.6;ctx.stroke();});
-    const pins={workspace:[5,98,95],spindle:[0,182,90],tools:[-95,192,80]};
+    const pins={workspace:[5,98,95],spindle:[0,182,90],tools:[-68,205,50]};
     root.querySelectorAll('.machine-hotspots button').forEach(b=>{const p=project(pins[b.dataset.feature]);b.style.left=`${p[0]}px`;b.style.top=`${p[1]}px`;});
   }
   function animate() {

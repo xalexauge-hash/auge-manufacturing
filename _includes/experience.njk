@@ -1,8 +1,8 @@
 <section class="ax-experience" data-experience data-stage="0" data-paused="false" aria-label="Entwicklungsprozess interaktiv entdecken">
-  <div class="ax-heading"><div><p class="ax-kicker">AUGÉ / Engineering erleben</p><h2>Aus einer Aufgabe<br>wird ein System.</h2></div><p>Entdecken Sie einen exemplarischen Entwicklungsprozess. Wählen Sie eine Phase oder erkunden Sie die Bauteile der Handhabungszelle.</p></div>
+  <div class="ax-heading"><div><p class="ax-kicker">AUGÉ / Engineering erleben</p><h2>Aus einer Aufgabe<br>wird ein System.</h2></div><p>Ein gefrästes Gehäuseteil soll aus einer Zuführung entnommen, definiert positioniert und optisch geprüft werden. Entdecken Sie unsere illustrative Lösungsidee – von der Aufgabenklärung bis zum Ablauf.</p></div>
   <div class="ax-workspace">
     <div class="ax-viewport">
-      <div class="ax-scene-top"><span><i></i> HANDHABUNGSZELLE / KONZEPTSTUDIE</span><button type="button" class="ax-motion" data-motion hidden>Animation pausieren</button></div>
+      <div class="ax-scene-top"><span><i></i> BAUTEILHANDHABUNG / OPTISCHE PRÜFUNG</span><button type="button" class="ax-motion" data-motion hidden>Animation pausieren</button></div>
       <svg class="ax-machine" viewBox="0 0 900 620" role="group" aria-label="Illustration einer Roboterzelle mit Werkstückaufnahme, Greifer, Sensor und Steuerung">
         <defs>
           <linearGradient id="ax-metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e2e8e9"/><stop offset=".28" stop-color="#8d9a9f"/><stop offset=".6" stop-color="#d4dcde"/><stop offset="1" stop-color="#46565f"/></linearGradient>
@@ -15,49 +15,35 @@
         <path d="M0 270L450 140 900 270V620H0Z" fill="url(#ax-grid)"/>
         <g class="ax-dimensions" fill="none" stroke="#8fa5ad" stroke-width="1"><path d="M140 442L430 547 777 428M140 428V452M430 535V558M777 416V440"/><path d="M790 414V185M781 185H801M781 414H801"/><path d="M156 230L396 146 752 254" stroke-dasharray="4 6"/></g>
         <g class="ax-dimension-labels" fill="#aabac2" font-family="monospace" font-size="11"><text x="254" y="508" transform="rotate(20 254 508)">PROZESS &amp; SCHNITTSTELLEN</text><text x="809" y="324" transform="rotate(-90 809 324)">ARBEITSRAUM</text></g>
-        <g class="ax-assembly">
-          <ellipse cx="455" cy="460" rx="290" ry="85" fill="#02080b" opacity=".5"/>
-          <g class="ax-table">
-            <path d="M180 351L446 265 742 366 467 463Z" fill="url(#ax-table)" stroke="#80949d"/>
-            <path d="M180 351V376L467 488V463Z" fill="#24333b" stroke="#44555e"/><path d="M467 463L742 366V390L467 488Z" fill="#14252e" stroke="#44555e"/>
-            <path d="M209 387V453L231 462V395M693 409V466L715 457V401M453 485V548L477 548V484" fill="#62717a" stroke="#94a2a7"/>
-            <path d="M240 359L498 448M288 343L550 429M337 328L599 411M386 312L646 395M434 296L691 378" stroke="#9aaeb7" stroke-opacity=".2"/>
+
+        <g class="ax-cell">
+          <rect x="125" y="125" width="640" height="380" rx="14" fill="#071018" stroke="#58717c" stroke-width="8"/>
+          <rect x="137" y="137" width="616" height="356" rx="6" fill="url(#ax-table)" stroke="#82959c"/>
+          <g stroke="#afbdc3" opacity=".25"><path d="M155 170H735M155 210H735M155 250H735M155 290H735M155 330H735M155 370H735M155 410H735M155 450H735"/></g>
+          <g fill="#172830" stroke="#a4b5bc"><circle cx="150" cy="150" r="5"/><circle cx="740" cy="150" r="5"/><circle cx="150" cy="480" r="5"/><circle cx="740" cy="480" r="5"/></g>
+          <g class="ax-input"><rect x="175" y="270" width="110" height="185" rx="5" fill="#243742" stroke="#8da2ad" stroke-width="3"/><path d="M185 285H275M185 315H275M185 345H275M185 375H275M185 405H275M185 435H275" stroke="#5a727d" stroke-width="12"/><path d="M178 273V453M282 273V453" stroke="#b9c8cd" stroke-width="4"/><rect x="214" y="384" width="32" height="26" rx="4" fill="#c9d4d8" stroke="#f6fbfc"/><rect x="214" y="422" width="32" height="26" rx="4" fill="#c9d4d8" stroke="#f6fbfc"/></g>
+          <g data-part="fixture" class="ax-fixture"><rect x="540" y="285" width="120" height="120" rx="5" fill="url(#ax-metal)" stroke="#d4e0e4" stroke-width="2"/><rect x="571" y="319" width="58" height="51" rx="4" fill="#182f3c" stroke="#aec1c9"/><path d="M562 320V367M638 320V367" stroke="#f46c5f" stroke-width="8"/><circle cx="554" cy="299" r="4" fill="#334a56"/><circle cx="646" cy="391" r="4" fill="#334a56"/><path d="M580 380H620" stroke="#75c3b5" stroke-width="4"/></g>
+          <g class="ax-output"><rect x="350" y="391" width="135" height="80" rx="5" fill="#29413f" stroke="#8eb6a9"/><rect x="369" y="411" width="38" height="33" rx="4" fill="#122c2c" stroke="#77a79b"/><rect x="430" y="411" width="38" height="33" rx="4" fill="#122c2c" stroke="#77a79b"/></g>
+          <g data-part="sensor" class="ax-sensor"><path d="M665 267H599V307" fill="none" stroke="#8cabb9" stroke-width="10"/><rect x="650" y="239" width="54" height="45" rx="5" fill="#173340" stroke="#93b6c7"/><circle cx="674" cy="260" r="12" fill="#061821" stroke="#5cbcc9" stroke-width="4"/><rect x="586" y="285" width="28" height="22" rx="3" fill="#173340" stroke="#93b6c7"/><ellipse cx="600" cy="306" rx="10" ry="4" fill="#7ce5de" stroke="#123d4e"/><path data-check-beam d="M600 303L571 363H629Z" fill="#7cf8d5" opacity="0"/></g>
+          <g data-part="software" class="ax-control"><rect x="295" y="145" width="120" height="65" rx="5" fill="#12222d" stroke="#91a6af"/><rect x="305" y="154" width="77" height="45" fill="#061318"/><path d="M314 166H369M314 176H350M314 187H363" stroke="#5ed5ba" stroke-width="3"/><circle cx="398" cy="164" r="6" fill="#81c9a5"/><circle cx="398" cy="185" r="7" fill="#df5350"/></g>
+          <path d="M415 180H690V235M415 189H440V223" stroke="#192d39" stroke-width="7" fill="none"/>
+          <path d="M230 340Q330 270 600 340Q560 420 389 428" fill="none" stroke="#f29776" stroke-width="2" stroke-dasharray="5 7" opacity=".5"/>
+          <g data-part="gripper" class="ax-robot">
+            <circle cx="440" cy="245" r="47" fill="#1e313c" stroke="#b4c5ce" stroke-width="3"/><circle cx="440" cy="245" r="34" fill="url(#ax-red)"/>
+            <path data-link-a d="M440 245L350 240" stroke="#253946" stroke-width="40" stroke-linecap="round"/><path data-link-a d="M440 245L350 240" stroke="url(#ax-metal)" stroke-width="29" stroke-linecap="round"/>
+            <path data-link-b d="M350 240L230 340" stroke="#263c48" stroke-width="32" stroke-linecap="round"/><path data-link-b d="M350 240L230 340" stroke="url(#ax-metal)" stroke-width="23" stroke-linecap="round"/>
+            <circle data-elbow cx="350" cy="240" r="24" fill="url(#ax-red)" stroke="#d3e0e5" stroke-width="3"/>
+            <g data-tool transform="translate(230 340)"><circle r="19" fill="#233d49" stroke="#dce7eb" stroke-width="3"/><circle r="10" fill="#d4443e"/><path data-jaws d="M-24 12V28H-16M24 12V28H16" stroke="#dfebef" stroke-width="5" fill="none"/></g>
           </g>
-          <g class="ax-fixture" data-part="fixture">
-            <path d="M513 379L580 354 650 379 584 404Z" fill="#bbc9cd" stroke="#e7eeef"/><path d="M513 379V396L584 423V404Z" fill="#64767f"/><path d="M584 404L650 379V396L584 423Z" fill="#354b58"/>
-            <path d="M530 367V348L549 342 565 348V378M607 379V357L625 351 638 358V388" fill="url(#ax-metal)" stroke="#b9c8cd"/>
-            <path class="ax-workpiece" d="M558 364L584 354 610 365 584 375Z M558 364V377L584 388 610 378V365L584 375Z" fill="url(#ax-red)" stroke="#ec6a61"/>
-          </g>
-          <g class="ax-robot" data-part="gripper">
-            <path d="M284 348L349 326 414 349 350 375Z" fill="#53636b" stroke="#aab9bf"/><path d="M284 348V365L350 393 414 368V349L350 375Z" fill="#263b46" stroke="#738992"/>
-            <ellipse cx="351" cy="342" rx="44" ry="19" fill="#99a6ac"/>
-            <path d="M307 342V310Q351 286 395 310V342Q351 365 307 342Z" fill="url(#ax-red)" stroke="#ee5c56"/>
-            <ellipse cx="351" cy="309" rx="44" ry="18" fill="#e44640"/>
-            <g class="ax-arm-motion">
-              <path d="M332 305L308 208Q315 188 337 190L371 289Z" fill="url(#ax-metal)" stroke="#b7c6cc" stroke-width="2"/>
-              <path d="M350 290L328 207" stroke="#425862" stroke-width="9"/>
-              <circle cx="326" cy="204" r="31" fill="#293e49" stroke="#8599a2" stroke-width="3"/><circle cx="326" cy="204" r="20" fill="url(#ax-red)"/><circle cx="326" cy="204" r="7" fill="#d7e1e3"/>
-              <g class="ax-forearm">
-                <path d="M329 179L498 213 505 249 319 228Z" fill="url(#ax-metal)" stroke="#c1d0d5" stroke-width="2"/>
-                <path d="M355 206L482 229" stroke="#354c58" stroke-width="12"/>
-                <circle cx="501" cy="234" r="28" fill="#304650" stroke="#9cafb7" stroke-width="2"/><circle cx="501" cy="234" r="17" fill="url(#ax-red)"/>
-                <path d="M508 241L546 280 529 299 491 256Z" fill="url(#ax-metal)" stroke="#afc0c7"/>
-                <g class="ax-gripper"><path d="M523 285L547 274 566 288 541 303Z" fill="#e4453e"/><path d="M523 285V307L541 318V303L566 288V310L541 325 523 314Z" fill="#9b272b"/><path d="M525 309V333L536 340V322M554 313V335L544 342V323" fill="#becacf" stroke="#e3eced"/></g>
-              </g>
-            </g>
-            <path d="M319 299Q286 257 299 216Q309 175 354 183" fill="none" stroke="#111f28" stroke-width="10"/><path d="M319 299Q286 257 299 216Q309 175 354 183" fill="none" stroke="#798b93" stroke-width="2" stroke-dasharray="3 4"/>
-          </g>
-          <g class="ax-sensor" data-part="sensor"><path d="M670 351V234L688 228V351" fill="#4e6673" stroke="#94a7b1"/><path d="M656 220L686 208 714 220 685 232Z" fill="#b5c4cb"/><path d="M656 220V250L685 262V232L714 220V250L685 262" fill="#344c5a" stroke="#819ba7"/><ellipse cx="674" cy="242" rx="7" ry="9" fill="#55d0d4"/><path class="ax-scan" d="M674 250L550 368 624 382Z" fill="#64dee2" fill-opacity=".1" stroke="#74e1e4" stroke-opacity=".4" stroke-dasharray="4 4"/></g>
-          <g class="ax-control" data-part="software"><path d="M204 306L154 287V224L204 241Z" fill="#1b303d" stroke="#8ca1ac"/><path d="M161 235L196 248V285L161 272Z" fill="#07131b" stroke="#526e7d"/><path class="ax-code" d="M167 246L188 254M167 253L182 259M167 260L191 269" stroke="#74d4c3" stroke-width="2"/><path d="M180 297V339" stroke="#6d838d" stroke-width="7"/></g>
-          <path class="ax-signal" d="M188 310L232 328 262 318 289 331M203 294L236 305 289 287 317 299M694 310L721 322 683 335" fill="none" stroke="#eb6b5f" stroke-width="2" stroke-dasharray="6 7"/>
+          <g data-piece transform="translate(230 340)"><rect x="-16" y="-12" width="32" height="26" rx="4" fill="#ec8b54" stroke="#ffcd9e" stroke-width="2"/><circle cx="0" cy="1" r="5" fill="#3c4d54" stroke="#ffcfa5"/></g>
+          <g fill="#c4d5de" font-family="monospace" font-size="11"><text x="175" y="475">01 / ZUFÜHRUNG</text><text x="539" y="426">02 / PRÜFAUFNAHME</text><text x="349" y="488">03 / ABLAGE</text><text x="540" y="164">DRAUFSICHT · PRINZIP</text></g>
+          <g fill="none" stroke="#74b6c4" stroke-dasharray="3 6" opacity=".45"><circle cx="440" cy="245" r="245"/><path d="M440 120V500M160 245H735"/></g>
         </g>
-        <g class="ax-concept" fill="none" stroke="#b4ced7" stroke-width="1.4" stroke-dasharray="6 6"><path d="M204 353V220L449 135 717 237V377M449 135V276M204 220L472 320 717 237M472 320V454"/><circle cx="350" cy="337" r="83"/><path d="M351 337L327 204 501 234 540 311" stroke="#ee786d" stroke-width="3"/></g>
-        <g class="ax-mill"><path d="M572 180V226L586 243 600 226V180Z" fill="url(#ax-metal)"/><path d="M579 243V294L586 307 593 294V243" fill="#c8d3d6"/><path d="M551 104H620V180Q586 194 551 180Z" fill="#263c48" stroke="#8d9fa7"/><path d="M551 165Q586 180 620 165V179Q586 193 551 179Z" fill="url(#ax-red)"/><path d="M579 260L593 269M579 274L593 283M579 288L590 295" stroke="#566e7a" stroke-width="3"/></g>
         <g class="ax-hotspots">
-          <g role="button" tabindex="0" aria-label="Greifer erkunden" data-part-hotspot="gripper" transform="translate(551 303)"><circle r="18"/><text text-anchor="middle" y="4">01</text></g>
-          <g role="button" tabindex="0" aria-label="Werkstückaufnahme erkunden" data-part-hotspot="fixture" transform="translate(605 403)"><circle r="18"/><text text-anchor="middle" y="4">02</text></g>
-          <g role="button" tabindex="0" aria-label="Sensorik erkunden" data-part-hotspot="sensor" transform="translate(698 201)"><circle r="18"/><text text-anchor="middle" y="4">03</text></g>
-          <g role="button" tabindex="0" aria-label="Software erkunden" data-part-hotspot="software" transform="translate(157 211)"><circle r="18"/><text text-anchor="middle" y="4">04</text></g>
+          <g role="button" tabindex="0" aria-label="Greifer erkunden" data-part-hotspot="gripper" transform="translate(465 245)"><circle r="18"/><text text-anchor="middle" y="4">01</text></g>
+          <g role="button" tabindex="0" aria-label="Werkstückaufnahme erkunden" data-part-hotspot="fixture" transform="translate(660 407)"><circle r="18"/><text text-anchor="middle" y="4">02</text></g>
+          <g role="button" tabindex="0" aria-label="Sensorik erkunden" data-part-hotspot="sensor" transform="translate(705 235)"><circle r="18"/><text text-anchor="middle" y="4">03</text></g>
+          <g role="button" tabindex="0" aria-label="Software erkunden" data-part-hotspot="software" transform="translate(293 143)"><circle r="18"/><text text-anchor="middle" y="4">04</text></g>
         </g>
       </svg>
       <div class="ax-scene-bottom"><span data-scene-label>01 / ANFORDERUNGEN</span><span>ILLUSTRATION · KEINE SIMULATION</span></div>
@@ -71,6 +57,7 @@
       <a class="ax-contact" href="/kontakt/">Ihre Aufgabe mit uns besprechen <span aria-hidden="true">↗</span></a>
     </div>
   </div>
+  <div class="ax-cycle"><div><p class="ax-kicker">Funktionsablauf · einzeln nachvollziehen</p><p data-cycle-status aria-live="polite">Bauteil bereit · geordnete Zuführung</p></div><div class="ax-cycle-buttons" role="group" aria-label="Funktionsschritt auswählen"><button data-cycle="0" aria-pressed="true">1 Bereit</button><button data-cycle="1" aria-pressed="false">2 Greifen</button><button data-cycle="2" aria-pressed="false">3 Positionieren</button><button data-cycle="3" aria-pressed="false">4 Prüfen</button><button data-cycle="4" aria-pressed="false">5 Ablegen</button></div><p class="ax-cycle-note">Konzeptbeispiel, keine Kundenreferenz. Gezeigt wird der Gutteilpfad in Draufsicht; vertikale Hubbewegungen sind nicht dargestellt. Beim Neustart steht exemplarisch das nächste Teil bereit. Prüfmerkmale, Ausschleusung, Schutzkonzept und erreichbare Taktzeit müssten für eine reale Anlage ausgelegt und validiert werden.</p></div>
   <div class="ax-explorer"><div><p class="ax-kicker">Anwendung erkunden</p><h3>Ein System. Viele Entscheidungen.</h3><p>Wählen Sie eine Komponente und entdecken Sie, welche Fragen wir im Engineering stellen.</p></div><div><div class="ax-parts" role="group" aria-label="Komponente erkunden"><button type="button" data-part-button="gripper" aria-pressed="true">01 Greifer</button><button type="button" data-part-button="fixture" aria-pressed="false">02 Aufnahme</button><button type="button" data-part-button="sensor" aria-pressed="false">03 Sensorik</button><button type="button" data-part-button="software" aria-pressed="false">04 Software</button></div><div class="ax-part-story" aria-live="polite" aria-atomic="true"><h4 data-part-title>Das Werkstück sicher handhaben.</h4><p data-part-text>Geometrie, Gewicht und Oberfläche bestimmen die Greifaufgabe. Zugänglichkeit, Teilevarianten und die Übergabe an die nächste Station fließen in das Konzept ein.</p><p data-part-question>Welche Flächen dürfen berührt werden – und in welcher Lage kommt das Teil an?</p></div></div></div>
   <noscript><p class="ax-nojs">Der Ablauf: Aufgabe und Randbedingungen klären → Konzept und Schnittstellen abstimmen → Bauteile und Baugruppen konstruieren → Fertigung vorbereiten → Funktionen zusammenführen. Kontaktieren Sie uns für eine projektbezogene Einordnung.</p></noscript>
 </section>
