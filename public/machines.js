@@ -226,7 +226,6 @@
       selected='workspace';
       ['number','title','value','copy'].forEach((id,i)=>{document.getElementById('machine-feature-'+id).textContent=['Kondia A10','Ein Blick in die Maschine.','','Öffnen Sie den Arbeitsraum mit einem Klick auf den Türspalt.'][i];});
     }
-    root.querySelector('.machine-drag-hint').textContent=open?'Bauteile anklicken · außen an der Tür schließen':'Türspalt anklicken und Arbeitsraum entdecken';
     document.getElementById('machine-status').textContent=open?'Arbeitsraum geöffnet.':'Türen geschlossen. Ansicht zurückgesetzt.';
     start();
   }
