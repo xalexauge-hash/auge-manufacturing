@@ -1,8 +1,8 @@
-(() => {
-  'use strict';
+import {createCadExperience} from './cad-scenes.js';
+import {INSPECTION_DURATION,PACKAGING_DURATION} from './cad-timeline.js';
   const inspectionStages = [
-    ['Gehäuseteile zuverlässig prüfen.', 'Ein gefrästes Gehäuseteil kommt in definierter Lage an. Die Aufgabe: entnehmen, in einer Prüfaufnahme positionieren, ein optisches Merkmal erfassen und das geprüfte Teil ablegen. Teilevarianten, Prüfmerkmal und Fehlerreaktion werden zuerst festgelegt.', 'Ein klar abgegrenzter Prüf- und Handhabungsauftrag.', 'ANFORDERUNG'],
-    ['Drei Stationen. Ein Materialfluss.', 'Eine geordnete Zuführung, eine definierte Prüfaufnahme und eine getrennte Ablage bilden den Ablauf. Die Draufsicht zeigt, warum Reichweite, Zugänglichkeit und Freiraum für Greifer und Kamera gemeinsam geplant werden.', 'Ein Stationslayout mit eindeutigen Übergaben.', 'KONZEPT'],
+    ['Gehäuseteile zuverlässig prüfen.', 'Vier gefräste Gehäuseteile liegen in einem Eingangstablett bereit. Die Aufgabe: entnehmen, in einer Prüfaufnahme positionieren, ein optisches Merkmal erfassen und das geprüfte Teil ablegen. Teilevarianten, Prüfmerkmal und Fehlerreaktion werden zuerst festgelegt.', 'Ein klar abgegrenzter Prüf- und Handhabungsauftrag.', 'ANFORDERUNG'],
+    ['Drei Stationen. Ein Materialfluss.', 'Ein Eingangstablett mit vier Teilen, eine feste Prüfaufnahme und vier getrennte Ablageplätze bilden den Ablauf. Die 3D-Ansicht zeigt, warum Reichweite, Zugänglichkeit und Freiraum für Greifer und Kamera gemeinsam geplant werden.', 'Ein Stationslayout mit eindeutigen Übergaben.', 'KONZEPT'],
     ['Greifer und Aufnahme aufeinander abstimmen.', 'Formangepasste Greiferbacken halten das Gehäuse an geeigneten Außenflächen. Die Aufnahme legt seine Position zur Kamera fest. Befestigungen, Bezugspunkte und Freiräume werden so konstruiert, dass Greifen und Prüfen sich nicht behindern.', 'Ausgearbeitete Greiferbacken und Werkstückaufnahme.', 'KONSTRUKTION'],
     ['Die Schnittstelle wird ein reales Bauteil.', 'Greiferbacken, Adapter und Aufnahme können als CNC-gefertigte Komponenten entstehen. Bezugselemente und funktionsrelevante Maße werden abgestimmt; anschließend wird das Zusammenspiel mit dem realen Musterteil erprobt.', 'Mechanische Komponenten für Montage und Erprobung.', 'FERTIGUNG'],
     ['Aus Komponenten wird eine Prüfzelle.', 'Greifer, Werkstückaufnahme und Kamerahalterung werden montiert und ausgerichtet. Mechanische, elektrische und steuerungstechnische Schnittstellen werden zusammengeführt.', 'Eine montierte Zelle als Grundlage für die Funktionsprüfung.', 'MONTAGE'],
@@ -25,11 +25,11 @@
     ['Jede Übergabe im Ablauf erproben.', 'Wir prüfen die Kistenvereinzelung, das Aufrichten, die Teilezählung und das Palettiermuster. Stationsfreigaben und Reaktionen auf Unterbrechungen werden mit realen Kisten und Musterteilen erprobt.', 'Ein erprobter Ablauf vom Kistenstapel bis zur Palette.', 'INBETRIEBNAHME'],
     ['Die Anlage in den Betrieb übergeben.', 'Die abgestimmten Roboterprogramme, Kistenformate und Palettierparameter werden für den Betrieb bereitgestellt. Einweisung und Dokumentation begleiten die Übergabe; Service und Anpassungen bleiben Teil der Zusammenarbeit.', 'Eine übergebene Anlage mit dokumentierten Programmen und Parametern.', 'DEPLOYMENT']
   ];
-  const inspectionLabels=['Bauteil bereit · geordnete Zuführung','Greifer geschlossen · Teil wird übernommen','Teil in der Aufnahme · Greifer zieht zurück','Optische Prüfung · Teil liegt ruhig in der Aufnahme','Gutteil übernehmen und zur Ablage führen'];
+  const inspectionLabels=['Bauteil bereit · Eingangstablett','Greifer geschlossen · Teil wird übernommen','Teil in der Aufnahme · Greifer zieht zurück','Optische Prüfung · Teil liegt ruhig in der Aufnahme','Gutteil übernehmen und zur Ablage führen'];
   const packagingLabels=['Kistenstapel bereitstellen und unten zuführen','Eine Kiste vereinzeln, aufrichten und nach oben übergeben','Leere Kiste zur Befüllstation fördern','Vier Fertigteile nacheinander in die Kiste einlegen','Volle Kiste zur Palettierstation fördern','Volle Kiste übernehmen und auf der Palette absetzen'];
   const operationCopy={
-    inspection:[['Bereitstellen','Ein Gehäuseteil liegt definiert in der Zuführung. Der Roboter fährt zur Greifposition.'],['Greifen und transportieren','Die Greiferbacken schließen. Das Teil wird übernommen und zur Prüfaufnahme geführt.'],['Positionieren','Das Teil wird in der Aufnahme abgelegt. Der Roboter zieht sich aus dem Prüfbereich zurück.'],['Prüfen','Das Werkstück liegt ruhig. Die Kamera erfasst das vorgesehene Merkmal.'],['Ablegen','Nach der Freigabe übernimmt der Roboter das Gutteil und legt es in der Ausgangsaufnahme ab.']],
-    packaging:[['Kistenstapel zuführen','Mitarbeitende geben den Stapel auf die untere Ebene. Das Förderband bringt ihn zum ersten Roboter.'],['Kiste aufrichten','Roboter 01 nimmt die oberste gefaltete Kiste, richtet sie auf und setzt sie auf der oberen Förderebene ab.'],['Zur Befüllung fördern','Die leere Kiste fährt auf der oberen Ebene zur zweiten Station und wird dort angehalten.'],['Kiste befüllen','Roboter 02 übernimmt nacheinander vier Musterteile vom separaten Teileband. Die Kiste bleibt während der Befüllung stehen.'],['Volle Kiste freigeben','Nach dem vierten Teil gibt die Steuerung die Kiste frei. Sie fährt zur Palettierstation.'],['Palettieren','Roboter 03 hebt die volle Kiste vom oberen Band und setzt sie auf der Palette ab. Danach folgt das nächste Anwendungsbeispiel.']]
+    inspection:[['Bereitstellen','Das nächste Gehäuseteil liegt in seinem definierten Platz im Eingangstablett. Der Roboter fährt zur Greifposition.'],['Greifen und transportieren','Die Greiferbacken schließen. Das Teil wird übernommen und zur Prüfaufnahme geführt.'],['Positionieren','Das Teil wird in der Aufnahme abgelegt. Der Roboter zieht sich aus dem Prüfbereich zurück.'],['Prüfen','Das Werkstück liegt ruhig. Die Kamera erfasst das vorgesehene Merkmal.'],['Ablegen','Nach der Freigabe übernimmt der Roboter das Gutteil und legt es in seinem eigenen Platz im Ausgangstablett ab. Die Charge endet nach vier abgelegten Teilen.']],
+    packaging:[['Kistenstapel zuführen','Mitarbeitende geben den Stapel auf die untere Ebene. Das Förderband bringt ihn zum ersten Roboter.'],['Kiste aufrichten','Roboter 01 nimmt die oberste gefaltete Kiste, richtet sie auf und setzt sie auf der oberen Förderebene ab.'],['Zur Befüllung fördern','Die leere Kiste fährt auf der oberen Ebene zur zweiten Station und wird dort angehalten.'],['Kiste befüllen','Roboter 02 übernimmt nacheinander vier Musterteile vom separaten Teileband. Die Kiste bleibt während der Befüllung stehen.'],['Volle Kiste freigeben','Nach dem vierten Teil gibt die Steuerung die Kiste frei. Sie fährt zur Palettierstation.'],['Palettieren','Roboter 03 hebt die volle Kiste vom oberen Band und setzt sie auf der Palette ab. Erst nach vier vollständig befüllten Kisten und leerem Eingangsstapel folgt das nächste Anwendungsbeispiel.']]
   };
   const packagingParts = {
     gripper: ['Drei Aufgaben. Drei passende Greifer.', 'Aufrichten, Teile einlegen und volle Kisten palettieren stellen unterschiedliche Anforderungen an Greifflächen, Traglast und Freiraum.', 'Wie werden gefaltete Kisten vereinzelt und volle Kisten sicher gehalten?'],
@@ -38,169 +38,63 @@
     software: ['Drei Roboter zu einem Ablauf verbinden.', 'Stationsfreigaben, Teilezählung und das Palettiermuster werden zusammengeführt. Auch fehlende Kisten und Unterbrechungen gehören zum Ablauf.', 'Wie läuft die Anlage nach einer Unterbrechung kontrolliert weiter?']
   };
   document.querySelectorAll('[data-experience]').forEach(root=>{
-    if(root.classList.contains('ax-ready'))return;
     const q=s=>root.querySelector(s),all=s=>[...root.querySelectorAll(s)];
-    const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-    const motion=q('[data-motion]'),stageButtons=all('[data-stage-button]'),cycleButtons=all('[data-cycle]');
-    let currentCase='inspection',mode='development',stage=0,elapsed=0,lastTime=0,lastPhase=-1,visible=false,paused=reduced.matches,raf=0;
-    const stageDuration=4,stageCount=inspectionStages.length,operationDuration=()=>currentCase==='inspection'?13:29;
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)'),viewer=createCadExperience(root);
+    const motion=q('[data-motion]'),stageButtons=all('[data-stage-button]'),cycleButtons=all('[data-cycle]'),partButtons=all('[data-part-button]');
+    let currentCase='inspection',mode='development',stage=0,elapsed=0,lastTime=0,lastPhase=-1,visible=false,paused=reduced.matches,raf=0,speed=1,lastRender=0;
+    const stageDuration=4,stageCount=inspectionStages.length,operationDuration=()=>currentCase==='inspection'?INSPECTION_DURATION:PACKAGING_DURATION;
     const setText=(s,v)=>{q(s).textContent=v;};
-    const mix=(a,b,t)=>a+(b-a)*t,smooth=t=>t*t*(3-2*t);
-    function point(t,a,b){const u=smooth(Math.max(0,Math.min(1,t)));return [mix(a[0],b[0],u),mix(a[1],b[1],u)];}
     function updateMotion(){root.dataset.paused=String(paused||reduced.matches);motion.textContent=reduced.matches?'Reduzierte Bewegung aktiv':paused?'Animation fortsetzen':'Animation pausieren';motion.disabled=reduced.matches;}
-    function updateOperationStory(index){
-      if(mode!=='operation')return;
-      const entry=operationCopy[currentCase][index];
-      setText('[data-story-title]',entry[0]);setText('[data-story-text]',entry[1]);
-      setText('[data-story-result]',`${index+1} / ${operationCopy[currentCase].length} · ${currentCase==='inspection'?'Bauteile prüfen':'Kisten aufrichten, befüllen & palettieren'}`);
-      setText('[data-scene-label]',`B / ${entry[0].toUpperCase()}`);
+    function render(){
+      const state=viewer.update({example:currentCase,mode,stage,time:elapsed,stageProgress:mode==='development'?(elapsed%stageDuration)/stageDuration:1,selectedPart:root.dataset.selectedPart});
+      if(mode==='operation'&&state){
+        cycleButtons.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===state.phase)));
+        setText('[data-cycle-status]',state.caption);
+        if(lastPhase!==state.phase||state.complete){
+          const entry=operationCopy[currentCase][state.phase];
+          setText('[data-story-title]',state.complete?'Charge abgeschlossen.':entry[0]);setText('[data-story-text]',state.complete?(currentCase==='inspection'?'Alle vier Teile liegen geprüft im Ausgangstablett. Die Aufnahme ist leer, der Greifer offen und der Roboter in Parkposition.':'Der Eingangsstapel ist leer. Alle vier Kisten enthalten jeweils vier Teile und stehen in zwei Lagen auf der Palette. Die Roboter stehen in Parkposition.'):entry[1]);
+          setText('[data-story-result]',state.caption);setText('[data-scene-label]',state.complete?'B / CHARGE VOLLSTÄNDIG':`B / ${entry[0].toUpperCase()}`);lastPhase=state.phase;
+        }
+      }
+      q('[data-cycle-scrub]').max=operationDuration();q('[data-cycle-scrub]').value=mode==='operation'?elapsed:0;setText('[data-cycle-time]',`${Math.floor(mode==='operation'?elapsed:0)} / ${operationDuration()} s`);
+      const total=stageCount*stageDuration+operationDuration(),done=mode==='development'?elapsed:stageCount*stageDuration+elapsed;q('[data-timeline]').style.transform=`scaleX(${done/total})`;
     }
     function showStage(index){
-      stage=index;root.dataset.stage=String(index);delete root.dataset.selectedPart;
-      stageButtons.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===index)));
-      const entry=(currentCase==='inspection'?inspectionStages:packagingStages)[index];
-      setText('[data-story-title]',entry[0]);setText('[data-story-text]',entry[1]);setText('[data-story-result]',entry[2]);setText('[data-scene-label]',`A / 0${index+1} · ${entry[3]}`);
-      drawCurrent(index===5?(currentCase==='inspection'?7:17.5):0);
+      stage=index;root.dataset.stage=String(index);delete root.dataset.selectedPart;stageButtons.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===index)));
+      const entry=(currentCase==='inspection'?inspectionStages:packagingStages)[index];setText('[data-story-title]',entry[0]);setText('[data-story-text]',entry[1]);setText('[data-story-result]',entry[2]);setText('[data-scene-label]',`A / 0${index+1} · ${entry[3]}`);
     }
     function setMode(next){
-      mode=next;root.dataset.mode=mode;elapsed=0;lastPhase=-1;delete root.dataset.selectedPart;
-      all('[data-mode-button]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.modeButton===mode)));
-      q('.ax-stages').hidden=mode==='operation';
-      setText('[data-mode-label]',mode==='development'?'Entwicklung in sieben Schritten':'Die Lösung im Betrieb');
-      setText('[data-result-label]',mode==='development'?'Ergebnis dieser Phase':'Funktionsschritt');
-      if(mode==='development')showStage(0);else{root.dataset.stage=String(stageCount-1);stageButtons.forEach(b=>b.setAttribute('aria-pressed','false'));}
-      drawCurrent(0);progress();
+      mode=next;root.dataset.mode=mode;elapsed=0;lastPhase=-1;delete root.dataset.selectedPart;all('[data-mode-button]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.modeButton===mode)));q('.ax-stages').hidden=mode==='operation';
+      setText('[data-mode-label]',mode==='development'?'Entwicklung in sieben Schritten':'Die vollständige Charge im Betrieb');setText('[data-result-label]',mode==='development'?'Ergebnis dieser Phase':'Chargenfortschritt');
+      if(mode==='development'){showStage(0);setText('[data-cycle-status]','Nach der Entwicklung folgt der vollständige Funktionsablauf.');cycleButtons.forEach(b=>b.setAttribute('aria-pressed','false'));}else{stage=6;root.dataset.stage='6';stageButtons.forEach(b=>b.setAttribute('aria-pressed','false'));}render();
     }
     function setCase(next){
-      currentCase=next;root.dataset.case=next;
-      q('[data-inspection-scene]').toggleAttribute('hidden',next!=='inspection');q('[data-packaging-scene]').toggleAttribute('hidden',next!=='packaging');
-      const names=next==='inspection'?['01 Greifer','02 Aufnahme','03 Sensorik','04 Software']:['01 Greifer','02 Fördertechnik','03 Sensorik','04 Steuerung'];
-      all('[data-part-button]').forEach((b,i)=>{b.textContent=names[i];b.setAttribute('aria-pressed',String(i===0));});
-      const partEntry=(next==='inspection'?parts:packagingParts).gripper;
-      setText('[data-part-title]',partEntry[0]);setText('[data-part-text]',partEntry[1]);setText('[data-part-question]',partEntry[2]);
+      currentCase=next;root.dataset.case=next;viewer.reset();
       all('[data-case-button]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.caseButton===next)));
-      setText('[data-case-label]',next==='inspection'?'BAUTEILHANDHABUNG / OPTISCHE PRÜFUNG':'FÖRDERTECHNIK / VERPACKUNG / PALETTIERUNG');
-      const labels=next==='inspection'?['Bereit','Greifen','Positionieren','Prüfen','Ablegen']:['Bereit','Aufrichten','Fördern','Befüllen','Weiterfördern','Palettieren'];
-      cycleButtons.forEach((b,i)=>{b.hidden=i>=labels.length;if(i<labels.length)b.textContent=`${i+1} ${labels[i]}`;});
+      const names=next==='inspection'?['01 Greifer','02 Prüfaufnahme','03 Sensorik','04 Software']:['01 Greifer','02 Fördertechnik','03 Sensorik','04 Steuerung'];partButtons.forEach((b,i)=>{b.textContent=names[i];b.setAttribute('aria-pressed',String(i===0));});
+      const entry=(next==='inspection'?parts:packagingParts).gripper;setText('[data-part-title]',entry[0]);setText('[data-part-text]',entry[1]);setText('[data-part-question]',entry[2]);
+      setText('[data-case-label]',next==='inspection'?'PRÜFZELLE / VIER GEHÄUSETEILE':'VERPACKUNGSLINIE / VIER KISTEN');
+      const labels=next==='inspection'?['Bereit','Greifen','Positionieren','Prüfen','Ablegen']:['Bereit','Aufrichten','Fördern','Befüllen','Weiterfördern','Palettieren'];cycleButtons.forEach((b,i)=>{b.hidden=i>=labels.length;if(!b.hidden)b.textContent=`${i+1} ${labels[i]}`;});
       setMode('development');
     }
-
-    function drawCycle(time){
-      const labels=inspectionLabels;
-      const source=[230,340],fixture=[600,340],output=[389,428],park=[470,290],clear=[570,265];
-      let tcp=source,part=source,grip=false,checking=false,phase=0;
-      if(time<1){tcp=point(time,park,source);}
-      else if(time<2){tcp=source;grip=true;phase=1;}
-      else if(time<4){tcp=point((time-2)/2,source,fixture);tcp[1]-=Math.sin(Math.PI*(time-2)/2)*55;part=tcp;grip=true;phase=1;}
-      else if(time<5){tcp=fixture;part=fixture;phase=2;}
-      else if(time<6){tcp=point(time-5,fixture,clear);part=fixture;phase=2;}
-      else if(time<8){tcp=clear;part=fixture;checking=true;phase=3;}
-      else if(time<9){tcp=point(time-8,clear,fixture);part=fixture;phase=3;}
-      else if(time<11){tcp=point((time-9)/2,fixture,output);tcp[1]-=Math.sin(Math.PI*(time-9)/2)*35;part=tcp;grip=true;phase=4;}
-      else if(time<12){tcp=output;part=output;phase=4;}
-      else{tcp=point((time-12),output,park);part=output;phase=4;}
-      const dx=tcp[0]-440,dy=tcp[1]-245,d=Math.hypot(dx,dy),a=Math.atan2(dy,dx)-Math.acos(Math.max(-1,Math.min(1,(160*160+d*d-150*150)/(320*d))));
-      const elbow=[440+160*Math.cos(a),245+160*Math.sin(a)];
-      root.querySelectorAll('[data-link-a]').forEach(e=>e.setAttribute('d','M440 245L'+elbow.join(' ')));
-      root.querySelectorAll('[data-link-b]').forEach(e=>e.setAttribute('d','M'+elbow.join(' ')+'L'+tcp.join(' ')));
-      root.querySelector('[data-elbow]').setAttribute('cx',elbow[0]);root.querySelector('[data-elbow]').setAttribute('cy',elbow[1]);
-      root.querySelector('[data-tool]').setAttribute('transform','translate('+tcp.join(' ')+')');
-      root.querySelector('[data-jaws]').setAttribute('d',grip?'M-18 -15V17H-14M18 -15V17H14':'M-27 -15V17H-21M27 -15V17H21');
-      root.querySelector('[data-piece]').setAttribute('transform','translate('+part.join(' ')+')');
-      root.querySelector('[data-check-beam]').setAttribute('opacity',checking?'.45':'0');
-      if(lastPhase!==phase){root.querySelector('[data-cycle-status]').textContent=labels[phase];cycleButtons.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===phase)));lastPhase=phase;updateOperationStory(phase);}
-    }
-
-    function drawPackaging(time){
-      let box=[745,262],stack=[220,388],r1=[755,220],r2=[548,202],r3=[220,205],part=[481,166],boxVisible=time>=6,open=1,filled=0,carried=false,phase=0;
-      if(time<2)stack=point(time/2,[155,388],[220,388]);
-      else if(time<5)stack=point((time-2)/3,[220,388],[745,388]);
-      else stack=[745,388];
-      if(time>=5&&time<10){
-        phase=1;
-        if(time<6)r1=point(time-5,[755,220],[745,359]);
-        else if(time<7){r1=[745,359];box=r1;open=.08;}
-        else{r1=point((time-7)/3,[745,359],[745,262]);r1[0]-=Math.sin(Math.PI*(time-7)/3)*38;box=r1;open=.08+.92*Math.min(1,(time-7)/2.5);}
-      }
-      if(time>=6&&time<10)r1=[box[0],box[1]-26*open];
-      if(time>=10){r1=point(Math.min(1,time-10),[745,236],[755,220]);}
-      if(time>=10&&time<13){phase=2;box=point((time-10)/3,[745,262],[480,262]);}
-      if(time>=13&&time<21){
-        phase=3;box=[480,262];const slot=Math.min(3,Math.floor((time-13)/2)),t=(time-13)%2;
-        const source=[481,166],dest=[480+(slot%2?9:-9),239-(slot<2?5:0)];
-        filled=slot+(t>=1.2?1:0);
-        if(t<.4)r2=point(t/.4,[548,202],source);
-        else if(t<1.2){r2=point((t-.4)/.8,source,dest);r2[0]-=Math.sin(Math.PI*(t-.4)/.8)*20;part=r2;carried=true;}
-        else if(t<1.4)r2=dest;
-        else r2=point((t-1.4)/.6,dest,[548,202]);
-      }
-      if(time>=21&&time<24){phase=4;filled=4;box=point((time-21)/3,[480,262],[250,262]);}
-      if(time>=24){
-        phase=5;filled=4;box=[250,262];
-        if(time<25)r3=point(time-24,[220,205],[250,236]);
-        else if(time<28){r3=point((time-25)/3,[250,236],[88,194]);r3[1]-=Math.sin(Math.PI*(time-25)/3)*55;box=[r3[0],r3[1]+26];}
-        else{box=[88,220];r3=point(time-28,[88,194],[220,205]);}
-      }
-      function robot(id,base,tcp,lengths){
-        const el=q(`[data-pack-robot="${id}"]`),dx=tcp[0]-base[0],dy=tcp[1]-base[1],d=Math.max(.001,Math.hypot(dx,dy));
-        const [a,b]=lengths,angle=Math.atan2(dy,dx)+Math.acos(Math.max(-1,Math.min(1,(a*a+d*d-b*b)/(2*a*d))));
-        const elbow=[base[0]+a*Math.cos(angle),base[1]+a*Math.sin(angle)];
-        el.querySelectorAll('[data-pack-arm]').forEach(e=>e.setAttribute('d',`M${base.join(' ')}L${elbow.join(' ')}L${tcp.join(' ')}`));
-        el.querySelector('[data-pack-elbow]').setAttribute('cx',elbow[0]);el.querySelector('[data-pack-elbow]').setAttribute('cy',elbow[1]);
-        el.querySelector('[data-pack-tool]').setAttribute('transform',`translate(${tcp.join(' ')})`);
-      }
-      robot('erect',[799,195],r1,[120,115]);robot('fill',[594,155],r2,[90,85]);robot('pallet',[235,148],r3,[110,100]);
-      q('[data-pack-stack]').setAttribute('transform',`translate(${stack.join(' ')})`);
-      q('[data-pack-stack]').querySelectorAll('path').forEach((e,i)=>e.setAttribute('opacity',time>=6&&i>=8?'0':'1'));
-      q('[data-pack-box]').setAttribute('transform',`translate(${box.join(' ')})`);q('[data-pack-box]').setAttribute('opacity',boxVisible?'1':'0');
-      q('[data-box-shape]').setAttribute('transform',`scale(1 ${open})`);
-      all('[data-filled-part]').forEach((e,i)=>e.setAttribute('opacity',i<filled?'1':'0'));
-      q('[data-pack-part]').setAttribute('transform',`translate(${part.join(' ')})`);q('[data-pack-part]').setAttribute('opacity',carried?'1':'0');
-      q('[data-feed-parts]').setAttribute('transform',`translate(0 ${time>=13&&time<21?((time-13)%2)*7:0})`);
-      q('[data-worker-arm]').setAttribute('d',time<2?`M105 380L128 397L${149+Math.sin(time*Math.PI/2)*12} 390`:'M105 380L119 402L112 415');
-      if(lastPhase!==phase){setText('[data-cycle-status]',packagingLabels[phase]);cycleButtons.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===phase)));lastPhase=phase;updateOperationStory(phase);}
-    }
-    function drawCurrent(time){if(currentCase==='inspection')drawCycle(time);else drawPackaging(time);}
-    function progress(){const total=stageCount*stageDuration+operationDuration(),done=mode==='development'?elapsed:stageCount*stageDuration+elapsed;q('[data-timeline]').style.transform=`scaleX(${done/total})`;}
     function stop(){if(raf)cancelAnimationFrame(raf);raf=0;lastTime=0;}
     function run(){if(!raf&&visible&&!document.hidden&&!paused&&!reduced.matches)raf=requestAnimationFrame(tick);}
     function tick(now){
-      raf=0;const dt=lastTime?Math.min((now-lastTime)/1000,.1):0;lastTime=now;elapsed+=dt;
-      if(mode==='development'){
-        if(elapsed>=stageCount*stageDuration)setMode('operation');
-        else{const next=Math.floor(elapsed/stageDuration);if(next!==stage)showStage(next);}
-      }else if(elapsed>=operationDuration())setCase(currentCase==='inspection'?'packaging':'inspection');
-      else drawCurrent(elapsed);
-      progress();run();
+      raf=0;const dt=lastTime?Math.min((now-lastTime)/1000,.1)*speed:0;lastTime=now;elapsed+=dt;
+      if(mode==='development'){if(elapsed>=stageCount*stageDuration)setMode('operation');else{const next=Math.floor(elapsed/stageDuration);if(next!==stage)showStage(next);}}
+      else if(elapsed>=operationDuration())setCase(currentCase==='inspection'?'packaging':'inspection');
+      if(now-lastRender>32){render();lastRender=now;}run();
     }
     function pause(){paused=true;stop();updateMotion();setText('.ax-autoplay-label','Manuelle Ansicht · Fortsetzen startet den Ablauf');}
-    function resume(){paused=false;updateMotion();setText('.ax-autoplay-label','Automatischer Wechsel');run();}
-    stageButtons.forEach(b=>b.addEventListener('click',()=>{pause();setMode('development');elapsed=Number(b.dataset.stageButton)*stageDuration;showStage(Number(b.dataset.stageButton));progress();}));
-    cycleButtons.forEach(b=>b.addEventListener('click',()=>{pause();setMode('operation');elapsed=(currentCase==='inspection'?[0,2,5,7,11]:[0,7.8,11.5,17.5,22.5,27])[Number(b.dataset.cycle)];lastPhase=-1;drawCurrent(elapsed);progress();}));
-    all('[data-case-button]').forEach(b=>b.addEventListener('click',()=>{setCase(b.dataset.caseButton);resume();}));
-    all('[data-mode-button]').forEach(b=>b.addEventListener('click',()=>{setMode(b.dataset.modeButton);resume();}));
-    const partButtons=all('[data-part-button]');
-    partButtons.forEach(button=>button.addEventListener('click',()=>{
-      pause();setMode('operation');root.dataset.selectedPart=button.dataset.partButton;
-      partButtons.forEach(other=>other.setAttribute('aria-pressed',String(other===button)));
-      const entry=(currentCase==='inspection'?parts:packagingParts)[button.dataset.partButton];setText('[data-part-title]',entry[0]);setText('[data-part-text]',entry[1]);setText('[data-part-question]',entry[2]);
-    }));
-    all('[data-part-hotspot]').forEach(h=>{
-      const activate=()=>partButtons.find(b=>b.dataset.partButton===h.dataset.partHotspot).click();
-      h.addEventListener('click',activate);h.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activate();}});
-    });
-    [stageButtons,cycleButtons,partButtons,all('[data-case-button]'),all('[data-mode-button]')].forEach(buttons=>buttons.forEach(b=>b.addEventListener('keydown',e=>{
-      const available=buttons.filter(x=>!x.hidden),i=available.indexOf(b);let next;
-      if(e.key==='ArrowRight'||e.key==='ArrowDown')next=(i+1)%available.length;
-      if(e.key==='ArrowLeft'||e.key==='ArrowUp')next=(i-1+available.length)%available.length;
-      if(e.key==='Home')next=0;if(e.key==='End')next=available.length-1;
-      if(next!==undefined){e.preventDefault();available[next].focus();available[next].click();}
-    })));
-    motion.hidden=false;motion.addEventListener('click',()=>{if(paused)resume();else pause();});
-    reduced.addEventListener('change',()=>{if(reduced.matches)pause();updateMotion();});
-    document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else run();});
-    if('IntersectionObserver' in window)new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;root.classList.toggle('ax-offscreen',!visible);if(visible)run();else stop();},{threshold:.08}).observe(q('.ax-workspace'));
-    else visible=true;
+    function resume(){paused=false;updateMotion();setText('.ax-autoplay-label','Automatischer Wechsel nach vollständiger Charge');run();}
+    stageButtons.forEach(b=>b.addEventListener('click',()=>{pause();setMode('development');elapsed=Number(b.dataset.stageButton)*stageDuration;showStage(Number(b.dataset.stageButton));render();}));
+    cycleButtons.forEach(b=>b.addEventListener('click',()=>{pause();setMode('operation');elapsed=(currentCase==='inspection'?[0,2.3,5.6,8,14.8]:[0,6.3,10.2,16.2,21.5,26.5])[Number(b.dataset.cycle)];lastPhase=-1;render();}));
+    all('[data-case-button]').forEach(b=>b.addEventListener('click',()=>{setCase(b.dataset.caseButton);resume();}));all('[data-mode-button]').forEach(b=>b.addEventListener('click',()=>{setMode(b.dataset.modeButton);resume();}));
+    partButtons.forEach(button=>button.addEventListener('click',()=>{pause();setMode('operation');root.dataset.selectedPart=button.dataset.partButton;partButtons.forEach(b=>b.setAttribute('aria-pressed',String(b===button)));const entry=(currentCase==='inspection'?parts:packagingParts)[button.dataset.partButton];setText('[data-part-title]',entry[0]);setText('[data-part-text]',entry[1]);setText('[data-part-question]',entry[2]);render();}));
+    [stageButtons,cycleButtons,partButtons,all('[data-case-button]'),all('[data-mode-button]')].forEach(buttons=>buttons.forEach(b=>b.addEventListener('keydown',e=>{const available=buttons.filter(x=>!x.hidden),i=available.indexOf(b);let next;if(e.key==='ArrowRight'||e.key==='ArrowDown')next=(i+1)%available.length;if(e.key==='ArrowLeft'||e.key==='ArrowUp')next=(i-1+available.length)%available.length;if(e.key==='Home')next=0;if(e.key==='End')next=available.length-1;if(next!==undefined){e.preventDefault();available[next].focus();available[next].click();}})));
+    q('[data-cycle-scrub]').addEventListener('input',e=>{const value=Number(e.target.value);pause();if(mode!=='operation')setMode('operation');elapsed=value;lastPhase=-1;render();});
+    q('[data-speed]').addEventListener('click',()=>{speed=speed===1?2:1;q('[data-speed]').textContent=`Tempo ${speed}×`;});q('[data-view-reset]').addEventListener('click',()=>{delete root.dataset.selectedPart;viewer.reset();render();});
+    motion.hidden=false;motion.addEventListener('click',()=>paused?resume():pause());reduced.addEventListener('change',()=>{if(reduced.matches)pause();updateMotion();});document.addEventListener('visibilitychange',()=>document.hidden?stop():run());
+    if('IntersectionObserver' in window)new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;root.classList.toggle('ax-offscreen',!visible);if(visible)run();else stop();},{threshold:.08}).observe(q('[data-cad-host]'));else visible=true;
     root.classList.add('ax-ready');setCase('inspection');updateMotion();run();
   });
-})();
