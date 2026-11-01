@@ -1,52 +1,15 @@
 ---
 layout: base.njk
-title: Startseite
+title: Engineering, Automatisierung und Robotik
 seo:
-    title: "Lohnfertigung, CNC-Fräsen & CAD-Konstruktion | AUGÉ Manufacturing"
-    description: "Präzise Lohnfertigung in Riedering: AUGÉ Manufacturing bietet CNC-Fräsen, CAD-Konstruktion und Baugruppenmontage für Prototypen, Einzelteile und Kleinserien. Wir bedienen Kunden in Riedering, Rosenheim, Chiemgau und Oberbayern."
+  title: "Engineering, Automatisierung & Robotik | AUGÉ Manufacturing"
+  description: "Engineering und Robotik aus Riedering: von der technischen Aufgabenstellung zur durchdachten Lösung. Ergänzende CNC-Fertigung für Bauteile und Prototypen."
 ---
-
-<style>
-    @media (max-width: 768px) {
-        .hero {
-            justify-content: center !important;
-            align-items: flex-start !important;
-            padding-right: 1rem !important;
-            padding-top: 2rem !important;
-            background-image: url('/public/images/cut_country_mobil.png') !important;
-        }
-        .hero-box {
-            max-width: 280px !important;
-            padding: 1rem !important;
-        }
-        .hero h1 {
-            font-size: 1.4rem !important;
-        }
-    }
-</style>
-
-<section class="hero" style="background: url('/public/images/cut_country.png') center/cover no-repeat; position: relative; min-height: 500px; display: flex; align-items: center; justify-content: flex-end; padding-right: 3rem;">
-    <div class="hero-box" style="background: white; padding: 3rem; max-width: 550px; text-align: center; border-right: 5px solid #d32f2f; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
-        <h1 style="font-size: 2.4rem; line-height: 1.3; margin: 0 0 2rem 0; color: #000; font-weight: 900; letter-spacing: -0.5px;">LOKALE, ZUVERLÄSSIGE UND PRÄZISE<br>FRÄSTECHNIK</h1>
-        <a href="{{ company.contact.cta_link }}" class="btn-quote" style="background-color: #d32f2f; color: white; padding: 1rem 2rem; font-weight: bold; text-decoration: none; display: inline-block; border: none; cursor: pointer;">JETZT ANFRAGE SENDEN</a>
-        <p style="margin-top: 1rem; font-size: 0.95rem;">
-            <a href="/leistungen/" style="color: inherit; text-decoration: underline;">Leistungen ansehen</a>
-            &nbsp;·&nbsp;
-            <a href="/maschinenpark/" style="color: inherit; text-decoration: underline;">Maschinenpark</a>
-        </p>
-    </div>
+<section class="engineering-hero">
+  <div><p class="eyebrow">AUGÉ Manufacturing · Riedering bei Rosenheim</p><h1>Technik entwickeln.<br>Prozesse verbinden.<br><span>Ideen umsetzen.</span></h1><p class="lead">Engineering, Automatisierung und Robotik – mit dem Blick für das ganze System und der Erfahrung aus der Fertigung.</p><div class="actions"><a class="btn-quote" href="/kontakt/">Projekt besprechen ↗</a><a href="/leistungen/">Leistungen entdecken →</a></div></div>
+  <div class="system-map" aria-label="Vom Engineering über Automatisierung und Robotik zur ergänzenden Fertigung"><p class="eyebrow">Von der Aufgabe zur Lösung</p><ol><li><span>01</span> Engineering<small>Anforderungen verstehen. Konstruktion durchdenken.</small></li><li><span>02</span> Automatisierung<small>Abläufe und Schnittstellen zusammenbringen.</small></li><li><span>03</span> Robotik<small>Bewegung in den Prozess bringen.</small></li><li><span>+</span> CNC-Fertigung<small>Die passenden Komponenten ergänzen.</small></li></ol></div>
 </section>
-
-<section class="expertise">
-    <h2>Expertise</h2>
-    <div class="services-grid">
-        
-        {% for service in company.services %}
-        <div class="service-card">
-            <h3>{{ service.title }}</h3>
-            <p>{{ service.description }}</p>
-        </div>
-        {% endfor %}
-
-    </div>
-</section>
+<section class="content-section"><p class="eyebrow">Leistungen</p><h2>Ihr Projekt bestimmt den Einstieg.</h2><p class="intro">Eine konstruktive Aufgabe, ein manueller Prozess oder eine geplante Roboteranwendung: Gemeinsam klären wir, wo Unterstützung sinnvoll ist.</p><div class="capabilities">{% for service in company.services %}<a href="/leistungen/#{{ service.id }}"><span class="eyebrow">{{ loop.index }} / Kompetenz</span><h3>{{ service.title }} ↗</h3><p>{{ service.description }}</p></a>{% endfor %}</div></section>
+<section class="content-section process-section"><p class="eyebrow">Zusammenarbeit</p><h2>Erst verstehen. Dann entwickeln.</h2><div class="process-grid"><div><h3>01 / Aufgabe klären</h3><p>Ausgangssituation, Ziel, technische Randbedingungen und vorhandene Daten gemeinsam einordnen.</p></div><div><h3>02 / Lösung abstimmen</h3><p>Konzept, Schnittstellen und Leistungsumfang festlegen. Machbarkeit und offene Fragen transparent besprechen.</p></div><div><h3>03 / Umsetzung planen</h3><p>Arbeitspakete und nächste Schritte vereinbaren – passend zu Ihrem Projektstand.</p></div></div></section>
+<section class="content-section person-section"><div><p class="eyebrow">Ihr Ansprechpartner</p><h2>Alexander Augé, M.Sc.</h2><p>Maschinenbau, Systems Design und praktische Erfahrung in CNC-Fertigung, Anlagenentwicklung und Robotik. Diese Perspektiven verbinde ich für technisch und wirtschaftlich sinnvolle Lösungen.</p><a href="/ueber-uns/">Meinen Hintergrund kennenlernen →</a></div><img src="/public/Portrait.jpg" alt="Alexander Augé" width="280" height="350" loading="lazy"></section>
+<section class="content-section contact-band"><h2>Was möchten Sie bewegen?</h2><p>Beschreiben Sie Ihre Aufgabe, den aktuellen Stand und das gewünschte Ergebnis. Daraus entsteht der nächste konkrete Schritt.</p><a class="btn-quote" href="/kontakt/">Projekt anfragen ↗</a></section>

@@ -1,5 +1,7 @@
 module.exports = function(eleventyConfig) {
   
+  eleventyConfig.ignores.add("work/**");
+  eleventyConfig.ignores.add("_site/**");
   // WICHTIG: Kopiert deine CSS-Dateien und Bilder in den fertigen Ordner
   eleventyConfig.addPassthroughCopy("public");
 

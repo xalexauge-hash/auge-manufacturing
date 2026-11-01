@@ -63,6 +63,8 @@
     </style>
 </head>
 <body>
+<script>document.documentElement.classList.add("js");</script>
+<a class="skip-link" href="#main-content">Zum Inhalt springen</a>
 
     <header>
         <div class="logo">
@@ -72,11 +74,11 @@
         </div>
     </header>
 
-    <nav>
-        <div class="menu-toggle" onclick="toggleMenu()">☰ Menü</div>
+    <nav aria-label="Hauptnavigation">
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navLinks" onclick="toggleMenu()">Menü</button>
         <div class="nav-links" id="navLinks">
             <a href="/" class="{% if page.url == '/' %}active{% endif %}">
-                Home
+                Startseite
             </a>
             <a href="/ueber-uns/" class="{% if page.url == '/ueber-uns/' %}active{% endif %}">
                 Über mich
@@ -93,7 +95,7 @@
         </div>
     </nav>
 
-    <main>
+    <main id="main-content">
         {{ content | safe }}
     </main>
 
@@ -124,6 +126,7 @@
     <script>
         function toggleMenu() {
             var x = document.getElementById("navLinks");
+            document.querySelector(".menu-toggle").setAttribute("aria-expanded", String(!x.classList.contains("show")));
             if (x.className === "nav-links") {
                 x.className += " show";
             } else {
