@@ -1,0 +1,75 @@
+---
+layout: base.njk
+pagination:
+  data: serviceDetails
+  size: 1
+  alias: service
+permalink: "/leistungen/{{ service.id }}/index.html"
+eleventyComputed:
+  title: "{{ service.title }}"
+  seo:
+    title: "{{ service.title }} | AUGÉ Manufacturing"
+    description: "{{ service.description }}"
+---
+<section class="page-header">
+  <p class="eyebrow"><a href="/leistungen/">Leistungen</a> / {{ service.title }}</p>
+  <h1>{{ service.title }}</h1>
+  <p>{{ service.description }}</p>
+  <a class="btn-quote" href="/kontakt/">Projekt besprechen ↗</a>
+</section>
+
+<section class="content-section" id="aufgaben">
+  <p class="eyebrow">Die Aufgabe im Mittelpunkt</p>
+  <h2>{{ service.heading }}</h2>
+  <p class="intro">{{ service.intro }}</p>
+  <div class="process-grid">
+    {% for task in service.tasks %}
+    <article>
+      <h3>{{ task.title }}</h3>
+      <p>{{ task.text }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="content-section process-section" id="vorgehen">
+  <p class="eyebrow">Unsere Vorgehensweise</p>
+  <h2>Vom gemeinsamen Verständnis zur Umsetzung.</h2>
+  <div class="process-grid">
+    {% for step in service.steps %}
+    <article>
+      <h3>0{{ loop.index }} / {{ step.title }}</h3>
+      <p>{{ step.text }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="content-section">
+  <p class="eyebrow">Ergebnisse und Zusammenarbeit</p>
+  <h2>Ein klarer Umfang schafft eine gemeinsame Grundlage.</h2>
+  <p>Welche Arbeitspakete und Ergebnisse zu Ihrem Projekt gehören, halten wir im vereinbarten Leistungsumfang fest. Je nach Aufgabe umfasst das:</p>
+  <ul>
+    {% for output in service.outputs %}<li>{{ output }}</li>{% endfor %}
+  </ul>
+  <h3>Schnittstellen früh abstimmen</h3>
+  <p class="intro">{{ service.interfaces }}</p>
+</section>
+
+<section class="content-section process-section">
+  <p class="eyebrow">Der Einstieg</p>
+  <h2>Diese Informationen helfen uns weiter.</h2>
+  <p>Sie müssen noch kein fertiges Lastenheft haben. Vorhandene Unterlagen und eine kurze Beschreibung Ihrer Aufgabe sind ein guter Ausgangspunkt.</p>
+  <ul>
+    {% for input in service.inputs %}<li>{{ input }}</li>{% endfor %}
+  </ul>
+  <h3>Auch nach der Übergabe</h3>
+  <p class="intro">{{ service.service }}</p>
+</section>
+
+<section class="content-section contact-band">
+  <h2>Wo steht Ihr Projekt gerade?</h2>
+  <p>Beschreiben Sie uns Ihre Ausgangssituation und das gewünschte Ergebnis. Gemeinsam klären wir, wie {{ service.title }} zu Ihrer Aufgabe passt.</p>
+  <a class="btn-quote" href="/kontakt/">Projekt anfragen ↗</a>
+  <p><a href="/leistungen/">Alle Leistungsbereiche ansehen →</a></p>
+</section>
