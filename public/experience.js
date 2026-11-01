@@ -1,11 +1,13 @@
 (() => {
   'use strict';
   const inspectionStages = [
-    ['Gehäuseteile zuverlässig prüfen.', 'Ein gefrästes Gehäuseteil kommt in definierter Lage an. Die Aufgabe: entnehmen, in einer Prüfaufnahme positionieren, ein optisches Merkmal erfassen und das geprüfte Teil ablegen. Teilevarianten, Prüfmerkmal und Fehlerreaktion werden zuerst festgelegt.', 'Ein klar abgegrenzter Prüf- und Handhabungsauftrag.', 'ANFORDERUNGEN'],
+    ['Gehäuseteile zuverlässig prüfen.', 'Ein gefrästes Gehäuseteil kommt in definierter Lage an. Die Aufgabe: entnehmen, in einer Prüfaufnahme positionieren, ein optisches Merkmal erfassen und das geprüfte Teil ablegen. Teilevarianten, Prüfmerkmal und Fehlerreaktion werden zuerst festgelegt.', 'Ein klar abgegrenzter Prüf- und Handhabungsauftrag.', 'ANFORDERUNG'],
     ['Drei Stationen. Ein Materialfluss.', 'Eine geordnete Zuführung, eine definierte Prüfaufnahme und eine getrennte Ablage bilden den Ablauf. Die Draufsicht zeigt, warum Reichweite, Zugänglichkeit und Freiraum für Greifer und Kamera gemeinsam geplant werden.', 'Ein Stationslayout mit eindeutigen Übergaben.', 'KONZEPT'],
     ['Greifer und Aufnahme aufeinander abstimmen.', 'Formangepasste Greiferbacken halten das Gehäuse an geeigneten Außenflächen. Die Aufnahme legt seine Position zur Kamera fest. Befestigungen, Bezugspunkte und Freiräume werden so konstruiert, dass Greifen und Prüfen sich nicht behindern.', 'Ausgearbeitete Greiferbacken und Werkstückaufnahme.', 'KONSTRUKTION'],
     ['Die Schnittstelle wird ein reales Bauteil.', 'Greiferbacken, Adapter und Aufnahme können als CNC-gefertigte Komponenten entstehen. Bezugselemente und funktionsrelevante Maße werden abgestimmt; anschließend wird das Zusammenspiel mit dem realen Musterteil erprobt.', 'Mechanische Komponenten für Montage und Erprobung.', 'FERTIGUNG'],
-    ['Greifen. Positionieren. Prüfen. Ablegen.', 'Das Teil bewegt sich mit dem Greifer zur Aufnahme. Erst nach dem Ablegen und Zurückziehen wird die optische Prüfung ausgelöst. Nach der Freigabe übernimmt der Roboter das Teil erneut und legt es im Ausgang ab. Die Darstellung zeigt den Gutteilpfad.', 'Ein aufeinander abgestimmter Ablauf mit klaren Freigaben.', 'ZUSAMMENSPIEL']
+    ['Aus Komponenten wird eine Prüfzelle.', 'Greifer, Werkstückaufnahme und Kamerahalterung werden montiert und ausgerichtet. Mechanische, elektrische und steuerungstechnische Schnittstellen werden zusammengeführt.', 'Eine montierte Zelle als Grundlage für die Funktionsprüfung.', 'MONTAGE'],
+    ['Funktionen prüfen. Abläufe abstimmen.', 'Mit Musterteilen prüfen wir Greifpositionen, Übergaben und die optische Erfassung. Freigaben, Fehlermeldungen und Wiederanlauf werden im vereinbarten Umfang erprobt.', 'Ein erprobter Prüf- und Handhabungsablauf.', 'INBETRIEBNAHME'],
+    ['Die Lösung in den Betrieb überführen.', 'Die abgestimmten Programme und Parameter werden für den Betrieb bereitgestellt. Dokumentation, Einweisung und Übergabe schaffen die Grundlage für den Einsatz; für unsere Lösung bleiben wir im Service ansprechbar.', 'Eine übergebene Lösung mit dokumentiertem Betriebsstand.', 'DEPLOYMENT']
   ];
   const parts = {
     gripper: ['Das Werkstück sicher handhaben.', 'Geometrie, Gewicht und Oberfläche bestimmen die Greifaufgabe. Zugänglichkeit, Teilevarianten und die Übergabe an die nächste Station fließen in das Konzept ein.', 'Welche Flächen dürfen berührt werden – und in welcher Lage kommt das Teil an?'],
@@ -15,11 +17,13 @@
   };
 
   const packagingStages = [
-    ['Vom Kistenstapel zur vollen Palette.', 'Mitarbeitende stellen Stapel zusammengefalteter Kisten auf der unteren Förderebene bereit. Fertigteile kommen über eine separate Zuführung. Ziel ist ein durchgängiger Ablauf bis zur beladenen Palette.', 'Kistenformat, Teilezahl und Übergabepunkte festlegen.', 'AUFGABE'],
+    ['Vom Kistenstapel zur vollen Palette.', 'Mitarbeitende stellen Stapel zusammengefalteter Kisten auf der unteren Förderebene bereit. Fertigteile kommen über eine separate Zuführung. Ziel ist ein durchgängiger Ablauf bis zur beladenen Palette.', 'Kistenformat, Teilezahl und Übergabepunkte festlegen.', 'ANFORDERUNG'],
     ['Zwei Ebenen organisieren den Materialfluss.', 'Die untere Ebene führt Kistenstapel zum Aufrichtroboter. Oben laufen die aufgerichteten Kisten in Gegenrichtung: zuerst zur Befüllung, anschließend zur Palettierung. Die Teilezuführung bleibt separat.', 'Ein Anlagenlayout mit drei Roboterstationen.', 'KONZEPT'],
     ['Übergaben bis zum Greifer durchdenken.', 'Vereinzelung, Aufrichtgreifer, Kistenanschläge und Teilegreifer werden auf die Geometrien abgestimmt. Für die Palettierung sind Greifzugang, Lagenbild und Traglast maßgeblich.', 'Abgestimmte Baugruppen und klare Schnittstellen.', 'KONSTRUKTION'],
-    ['Die passenden Komponenten fertigen.', 'Adapterplatten, Greiferfinger, Führungen und Halter werden konstruiert, gefertigt und mit realen Kisten und Musterteilen erprobt. Die Fördertechnik und Roboter werden zu einer Anlage montiert.', 'Geprüfte Komponenten für Montage und Integration.', 'FERTIGUNG'],
-    ['Drei Roboter arbeiten zusammen.', 'Die Steuerung gibt Kisten und Teile stationsweise frei. Der Befüllroboter zählt die eingelegten Teile; erst die volle Kiste fährt weiter. Der Palettierroboter übernimmt sie am definierten Übergabepunkt.', 'Ein abgestimmter Ablauf vom Stapel bis zur Palette.', 'ZUSAMMENSPIEL']
+    ['Die passenden Komponenten fertigen.', 'Adapterplatten, Greiferfinger, Führungen und Halter werden konstruiert, gefertigt und mit realen Kisten und Musterteilen erprobt. Die gefertigten Komponenten werden für die anschließende Montage vorbereitet.', 'Geprüfte Komponenten für Montage und Integration.', 'FERTIGUNG'],
+    ['Fördertechnik und Roboter zusammenführen.', 'Die beiden Förderebenen, die Teilezuführung und die drei Roboterstationen werden montiert. Greifer, Anschläge und Sensoren werden ausgerichtet und mit der Steuerung verbunden.', 'Eine montierte Anlage mit abgestimmten Übergabepunkten.', 'MONTAGE'],
+    ['Jede Übergabe im Ablauf erproben.', 'Wir prüfen die Kistenvereinzelung, das Aufrichten, die Teilezählung und das Palettiermuster. Stationsfreigaben und Reaktionen auf Unterbrechungen werden mit realen Kisten und Musterteilen erprobt.', 'Ein erprobter Ablauf vom Kistenstapel bis zur Palette.', 'INBETRIEBNAHME'],
+    ['Die Anlage in den Betrieb übergeben.', 'Die abgestimmten Roboterprogramme, Kistenformate und Palettierparameter werden für den Betrieb bereitgestellt. Einweisung und Dokumentation begleiten die Übergabe; Service und Anpassungen bleiben Teil der Zusammenarbeit.', 'Eine übergebene Anlage mit dokumentierten Programmen und Parametern.', 'DEPLOYMENT']
   ];
   const inspectionLabels=['Bauteil bereit · geordnete Zuführung','Greifer geschlossen · Teil wird übernommen','Teil in der Aufnahme · Greifer zieht zurück','Optische Prüfung · Teil liegt ruhig in der Aufnahme','Gutteil übernehmen und zur Ablage führen'];
   const packagingLabels=['Kistenstapel bereitstellen und unten zuführen','Eine Kiste vereinzeln, aufrichten und nach oben übergeben','Leere Kiste zur Befüllstation fördern','Vier Fertigteile nacheinander in die Kiste einlegen','Volle Kiste zur Palettierstation fördern','Volle Kiste übernehmen und auf der Palette absetzen'];
@@ -39,7 +43,7 @@
     const reduced=matchMedia('(prefers-reduced-motion: reduce)');
     const motion=q('[data-motion]'),stageButtons=all('[data-stage-button]'),cycleButtons=all('[data-cycle]');
     let currentCase='inspection',mode='development',stage=0,elapsed=0,lastTime=0,lastPhase=-1,visible=false,paused=reduced.matches,raf=0;
-    const stageDuration=4,operationDuration=()=>currentCase==='inspection'?13:29;
+    const stageDuration=4,stageCount=inspectionStages.length,operationDuration=()=>currentCase==='inspection'?13:29;
     const setText=(s,v)=>{q(s).textContent=v;};
     const mix=(a,b,t)=>a+(b-a)*t,smooth=t=>t*t*(3-2*t);
     function point(t,a,b){const u=smooth(Math.max(0,Math.min(1,t)));return [mix(a[0],b[0],u),mix(a[1],b[1],u)];}
@@ -56,14 +60,15 @@
       stageButtons.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===index)));
       const entry=(currentCase==='inspection'?inspectionStages:packagingStages)[index];
       setText('[data-story-title]',entry[0]);setText('[data-story-text]',entry[1]);setText('[data-story-result]',entry[2]);setText('[data-scene-label]',`A / 0${index+1} · ${entry[3]}`);
+      drawCurrent(index===5?(currentCase==='inspection'?7:17.5):0);
     }
     function setMode(next){
       mode=next;root.dataset.mode=mode;elapsed=0;lastPhase=-1;delete root.dataset.selectedPart;
       all('[data-mode-button]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.modeButton===mode)));
       q('.ax-stages').hidden=mode==='operation';
-      setText('[data-mode-label]',mode==='development'?'Entwicklung in fünf Schritten':'Die Lösung im Betrieb');
+      setText('[data-mode-label]',mode==='development'?'Entwicklung in sieben Schritten':'Die Lösung im Betrieb');
       setText('[data-result-label]',mode==='development'?'Ergebnis dieser Phase':'Funktionsschritt');
-      if(mode==='development')showStage(0);else{root.dataset.stage='4';stageButtons.forEach(b=>b.setAttribute('aria-pressed','false'));}
+      if(mode==='development')showStage(0);else{root.dataset.stage=String(stageCount-1);stageButtons.forEach(b=>b.setAttribute('aria-pressed','false'));}
       drawCurrent(0);progress();
     }
     function setCase(next){
@@ -156,13 +161,13 @@
       if(lastPhase!==phase){setText('[data-cycle-status]',packagingLabels[phase]);cycleButtons.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===phase)));lastPhase=phase;updateOperationStory(phase);}
     }
     function drawCurrent(time){if(currentCase==='inspection')drawCycle(time);else drawPackaging(time);}
-    function progress(){const total=5*stageDuration+operationDuration(),done=mode==='development'?elapsed:5*stageDuration+elapsed;q('[data-timeline]').style.transform=`scaleX(${done/total})`;}
+    function progress(){const total=stageCount*stageDuration+operationDuration(),done=mode==='development'?elapsed:stageCount*stageDuration+elapsed;q('[data-timeline]').style.transform=`scaleX(${done/total})`;}
     function stop(){if(raf)cancelAnimationFrame(raf);raf=0;lastTime=0;}
     function run(){if(!raf&&visible&&!document.hidden&&!paused&&!reduced.matches)raf=requestAnimationFrame(tick);}
     function tick(now){
       raf=0;const dt=lastTime?Math.min((now-lastTime)/1000,.1):0;lastTime=now;elapsed+=dt;
       if(mode==='development'){
-        if(elapsed>=5*stageDuration)setMode('operation');
+        if(elapsed>=stageCount*stageDuration)setMode('operation');
         else{const next=Math.floor(elapsed/stageDuration);if(next!==stage)showStage(next);}
       }else if(elapsed>=operationDuration())setCase(currentCase==='inspection'?'packaging':'inspection');
       else drawCurrent(elapsed);
