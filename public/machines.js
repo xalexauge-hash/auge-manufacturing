@@ -110,13 +110,22 @@
       cylinder(-62,178,7,35,25,[221,222,211]); cylinder(-62,177,7,33,2,dark);
       for(let i=0;i<22;i++){const a=i*Math.PI*2/22;const tx=-62+28*Math.cos(a),tz=7+28*Math.sin(a);cylinder(tx,170,tz,3.5,8,dark);cylinder(tx,163-(i%3)*2,tz,1.6,7+(i%3)*2,metal);}
     }else{
-      for(let i=0;i<24;i++){const a=i*Math.PI*2/24;box(-65+26*Math.cos(a),185+26*Math.sin(a),18,3,5,9,metal);}
-      box(-79,176,12,28,26,10,dark);
+      // Reference interior: enclosed changer left of spindle, rounded lower-left shell.
+      // Only the visible housing and transfer area are modelled, not an exposed wheel.
+      const outline=[[-94,224],[-39,224],[-39,166],[-63,164],[-77,167],[-86,176],[-92,191]];
+      const front=outline.map(([x,y])=>[x,y,20]);
+      const back=outline.map(([x,y])=>[x,y,-35]);
+      pane(back,'#bbbeb5');pane(front,'#dedfd2');
+      outline.forEach((_,i)=>{const j=(i+1)%outline.length;pane([back[i],back[j],front[j],front[i]],i>3?'#c7cbbf':'#e8e9dd');});
+      // Narrow inspection/transfer aperture with metal surround, near spindle side.
+      box(-60,181,21,17,32,1,[134,143,139]);
+      box(-58,183,23,13,28,1,[36,42,42]);
+      for(const x of [-59,-45])for(const y of [182,211])box(x,y,24,1.4,1.4,1,metal);
+      box(-77,160,-2,27,6,18,[46,54,55]);
+      box(-54,157,9,29,5,8,[93,104,105]);
+      cylinder(-36,151,13,4,7,metal);
+      cylinder(-28,153,13,3,5,dark);
     }
-    // Upper changer shroud.
-    if(machine==='katrina')box(-89,184,-42,53,43,50,[210,214,208]);
-    box(-48,192,9,13,24,1,[28,36,39]);
-    box(-91,181,-42,55,3,51,[121,132,133]);
     // Articulated coolant nozzles, steel end tips and conduit behind head.
     for(let side of [-1,1])for(let i=0;i<6;i++)cylinder(side*(17+i*1.1),147-i*2,17+i*1.7,2.2,2.4,[43,85,122]);
     cylinder(-24,133,26,1.7,3,[196,156,62]);cylinder(24,133,26,1.7,3,[196,156,62]);
