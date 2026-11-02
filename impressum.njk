@@ -18,25 +18,25 @@ seo:
         
         <h3>Anbieter (Diensteanbieter nach TMG)</h3>
         <p>
-            <strong>AUGÉ Manufacturing GmbH</strong><br>
-            Eichenstraße 4<br>
-            83083 Riedering<br>
+            <strong>{{ company.legalName }}</strong><br>
+            {{ company.street }}<br>
+            {{ company.postalCode }} {{ company.city }}<br>
             Deutschland
         </p>
 
         <h3>Kontaktinformationen</h3>
         <p>
-            <strong>Telefon:</strong> <a href="tel:{{ company.contact.phone }}">{{ company.contact.phone }}</a><br>
-            <strong>E-Mail:</strong> <a href="mailto:{{ company.contact.email }}">{{ company.contact.email }}</a>
+            <strong>Telefon:</strong> <a href="tel:{{ company.contact.phone }}">{{ company.phone }}</a><br>
+            <strong>E-Mail:</strong> <a href="mailto:{{ company.contact.email }}">{{ company.contact.email }}</a><br>
+            <strong>Website:</strong> <a href="{{ company.website }}">www.auge-manufacturing.de</a>
         </p>
 
         <h3>Rechtsform und Register</h3>
         <p>
             <strong>Rechtsform:</strong> GmbH<br>
-            <strong>Handelsregister:</strong> ausstehend Neufirmierung<br>
-            <strong>Registergericht:</strong> Traunstein<br>
-            <strong>USt-IdNr:</strong> ausstehend Neufirmierung<br>
-            <strong>Steuernr:</strong> ausstehend Neufirmierung
+            <strong>Handelsregister:</strong> {{ company.registerNumber }}<br>
+            <strong>Registergericht:</strong> {{ company.registerCourt }}<br>
+            <strong>USt-IdNr.:</strong> {{ company.vatId }}
         </p>
 
         <h3>Vertretungsberechtigte Geschäftsführer</h3>

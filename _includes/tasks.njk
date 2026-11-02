@@ -1,0 +1,10 @@
+<section class="content-section task-navigator" aria-labelledby="task-title">
+  <p class="eyebrow">Ihr Einstieg</p>
+  <h2 id="task-title">Was möchten Sie lösen?</h2>
+  <p class="intro">Sie bringen die Aufgabe mit. Gemeinsam finden wir den passenden Einstieg – vom einzelnen Arbeitspaket bis zum vollständigen Projekt.</p>
+  <div class="task-grid">
+    {% for service in company.services %}
+    <a href="/leistungen/{{ service.id }}/#aufgaben"><span>0{{ loop.index }} / {{ service.title }}</span><h3>{{ service.taskTitle }} <b aria-hidden="true">↗</b></h3><p>{{ service.taskDescription }}</p></a>
+    {% endfor %}
+  </div>
+</section>
